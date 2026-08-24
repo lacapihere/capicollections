@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capi Collections — Tipografía · Ronda 3 (vía Syncopate)</title>
+
+<!-- Fontshare: una petición por familia (la API solo devuelve el primer f[]) -->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=technor@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=nippo@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=array@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=panchang@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=excon@700&display=swap">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Syncopate:wght@400;700&family=Michroma&family=Krona+One&family=Zen+Dots&family=Audiowide&family=Orbitron:wght@400..900&family=Lexend+Zetta:wght@400..900&family=Archivo:wdth,wght@62..125,100..900&family=Anybody:wdth,wght@50..150,100..900&family=Unbounded:wght@200..900&family=Gruppo&family=Julius+Sans+One&family=Bruno+Ace+SC&family=Nabla&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* paleta tomada de tu propio sitio en Framer */
+:root{
+  --bg:#070807; --surface:#101311; --line:rgba(181,235,185,.14);
+  --text:#F2F5F2; --dim:#7C8A7E;
+  --mint:#B5EBB9; --glow:#35E89E;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;
+  -webkit-font-smoothing:antialiased}
+::selection{background:var(--mint);color:#000}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+input{font:inherit}
+:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--dim)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 1.5rem}
+@media(min-width:900px){.wrap{padding:0 3rem}}
+
+header.top{padding:3.5rem 0 2rem;border-bottom:1px solid var(--line);position:relative;
+  overflow:hidden}
+header.top::before{content:"";position:absolute;left:12%;top:-60%;width:38rem;height:38rem;
+  background:radial-gradient(circle,rgba(53,232,158,.20) 0%,transparent 65%);pointer-events:none}
+header.top h1{font-family:'Syncopate',sans-serif;font-weight:700;
+  font-size:clamp(1.1rem,2.6vw,1.7rem);letter-spacing:.02em;margin:1.1rem 0 1rem;
+  text-transform:uppercase;position:relative}
+header.top p{color:var(--dim);max-width:66ch;line-height:1.7;font-size:.95rem;position:relative}
+header.top strong{font-weight:500;color:var(--mint)}
+
+.ctrl{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-top:1.75rem;position:relative}
+.ctrl input{background:var(--surface);border:1px solid var(--line);border-radius:99px;
+  padding:.7rem 1.15rem;color:var(--text);font-size:.9rem;min-width:min(100%,22rem);
+  transition:border-color .3s}
+.ctrl input:focus{border-color:var(--mint);outline:none}
+
+.stage{position:sticky;top:0;z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line);box-shadow:0 20px 40px -20px #000}
+.stage-in{padding:2.5rem 0 2rem;text-align:center;position:relative}
+.stage .eyebrow{font-size:.66rem;color:var(--dim);letter-spacing:.3em;text-transform:uppercase;
+  margin-bottom:1.1rem}
+#stageName{font-size:clamp(1.5rem,5.2vw,3.6rem);line-height:1.05;color:var(--mint);
+  word-break:break-word;text-transform:uppercase}
+#stageRole{color:var(--dim);margin-top:1rem;font-size:.9rem}
+.stage-meta{position:absolute;left:1.5rem;top:2.5rem}
+@media(min-width:900px){.stage-meta{left:3rem}}
+@media(max-width:760px){.stage-meta{display:none}}
+
+.group{padding:3.5rem 0 1rem}
+.group h2{font-size:.95rem;font-weight:500;letter-spacing:-.01em;margin:.6rem 0 .4rem}
+.group p.gd{color:var(--dim);font-size:.85rem;max-width:60ch;line-height:1.6;margin-bottom:2rem}
+
+.cards{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:900px){.cards{grid-template-columns:1fr 1fr}}
+
+.card{position:relative;border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:1.5rem;width:100%;overflow:hidden;
+  transition:border-color .35s var(--e),transform .35s var(--e)}
+.card:hover{border-color:rgba(181,235,185,.45);transform:translateY(-2px)}
+.card.on{border-color:var(--mint)}
+.card.on::before{content:"";position:absolute;right:-6rem;top:-6rem;width:16rem;height:16rem;
+  background:radial-gradient(circle,rgba(53,232,158,.18) 0%,transparent 65%);pointer-events:none}
+.card-hd{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.35rem}
+.card-hd .nm{font-size:.95rem;font-weight:500;letter-spacing:-.01em;position:relative}
+.card .desc{color:var(--dim);font-size:.8rem;line-height:1.55;margin-bottom:1.35rem;position:relative}
+.sample{font-size:clamp(1.15rem,3.1vw,1.9rem);line-height:1.15;color:var(--mint);
+  margin-bottom:1.25rem;word-break:break-word;text-transform:uppercase;position:relative}
+
+.width{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;position:relative}
+.width .bar{flex:1;height:4px;background:rgba(181,235,185,.09);border-radius:2px;overflow:hidden}
+.width .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--mint),var(--glow));
+  width:0;transition:width .8s var(--e)}
+.width .val{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--mint);
+  min-width:3.4rem;text-align:right}
+
+.css{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--dim);
+  border-top:1px solid var(--line);padding-top:.9rem;line-height:1.7;position:relative;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.css code{color:var(--mint);word-break:break-all}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:.25rem .55rem;
+  color:var(--dim);white-space:nowrap;position:relative}
+.badge.ok{color:var(--glow);border-color:rgba(53,232,158,.4)}
+.badge.no{color:#F87171;border-color:rgba(248,113,113,.4)}
+.src{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim)}
+
+footer{border-top:1px solid var(--line);margin-top:3rem;padding:2.5rem 0 4rem}
+footer p{color:var(--dim);font-size:.85rem;line-height:1.7;max-width:72ch}
+footer p+p{margin-top:.85rem}
+footer strong{font-weight:500;color:var(--mint)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="mono">Capi Collections — Ronda 3</div>
+    <h1>La vía Syncopate</h1>
+    <p>Tu sitio en Framer usa <strong>Syncopate 700</strong> para el display y <strong>Jost</strong>
+       para el resto, en verde menta sobre casi negro. Ese es el carril: geométrica, ancha,
+       muy espaciada, en mayúsculas. Todo lo que sigue vive en ese territorio.
+       El medidor ahora compara contra <strong>Syncopate = 1.00×</strong>, y esta página está
+       pintada con tu propia paleta. Ojo: Syncopate es rarísimamente ancha, así que casi todo
+       mide por debajo de 1.00× — solo tres la superan.</p>
+    <div class="ctrl">
+      <span class="mono">Prueba tu texto</span>
+      <input id="txt" value="Capi Collections" spellcheck="false" aria-label="Texto de muestra">
+    </div>
+  </div>
+</header>
+
+<div class="stage">
+  <div class="wrap stage-in">
+    <div class="stage-meta mono" id="stageLabel">—</div>
+    <div class="eyebrow">Colección '26</div>
+    <div id="stageName">Capi Collections</div>
+    <div id="stageRole">aquí no existe lo básico</div>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Sobre Syncopate:</strong> solo tiene dos pesos (400 y 700) y su ancho viene de un
+       espaciado enorme incorporado. Funciona increíble en titulares de una o dos palabras y se
+       vuelve ilegible en frases largas. Por eso varias de abajo te dan el mismo efecto con más
+       pesos y mejor comportamiento en textos medianos.</p>
+    <p>Marca la que te lata y la aplico a la landing completa, junto con la paleta menta que ya
+       usas. Si ninguna, dime cuál se acerca más y en qué falla.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+"use strict";
+
+const FONTS=[
+  {g:"Casi hermanas de Syncopate",
+   gd:"Mismo gesto: geométricas, anchas, pensadas para mayúsculas grandes. Si te gustó Syncopate, aquí está su familia.",
+   items:[
+    {n:"Syncopate", f:"'Syncopate'", w:"700", src:"Google · la tuya",
+     d:"La que ya usas. Espaciado enorme de fábrica, aire de etiqueta de laboratorio. Solo 400 y 700."},
+    {n:"Michroma", f:"'Michroma'", w:"400", src:"Google",
+     d:"Aún más ancha y técnica. Se lee como panel de control de nave. Un solo peso, palabras cortas."},
+    {n:"Krona One", f:"'Krona One'", w:"400", src:"Google",
+     d:"Misma energía pero con más cuerpo y menos aire. Sostiene mejor una frase completa."},
+    {n:"Lexend Zetta", f:"'Lexend Zetta'", w:"700", src:"Google",
+     d:"La versión más ancha de la familia Lexend. Limpia, sin adornos, brutalmente amplia."},
+    {n:"Bruno Ace SC", f:"'Bruno Ace SC'", w:"400", src:"Google",
+     d:"Geométrica con cortes finos y versalitas. Más rara que Syncopate, mismo tamaño de gesto."}
+   ]},
+
+  {g:"Ancho que tú controlas — variables",
+   gd:"Tienen un eje de ANCHO real: puedes dialar exactamente qué tan expandida la quieres, sin cambiar de fuente. Es lo más flexible para una marca.",
+   items:[
+    {n:"Archivo Expanded", f:"'Archivo'", w:"700", vs:'"wdth" 125', src:"Google",
+     d:"Grotesca sólida con eje de ancho 62–125. Aquí va al máximo. Neutral pero con presencia — y tiene todos los pesos."},
+    {n:"Anybody", f:"'Anybody'", w:"800", vs:'"wdth" 150', src:"Google",
+     d:"Eje de ancho 50–150, aquí al tope. Es la más extrema que puedes dialar, y también la puedes cerrar cuando quieras."},
+    {n:"Unbounded", f:"'Unbounded'", w:"600", src:"Google",
+     d:"Geométrica moderna con curvas que no cierran donde esperas. Nueve pesos, muy versátil."}
+   ]},
+
+  {g:"Técnicas — Fontshare",
+   gd:"El mismo carril geométrico pero con detalles menos vistos. Estas no las tiene nadie más en su portafolio.",
+   items:[
+    {n:"Technor", f:"'Technor'", w:"700", src:"Fontshare",
+     d:"Geométrica técnica con recortes precisos. Se siente ingeniería, no decoración. Mi favorita del grupo."},
+    {n:"Nippo", f:"'Nippo'", w:"700", src:"Fontshare",
+     d:"Ancha, redonda y limpia. La más amable de las técnicas — cálida sin dejar de ser geométrica."},
+    {n:"Array", f:"'Array'", w:"700", src:"Fontshare",
+     d:"Expandida de interfaz de máquina. Encaja perfecto con el lado “sistemas” de la marca."},
+    {n:"Panchang", f:"'Panchang'", w:"700", src:"Fontshare",
+     d:"De las más anchas de toda la lista. Ocupa la pantalla con dos palabras y lo hace a propósito."},
+    {n:"Excon", f:"'Excon'", w:"700", src:"Fontshare",
+     d:"Geométrica con ángulos cortados. Más agresiva, buena para el tono irreverente."}
+   ]},
+
+  {g:"Riesgo alto",
+   gd:"Si quieres que la primera pantalla sea imposible de ignorar. No las uses para nada más que el titular.",
+   items:[
+    {n:"Zen Dots", f:"'Zen Dots'", w:"400", src:"Google",
+     d:"Geométrica con contrapuntos redondos. Rara, divertida y con actitud de videojuego."},
+    {n:"Audiowide", f:"'Audiowide'", w:"400", src:"Google",
+     d:"Ancha y retro-futurista. Descarada. Funciona si la marca acepta ser ruidosa."},
+    {n:"Orbitron", f:"'Orbitron'", w:"800", src:"Google",
+     d:"El clásico techno. Muy usada en cripto y gaming — ese es su riesgo, no su calidad."},
+    {n:"Nabla", f:"'Nabla'", w:"400", src:"Google",
+     d:"Fuente cromática: trae color y volumen 3D dentro del propio archivo. Lo más disruptivo que existe gratis."},
+    {n:"Gruppo", f:"'Gruppo'", w:"400", src:"Google",
+     d:"El extremo opuesto: trazo finísimo y muy espaciada. Elegante y casi frágil, buen contraste con todo lo pesado de arriba."}
+   ]}
+];
+
+const cv=document.createElement("canvas"), ctx=cv.getContext("2d");
+function widthOf(family, weight, size=100){
+  ctx.font=`${weight||400} ${size}px ${family}`;
+  return ctx.measureText("COLLECTIONS").width;
+}
+
+const main=document.getElementById("main");
+const stageName=document.getElementById("stageName"),
+      stageLabel=document.getElementById("stageLabel"),
+      txt=document.getElementById("txt");
+
+const ROMAN=["I","II","III","IV","V"];
+FONTS.forEach((group,gi)=>{
+  const sec=document.createElement("section");
+  sec.className="group";
+  sec.innerHTML=`<div class="mono">${ROMAN[gi]||gi+1}</div>
+    <h2>${group.g}</h2><p class="gd">${group.gd}</p><div class="cards"></div>`;
+  const grid=sec.querySelector(".cards");
+
+  group.items.forEach(f=>{
+    const card=document.createElement("button");
+    card.className="card";
+    card.dataset.family=f.f; card.dataset.weight=f.w||"400";
+    card.dataset.vs=f.vs||""; card.dataset.name=f.n;
+
+    const style=`font-family:${f.f},sans-serif;font-weight:${f.w||400};`+
+                (f.vs?`font-variation-settings:${f.vs};`:"");
+
+    card.innerHTML=`
+      <div class="card-hd">
+        <span class="nm">${f.n}</span>
+        <span class="badge">verificando</span>
+      </div>
+      <p class="desc">${f.d}</p>
+      <div class="sample js-s" style="${style}">Capi Collections</div>
+      <div class="width">
+        <span class="mono" style="letter-spacing:.12em">Ancho</span>
+        <span class="bar"><i></i></span>
+        <span class="val">—</span>
+      </div>
+      <div class="css">
+        <code>font-family: ${f.f};${f.vs?" font-variation-settings: "+f.vs+";":""}</code>
+        <span class="src">${f.src}</span>
+      </div>`;
+
+    card.addEventListener("click",()=>{
+      document.querySelectorAll(".card").forEach(c=>c.classList.remove("on"));
+      card.classList.add("on");
+      stageName.style.cssText=style+"color:var(--mint);text-transform:uppercase;";
+      stageLabel.textContent=f.n+" · "+f.src;
+    });
+    grid.appendChild(card);
+  });
+  main.appendChild(sec);
+});
+
+txt.addEventListener("input",()=>{
+  const v=txt.value||"Capi Collections";
+  document.querySelectorAll(".js-s").forEach(s=>s.textContent=v);
+  stageName.textContent=v;
+});
+
+async function audit(){
+  const cards=[...document.querySelectorAll(".card")];
+  await document.fonts.load("700 40px 'Syncopate'").catch(()=>{});
+  await Promise.all(cards.map(c=>
+    document.fonts.load(`${c.dataset.weight} 40px ${c.dataset.family}`).catch(()=>{})
+  ));
+
+  const base=widthOf("'Syncopate'",700);
+
+  cards.forEach(card=>{
+    const fam=card.dataset.family, w=card.dataset.weight;
+    const badge=card.querySelector(".badge");
+    const wd=widthOf(fam,w);
+    // el fallback se mide al mismo peso: en 700+ el sintético es más ancho
+    const loaded=document.fonts.check(`${w} 40px ${fam}`) &&
+                 Math.abs(wd-widthOf("sans-serif",w))>0.5;
+    badge.textContent=loaded?"cargada":"no cargó";
+    badge.classList.add(loaded?"ok":"no");
+    const ratio=wd/base;
+    card.querySelector(".val").textContent=ratio.toFixed(2)+"×";
+    card.querySelector(".bar i").style.width=Math.min(100,(ratio/1.3)*100)+"%";
+  });
+}
+(document.fonts?document.fonts.ready:Promise.resolve()).then(audit);
+
+setTimeout(()=>{
+  const f=[...document.querySelectorAll(".card")].find(c=>c.dataset.name==="Technor");
+  if(f) f.click();
+},250);
+})();
+</script>
+</body>
+</html>

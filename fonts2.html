@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capi Collections — Tipografía · Ronda 2</title>
+
+<!-- Fontshare (Indian Type Foundry) — gratis para uso comercial -->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<!-- una petición por familia: la API solo devuelve el primer f[] de cada URL -->
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=melodrama@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=zodiak@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=panchang@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=tanker@400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=bespoke-stencil@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=gambetta@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=sentient@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=erode@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=excon@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=array@700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=stardom@400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=quilon@700&display=swap">
+
+<!-- Google -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Instrument+Serif&family=Anybody:wdth,wght@50..150,100..900&family=Michroma&family=Bungee&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0A0A0C; --surface:#141416; --line:rgba(255,255,255,.10);
+  --text:#F5F5F7; --dim:#8A8F98; --volt:#4E85BF; --hi:#89AACC;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;
+  -webkit-font-smoothing:antialiased}
+::selection{background:var(--volt);color:#fff}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+input{font:inherit}
+:focus-visible{outline:2px solid var(--hi);outline-offset:3px}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+@media(min-width:900px){.wrap{padding:0 3rem}}
+
+header.top{padding:3.5rem 0 2rem;border-bottom:1px solid var(--line)}
+header.top h1{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:400;letter-spacing:-.02em;
+  margin:1rem 0 .75rem}
+header.top p{color:var(--dim);max-width:64ch;line-height:1.65;font-size:.95rem}
+
+/* control de texto */
+.ctrl{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-top:1.75rem}
+.ctrl input{
+  background:var(--surface);border:1px solid var(--line);border-radius:99px;
+  padding:.7rem 1.15rem;color:var(--text);font-size:.9rem;min-width:min(100%,22rem);
+  transition:border-color .3s;
+}
+.ctrl input:focus{border-color:var(--hi);outline:none}
+
+/* hero en vivo */
+.stage{position:sticky;top:0;z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line);box-shadow:0 20px 40px -20px #000}
+.stage-in{padding:2.25rem 0 1.75rem;text-align:center;position:relative}
+.stage .eyebrow{font-size:.68rem;color:var(--dim);letter-spacing:.3em;text-transform:uppercase;
+  margin-bottom:1rem}
+#stageName{font-size:clamp(2.2rem,7vw,5rem);line-height:.95;letter-spacing:-.02em;
+  word-break:break-word}
+#stageRole{color:var(--dim);margin-top:.9rem;font-size:clamp(.85rem,1.6vw,1.05rem)}
+#stageRole em{color:var(--text)}
+.stage-meta{position:absolute;left:1.5rem;top:2.25rem}
+@media(min-width:900px){.stage-meta{left:3rem}}
+@media(max-width:760px){.stage-meta{display:none}}
+
+.group{padding:3.5rem 0 1rem}
+.group h2{font-size:.95rem;font-weight:500;letter-spacing:-.01em;margin:.6rem 0 .4rem}
+.group p.gd{color:var(--dim);font-size:.85rem;max-width:58ch;line-height:1.6;margin-bottom:2rem}
+
+.cards{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:820px){.cards{grid-template-columns:1fr 1fr}}
+
+.card{position:relative;border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:1.5rem;width:100%;
+  transition:border-color .35s var(--e),background-color .35s var(--e),transform .35s var(--e)}
+.card:hover{border-color:rgba(137,170,204,.45);transform:translateY(-2px)}
+.card.on{border-color:var(--hi);background:#17191D}
+.card-hd{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.35rem}
+.card-hd .nm{font-size:.95rem;font-weight:500;letter-spacing:-.01em}
+.card .desc{color:var(--dim);font-size:.8rem;line-height:1.5;margin-bottom:1.25rem}
+.sample{font-size:clamp(1.9rem,5.2vw,3.2rem);line-height:1;letter-spacing:-.02em;
+  margin-bottom:.5rem;word-break:break-word}
+.sample-2{font-size:clamp(.95rem,2vw,1.2rem);color:var(--dim);margin-bottom:1.25rem}
+
+.width{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.width .bar{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.width .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--hi),var(--volt));
+  width:0;transition:width .8s var(--e)}
+.width .val{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--hi);
+  min-width:3.4rem;text-align:right}
+
+.css{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--dim);
+  border-top:1px solid var(--line);padding-top:.9rem;line-height:1.7;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.css code{color:var(--hi);word-break:break-all}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:.25rem .55rem;
+  color:var(--dim);white-space:nowrap}
+.badge.ok{color:#4ADE80;border-color:rgba(74,222,128,.35)}
+.badge.no{color:#F87171;border-color:rgba(248,113,113,.35)}
+.src{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim)}
+
+footer{border-top:1px solid var(--line);margin-top:3rem;padding:2.5rem 0 4rem}
+footer p{color:var(--dim);font-size:.85rem;line-height:1.7;max-width:72ch}
+footer p+p{margin-top:.85rem}
+footer strong{font-weight:500;color:var(--text)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="mono">Capi Collections — Ronda 2</div>
+    <h1>Fuera del catálogo obvio</h1>
+    <p>Estas no son de Google. Vienen de <strong style="font-weight:500;color:var(--text)">Fontshare</strong>,
+       que es de donde salen las tipografías de los portafolios que se ven caros. Gratis para uso
+       comercial. Al final hay tres de Google con ejes raros por si prefieres no salir de ahí.
+       El medidor sigue comparando el ancho real contra Instrument Serif = 1.00×.</p>
+    <div class="ctrl">
+      <span class="mono">Prueba tu texto</span>
+      <input id="txt" value="Capi Collections" spellcheck="false" aria-label="Texto de muestra">
+    </div>
+  </div>
+</header>
+
+<div class="stage">
+  <div class="wrap stage-in">
+    <div class="stage-meta mono" id="stageLabel">—</div>
+    <div class="eyebrow">Colección '26</div>
+    <div id="stageName">Capi Collections</div>
+    <div id="stageRole">Un <em>creative technologist</em> que construye cosas reales.</div>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Cómo instalarlas:</strong> Fontshare se carga con una línea, igual que Google Fonts —
+       no hay que comprar ni hospedar archivos. Funciona en cualquier sitio normal. La única
+       excepción es dentro de un Artifact de Claude, donde solo cargan las de Google.</p>
+    <p>Si tampoco te convence ninguna de esta ronda, dime qué te molesta en concreto —
+       demasiado serif, demasiado techno, muy pesada, muy fina — y traigo una ronda dirigida
+       en vez de seguir tirando opciones al azar.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+"use strict";
+
+const FONTS=[
+  {g:"Serif display dramático — Fontshare",
+   gd:"Alto contraste llevado al extremo. Son las que hacen que un nombre en pantalla se vea como portada de revista, no como plantilla.",
+   items:[
+    {n:"Melodrama", f:"'Melodrama'", w:"700", src:"Fontshare",
+     d:"Curvas exageradas y remates que se estiran donde no esperas. Dramática de verdad — hecha para titulares cortos y grandes."},
+    {n:"Boska", f:"'Boska'", w:"700", src:"Fontshare",
+     d:"Contraste brutal entre trazo grueso y fino. Elegante y filosa — la más “cara” del grupo, aunque solo un poco más ancha que la actual."},
+    {n:"Zodiak", f:"'Zodiak'", w:"700", src:"Fontshare",
+     d:"Serif con estructura rara y personalidad fuerte. No se parece a nada del catálogo de Google."},
+    {n:"Gambetta", f:"'Gambetta'", w:"700", src:"Fontshare",
+     d:"Terminales extrañas, casi caligráficas. Se siente escrita a mano por alguien con muy buen pulso."},
+    {n:"Erode", f:"'Erode'", w:"700", src:"Fontshare",
+     d:"Bordes con textura, como si estuviera impresa y desgastada. Le da un aire físico y analógico."},
+    {n:"Sentient", f:"'Sentient'", w:"700", src:"Fontshare",
+     d:"Editorial con carácter, más contenida que las otras. La opción sobria de este grupo."}
+   ]},
+
+  {g:"Grotescas con carácter — Fontshare",
+   gd:"Sin serifas, pero lejos de neutrales. Proporciones anchas y detalles deliberadamente raros.",
+   items:[
+    {n:"Clash Display", f:"'Clash Display'", w:"600", src:"Fontshare",
+     d:"La fuente de los portafolios que se ven caros en 2026. Ancha, geométrica, con cortes secos. Segura y disruptiva a la vez."},
+    {n:"Cabinet Grotesk", f:"'Cabinet Grotesk'", w:"700", src:"Fontshare",
+     d:"Grotesca ancha con detalles torcidos a propósito. Más cálida que Clash, igual de sólida."},
+    {n:"Panchang", f:"'Panchang'", w:"700", src:"Fontshare",
+     d:"Display anchísima con curvas inesperadas. Ocupa mucho espacio y lo sabe."},
+    {n:"Excon", f:"'Excon'", w:"700", src:"Fontshare",
+     d:"Geométrica con recortes angulares. Se siente técnica sin caer en “fuente de ciencia ficción”."}
+   ]},
+
+  {g:"Extremas — para cuando quieres que grite",
+   gd:"Territorio de riesgo. Funcionan si la marca acepta ser incómoda; se rompen si intentas usarlas para todo.",
+   items:[
+    {n:"Tanker", f:"'Tanker'", w:"400", src:"Fontshare",
+     d:"Pesadísima pero compacta — la única de la lista más angosta que la actual. Bloque de concreto: mucha tinta en poco ancho."},
+    {n:"Bespoke Stencil", f:"'Bespoke Stencil'", w:"700", src:"Fontshare",
+     d:"Stencil, con cortes en las letras. Industrial y militante. Nadie la usa en un portafolio."},
+    {n:"Array", f:"'Array'", w:"700", src:"Fontshare",
+     d:"Expandida y técnica, casi de interfaz de máquina. Encaja con el lado “sistemas” de la marca."},
+    {n:"Stardom", f:"'Stardom'", w:"400", src:"Fontshare",
+     d:"De moda, alta y afilada. Es la más cercana a lo que ya tenías pero con mucho más filo."},
+    {n:"Quilon", f:"'Quilon'", w:"700", src:"Fontshare",
+     d:"Serif geométrica rara, entre display y editorial. Difícil de clasificar, que es justo el punto."}
+   ]},
+
+  {g:"Google, pero con ejes raros",
+   gd:"Por si prefieres no depender de otro CDN. Estas tres sí se salen del molde dentro del catálogo de Google.",
+   items:[
+    {n:"Anybody", f:"'Anybody'", w:"700", vs:'"wdth" 135', src:"Google",
+     d:"Variable con eje de ANCHO real (50–150). Puedes dialar exactamente qué tan ancha la quieres. Aquí va en 135."},
+    {n:"Michroma", f:"'Michroma'", w:"400", src:"Google",
+     d:"Anchísima y técnica. Se lee como panel de control. Solo aguanta palabras cortas."},
+    {n:"Bungee", f:"'Bungee'", w:"400", src:"Google",
+     d:"Display urbana inspirada en letreros. Ancha, pesada y con actitud de cartel."}
+   ]}
+];
+
+const cv=document.createElement("canvas"), ctx=cv.getContext("2d");
+function widthOf(family, weight, size=100){
+  ctx.font=`${weight||400} ${size}px ${family}`;
+  return ctx.measureText("COLLECTIONS").width;
+}
+
+const main=document.getElementById("main");
+const stageName=document.getElementById("stageName"),
+      stageRole=document.getElementById("stageRole"),
+      stageLabel=document.getElementById("stageLabel"),
+      txt=document.getElementById("txt");
+
+FONTS.forEach(group=>{
+  const sec=document.createElement("section");
+  sec.className="group";
+  sec.innerHTML=`<div class="mono">${group.g.split("—")[0].trim()}</div>
+    <h2>${group.g}</h2><p class="gd">${group.gd}</p><div class="cards"></div>`;
+  const grid=sec.querySelector(".cards");
+
+  group.items.forEach(f=>{
+    const card=document.createElement("button");
+    card.className="card";
+    card.dataset.family=f.f; card.dataset.weight=f.w||"400";
+    card.dataset.vs=f.vs||""; card.dataset.name=f.n;
+
+    const style=`font-family:${f.f},serif;font-weight:${f.w||400};`+
+                (f.vs?`font-variation-settings:${f.vs};`:"");
+
+    card.innerHTML=`
+      <div class="card-hd">
+        <span class="nm">${f.n}</span>
+        <span class="badge">verificando</span>
+      </div>
+      <p class="desc">${f.d}</p>
+      <div class="sample js-s" style="${style}">Capi Collections</div>
+      <div class="sample-2" style="${style}">Aquí no existe lo básico.</div>
+      <div class="width">
+        <span class="mono" style="letter-spacing:.12em">Ancho</span>
+        <span class="bar"><i></i></span>
+        <span class="val">—</span>
+      </div>
+      <div class="css">
+        <code>font-family: ${f.f};</code>
+        <span class="src">${f.src}</span>
+      </div>`;
+
+    card.addEventListener("click",()=>{
+      document.querySelectorAll(".card").forEach(c=>c.classList.remove("on"));
+      card.classList.add("on");
+      stageName.style.cssText=style;
+      stageRole.querySelector("em").style.cssText=style;
+      stageLabel.textContent=f.n+" · "+f.src;
+    });
+    grid.appendChild(card);
+  });
+  main.appendChild(sec);
+});
+
+/* texto editable en vivo */
+txt.addEventListener("input",()=>{
+  const v=txt.value||"Capi Collections";
+  document.querySelectorAll(".js-s").forEach(s=>s.textContent=v);
+  stageName.textContent=v;
+});
+
+/* verificación real de carga + medición */
+async function audit(){
+  const cards=[...document.querySelectorAll(".card")];
+  await document.fonts.load("400 40px 'Instrument Serif'").catch(()=>{});
+  await Promise.all(cards.map(c=>
+    document.fonts.load(`${c.dataset.weight} 40px ${c.dataset.family}`).catch(()=>{})
+  ));
+
+  const base=widthOf("'Instrument Serif'",400);
+
+  cards.forEach(card=>{
+    const fam=card.dataset.family, w=card.dataset.weight;
+    const badge=card.querySelector(".badge");
+    const wd=widthOf(fam,w);
+    // el fallback se mide al MISMO peso: en 700 el serif sintético es más ancho
+    // y comparar contra el de 400 daba falsos positivos
+    const loaded=document.fonts.check(`${w} 40px ${fam}`) &&
+                 Math.abs(wd-widthOf("serif",w))>0.5;
+    badge.textContent=loaded?"cargada":"no cargó";
+    badge.classList.add(loaded?"ok":"no");
+    const ratio=wd/base;
+    card.querySelector(".val").textContent=ratio.toFixed(2)+"×";
+    card.querySelector(".bar i").style.width=Math.min(100,(ratio/2.5)*100)+"%";
+  });
+}
+(document.fonts?document.fonts.ready:Promise.resolve()).then(audit);
+
+setTimeout(()=>{
+  const first=[...document.querySelectorAll(".card")].find(c=>c.dataset.name==="Clash Display");
+  if(first) first.click();
+},250);
+})();
+</script>
+</body>
+</html>

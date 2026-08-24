@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capi Collections — Laboratorio de tipografía</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Gloock&family=Libre+Caslon+Display&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Young+Serif&family=Unbounded:wght@200..900&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Syne:wght@400..800&family=Climate+Crisis&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0C; --surface:#141416; --line:rgba(255,255,255,.10);
+  --text:#F5F5F7; --dim:#8A8F98; --volt:#4E85BF; --hi:#89AACC;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;
+  -webkit-font-smoothing:antialiased}
+::selection{background:var(--volt);color:#fff}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+:focus-visible{outline:2px solid var(--hi);outline-offset:3px}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+@media(min-width:900px){.wrap{padding:0 3rem}}
+
+/* ---------- encabezado ---------- */
+header.top{padding:3.5rem 0 2rem;border-bottom:1px solid var(--line)}
+header.top h1{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:400;letter-spacing:-.02em;
+  margin:1rem 0 .75rem}
+header.top p{color:var(--dim);max-width:60ch;line-height:1.65;font-size:.95rem}
+
+/* ---------- hero en vivo ---------- */
+.stage{position:sticky;top:0;z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line);box-shadow:0 20px 40px -20px #000}
+.stage-in{padding:2.25rem 0 1.75rem;text-align:center;position:relative}
+.stage .eyebrow{font-size:.68rem;color:var(--dim);letter-spacing:.3em;text-transform:uppercase;
+  margin-bottom:1rem}
+#stageName{
+  font-size:clamp(2.4rem,7.5vw,5.5rem);line-height:.92;letter-spacing:-.02em;
+  transition:opacity .25s;
+}
+#stageRole{color:var(--dim);margin-top:.9rem;font-size:clamp(.85rem,1.6vw,1.05rem)}
+#stageRole em{color:var(--text);font-style:italic}
+.stage-meta{position:absolute;left:1.5rem;top:2.25rem}
+@media(min-width:900px){.stage-meta{left:3rem}}
+@media(max-width:700px){.stage-meta{display:none}}
+
+/* ---------- grilla ---------- */
+.group{padding:3.5rem 0 1rem}
+.group h2{font-size:.95rem;font-weight:500;letter-spacing:-.01em;margin:.6rem 0 .4rem}
+.group p.gd{color:var(--dim);font-size:.85rem;max-width:56ch;line-height:1.6;margin-bottom:2rem}
+
+.cards{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:820px){.cards{grid-template-columns:1fr 1fr}}
+
+.card{
+  position:relative;border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:1.5rem;transition:border-color .35s var(--e),background-color .35s var(--e),
+  transform .35s var(--e);width:100%;
+}
+.card:hover{border-color:rgba(137,170,204,.45);transform:translateY(-2px)}
+.card.on{border-color:var(--hi);background:#17191D}
+.card-hd{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.35rem}
+.card-hd .nm{font-size:.95rem;font-weight:500;letter-spacing:-.01em}
+.card .desc{color:var(--dim);font-size:.8rem;line-height:1.5;margin-bottom:1.25rem}
+
+.sample{font-size:clamp(2rem,5.6vw,3.4rem);line-height:.98;letter-spacing:-.02em;
+  margin-bottom:.5rem;word-break:break-word}
+.sample-2{font-size:clamp(.95rem,2vw,1.25rem);color:var(--dim);margin-bottom:1.25rem}
+
+/* medidor de ancho */
+.width{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.width .bar{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.width .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--hi),var(--volt));
+  width:0;transition:width .8s var(--e)}
+.width .val{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--hi);
+  min-width:3.4rem;text-align:right}
+
+.css{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--dim);
+  border-top:1px solid var(--line);padding-top:.9rem;line-height:1.7;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.css code{color:var(--hi);word-break:break-all}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:.25rem .55rem;
+  color:var(--dim);white-space:nowrap}
+.badge.ok{color:#4ADE80;border-color:rgba(74,222,128,.35)}
+.badge.no{color:#F87171;border-color:rgba(248,113,113,.35)}
+
+footer{border-top:1px solid var(--line);margin-top:3rem;padding:2.5rem 0 4rem}
+footer p{color:var(--dim);font-size:.85rem;line-height:1.7;max-width:70ch}
+footer p+p{margin-top:.85rem}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="mono">Capi Collections — Laboratorio</div>
+    <h1>Alternativas a Instrument Serif</h1>
+    <p>Todas son más anchas que la actual. El medidor compara el ancho real de la palabra
+       “COLLECTIONS” al mismo tamaño: <strong style="font-weight:500;color:var(--text)">Instrument Serif = 1.00×</strong>.
+       Haz clic en cualquier tarjeta para ver el hero de la v2 renderizado en esa fuente.</p>
+  </div>
+</header>
+
+<!-- hero en vivo -->
+<div class="stage">
+  <div class="wrap stage-in">
+    <div class="stage-meta mono" id="stageLabel">Instrument Serif</div>
+    <div class="eyebrow">Colección '26</div>
+    <div id="stageName">Capi Collections</div>
+    <div id="stageRole">Un <em>creative technologist</em> que construye cosas reales.</div>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="font-weight:500;color:var(--text)">Todas son de Google Fonts</strong> — cargan
+       en cualquier sitio y también dentro de un Artifact, sin licencias ni archivos que hospedar.</p>
+    <p>Si quieres salir del catálogo de Google, las que realmente rompen están en Fontshare
+       (Clash Display, Zodiak, Cabinet Grotesk, Author) y en Pangram Pangram (Editorial New,
+       Neue Montreal). Son gratuitas para uso comercial pero se cargan desde otro CDN — funcionan
+       en un sitio normal, no dentro de un Artifact. Dime si quieres que arme el espécimen con esas.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+"use strict";
+
+const FONTS=[
+  {g:"Serif editorial — la vibra de la v2, pero con más cuerpo",
+   gd:"Mismo territorio de alto contraste y aire editorial. Todas se sientan más anchas y sólidas que Instrument Serif, así que el nombre gana peso sin perder elegancia.",
+   items:[
+    {n:"DM Serif Display", f:"'DM Serif Display'", it:1,
+     d:"La transición más directa. Alto contraste, remates afilados, pero mucho más ancha y con ascendentes cortas. Se lee sólida a tamaño gigante."},
+    {n:"Gloock", f:"'Gloock'", it:0,
+     d:"Contraste extremo, casi didone. Muy ancha y de trazos finísimos. Se siente cara y un poco peligrosa — brilla solo en display."},
+    {n:"Bodoni Moda", f:"'Bodoni Moda'", it:1, w:"600",
+     d:"Didone de revista de moda. Dramática, ancha, con italic muy expresiva. La opción más “portada de Vogue”."},
+    {n:"Libre Caslon Display", f:"'Libre Caslon Display'", it:0,
+     d:"Editorial clásica con carácter, sin sentirse de plantilla. Más ancha y calmada; aguanta párrafos largos además de titulares."},
+    {n:"Newsreader", f:"'Newsreader'", it:1, w:"500",
+     d:"Editorial cálida y de proporciones amplias. Su italic tiene mucho más aire que la de Instrument."}
+   ]},
+
+  {g:"Serif con defecto intencional — lo disruptivo de verdad",
+   gd:"Aquí es donde deja de parecer una plantilla. Formas raras a propósito, que es exactamente el territorio de “aquí no existe lo básico”.",
+   items:[
+    {n:"Fraunces", f:"'Fraunces'", it:1, w:"700", vs:'"SOFT" 60, "WONK" 1',
+     d:"Mi favorita para esta marca. Variable con eje WONK: exagera las formas raras a propósito. Ancha, suave y con actitud. Nadie la usa por defecto."},
+    {n:"Young Serif", f:"'Young Serif'", it:0,
+     d:"Gruesa, ancha, casi slab. Rara sin ser un chiste. Se siente hecha a mano y aterriza como un puñetazo en un titular corto."},
+    {n:"Instrument Serif", f:"'Instrument Serif'", it:1, ref:1,
+     d:"La que tienes hoy. Angosta, ascendentes largas, muy elegante — pero se ve frágil y en 2026 ya está en todos lados."}
+   ]},
+
+  {g:"Display sin serifas — romper del todo",
+   gd:"Si quieres alejarte de lo editorial y empujar hacia laboratorio / tecnología. Estas cambian por completo la personalidad de la marca.",
+   items:[
+    {n:"Unbounded", f:"'Unbounded'", it:0, w:"600",
+     d:"Geométrica ancha y futurista, con curvas que no terminan donde esperas. Se ve a la vez cara y extraña."},
+    {n:"Bricolage Grotesque", f:"'Bricolage Grotesque'", it:0, w:"700",
+     d:"Grotesca deliberadamente incómoda: proporciones desparejas a propósito. Diseñada para no verse pulida."},
+    {n:"Syne", f:"'Syne'", it:0, w:"800",
+     d:"La de la v1. Anchos que saltan entre letras, herencia de arte contemporáneo. La más “estudio de diseño”."},
+    {n:"Climate Crisis", f:"'Climate Crisis'", it:0,
+     d:"El extremo. Pesadísima y comprimida, casi cartel de protesta. Úsala solo si quieres que la marca grite."}
+   ]}
+];
+
+/* ---------- medición de ancho real ---------- */
+const cv=document.createElement("canvas"), ctx=cv.getContext("2d");
+function widthOf(family, weight, size=100){
+  ctx.font=`${weight||400} ${size}px ${family}`;
+  return ctx.measureText("COLLECTIONS").width;
+}
+
+/* ---------- construcción ---------- */
+const main=document.getElementById("main");
+const stageName=document.getElementById("stageName"),
+      stageRole=document.getElementById("stageRole"),
+      stageLabel=document.getElementById("stageLabel");
+
+FONTS.forEach(group=>{
+  const sec=document.createElement("section");
+  sec.className="group";
+  sec.innerHTML=`<div class="mono">${group.g.split("—")[0].trim()}</div>
+    <h2>${group.g}</h2><p class="gd">${group.gd}</p>
+    <div class="cards"></div>`;
+  const grid=sec.querySelector(".cards");
+
+  group.items.forEach(f=>{
+    const card=document.createElement("button");
+    card.className="card";
+    card.dataset.family=f.f;
+    card.dataset.weight=f.w||"400";
+    card.dataset.italic=f.it?"1":"0";
+    card.dataset.vs=f.vs||"";
+    card.dataset.name=f.n;
+
+    const style=`font-family:${f.f},serif;font-weight:${f.w||400};`+
+                (f.vs?`font-variation-settings:${f.vs};`:"");
+    const styleIt=style+(f.it?"font-style:italic;":"");
+
+    card.innerHTML=`
+      <div class="card-hd">
+        <span class="nm">${f.n}${f.ref?" — actual":""}</span>
+        <span class="badge" data-chk="${f.f}">verificando</span>
+      </div>
+      <p class="desc">${f.d}</p>
+      <div class="sample" style="${styleIt}">Capi Collections</div>
+      <div class="sample-2" style="${styleIt}">Aquí no existe lo básico.</div>
+      <div class="width">
+        <span class="mono" style="letter-spacing:.12em">Ancho</span>
+        <span class="bar"><i></i></span>
+        <span class="val">—</span>
+      </div>
+      <div class="css">
+        <code>font-family: ${f.f};</code>
+        <span class="mono">${f.it?"italic ok":"sin italic"}</span>
+      </div>`;
+
+    card.addEventListener("click",()=>{
+      document.querySelectorAll(".card").forEach(c=>c.classList.remove("on"));
+      card.classList.add("on");
+      stageName.style.cssText=styleIt;
+      stageRole.querySelector("em").style.cssText=styleIt;
+      stageLabel.textContent=f.n;
+    });
+    grid.appendChild(card);
+  });
+  main.appendChild(sec);
+});
+
+/* ---------- verificar carga + medir ---------- */
+async function audit(){
+  const cards=[...document.querySelectorAll(".card")];
+
+  // se fuerza la descarga: fonts.check() da falso mientras la fuente aún viaja
+  await document.fonts.load("400 40px 'Instrument Serif'").catch(()=>{});
+  await Promise.all(cards.map(c=>
+    document.fonts.load(`${c.dataset.weight} 40px ${c.dataset.family}`).catch(()=>{})
+  ));
+
+  // referencia: el fallback puro, para detectar fuentes que no existen
+  const fallback=widthOf("serif",400);
+  const base=widthOf("'Instrument Serif'",400);
+
+  cards.forEach(card=>{
+    const fam=card.dataset.family, w=card.dataset.weight;
+    const badge=card.querySelector(".badge");
+    const wd=widthOf(fam,w);
+
+    // si mide exactamente igual que el fallback, no se aplicó la fuente
+    const loaded = document.fonts.check(`${w} 40px ${fam}`) && Math.abs(wd-fallback)>0.5;
+    badge.textContent = loaded ? "cargada" : "no cargó";
+    badge.classList.add(loaded?"ok":"no");
+
+    const ratio=wd/base;
+    card.querySelector(".val").textContent=ratio.toFixed(2)+"×";
+    card.querySelector(".bar i").style.width=Math.min(100,(ratio/2.5)*100)+"%";
+  });
+}
+(document.fonts?document.fonts.ready:Promise.resolve()).then(audit);
+
+/* selección inicial: la actual, para comparar */
+setTimeout(()=>{
+  const cur=[...document.querySelectorAll(".card")].find(c=>c.dataset.name==="Instrument Serif");
+  if(cur) cur.click();
+},200);
+})();
+</script>
+</body>
+</html>

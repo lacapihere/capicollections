@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capi Collections — Coming Soon</title>
+<meta name="description" content="Capi Collections. Algún día es hoy.">
+
+<meta property="og:title" content="Capi Collections">
+<meta property="og:description" content="Coming Soon. Algún día es hoy.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#B8E4C7">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 91 28'%3E%3Crect width='91' height='28' fill='%23B8E4C7'/%3E%3Cpath d='M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z' fill='%23111111'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --mint:#B8E4C7;
+  --ink:#111111;
+  --cream:#F3EFE6;
+  --e:cubic-bezier(.16,1,.3,1);
+  /* vuelta completa de los 3 colores. 1.5s = 2 cambios por segundo.
+     No bajar de 1.2s: por debajo se cruza el umbral de fotosensibilidad */
+  --cycle:1.5s;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  animation:cycle var(--cycle) linear infinite;
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  min-height:100svh;padding:2rem;text-align:center;
+  overflow:hidden;
+}
+::selection{background:var(--ink);color:var(--mint)}
+
+/* crema -> menta -> negro, con el logo invirtiendo como en el manual.
+   2.2s por estado (0.3 Hz): muy por debajo del umbral de fotosensibilidad */
+@keyframes cycle{
+  0%,     33.32% {background-color:#F3EFE6;color:#111111}
+  33.33%, 66.65% {background-color:#B8E4C7;color:#111111}
+  66.66%, 100%   {background-color:#111111;color:#F3EFE6}
+}
+/* el logo lleva su propio ciclo: sobre crema y sobre negro va menta,
+   sobre menta va negro. Misma duracion, arrancan juntas y quedan sincronizadas */
+@keyframes cycleLogo{
+  0%,     33.32% {color:#B8E4C7}
+  33.33%, 66.65% {color:#111111}
+  66.66%, 100%   {color:#B8E4C7}
+}
+@keyframes rise{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.025)}
+}
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:.25}
+}
+
+/* marca */
+.mark{
+  width:min(46vw,190px);height:auto;display:block;color:#B8E4C7;
+  opacity:0;
+  animation:rise 1.1s var(--e) .15s forwards,
+            cycleLogo var(--cycle) linear infinite;
+}
+.mark-inner{animation:breathe 6s ease-in-out 1.4s infinite}
+
+.wordmark{
+  margin-top:.7rem;
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:clamp(.62rem,1.5vw,.72rem);
+  letter-spacing:.42em;text-transform:uppercase;
+  margin-right:-.21em;  /* medio tracking: el aire sobrante tras la ultima letra */
+  color:inherit;opacity:0;
+  animation:rise 1.1s var(--e) .85s forwards;
+}
+
+/* línea divisoria */
+.rule{
+  width:clamp(3rem,10vw,5.5rem);height:1px;background:currentColor;
+  margin:2.5rem 0;opacity:0;
+  animation:rise 1.1s var(--e) .4s forwards;
+}
+
+.soon{
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:clamp(1.05rem,4.2vw,1.9rem);
+  font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  margin-right:-.12em;  /* idem: sin esto se ve corrido a la izquierda */
+  color:inherit;opacity:0;
+  animation:rise 1.1s var(--e) .6s forwards;
+}
+.soon i{font-style:normal;animation:blink 2.4s ease-in-out 2s infinite;display:inline-block}
+
+/* pie */
+.foot{
+  position:fixed;left:0;right:0;bottom:1.75rem;
+  display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+  padding-left:.14em;
+  color:inherit;opacity:0;
+  animation:rise 1.1s var(--e) 1s forwards;
+}
+.foot span:nth-child(2){opacity:.45}
+
+/* textura muy sutil para que el menta no se vea plano */
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.035;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  body{background:var(--mint);color:var(--ink)}
+  .mark{color:var(--ink)}
+  .mark,.wordmark,.rule,.soon,.foot{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<svg class="mark" viewBox="0 0 91 28" role="img" aria-label="Capi Collections">
+  <g class="mark-inner" style="transform-origin:50% 50%">
+    <path d="M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z"
+          fill="currentColor"/>
+  </g>
+</svg>
+
+<div class="rule"></div>
+
+<h1 class="soon">Coming Soon<i>.</i></h1>
+
+<div class="wordmark">Capi&nbsp;Collections</div>
+
+<div class="foot">
+  <span>Algún día es hoy</span>
+  <span>—</span>
+  <span>'26</span>
+</div>
+
+<div class="grain"></div>
+
+</body>
+</html>

@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capi Collections — Aquí no existe lo básico.</title>
+<meta name="description" content="Archivo vivo de ideas convertidas en cosas reales. Productos, sistemas, IA, automatización y marcas.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 91 28'%3E%3Cpath d='M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z' fill='%23B8E4C7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=technor@400,500,700&display=swap">
+<style>
+/* ============================================================
+   DESIGN SYSTEM
+   ============================================================ */
+:root{
+  /* manual de marca Capi Collections */
+  --bg:        0  0%  7%;   /* #111111 negro */
+  --surface:   0  0% 10%;   /* #1A1A1A */
+  --text:     41 35% 93%;   /* #F3EFE6 crema */
+  --muted:     0  0% 55%;   /* #8C8C8C */
+  --stroke:  146  8% 17%;   /* menta al 14% sobre el negro */
+  --accent:  141 45% 81%;   /* #B8E4C7 menta */
+
+  --font-body:'Inter', system-ui, sans-serif;
+  --font-mono:'JetBrains Mono', ui-monospace, monospace;
+  /* el manual marca Inter para títulos; cambiar aquí para probarlo */
+  --font-display:'Syncopate', 'Inter', sans-serif;
+
+  --ease: cubic-bezier(.25,.1,.25,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+}
+.accent-gradient{background:linear-gradient(90deg,#B8E4C7 0%,#F3EFE6 100%)}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:hsl(var(--bg));color:hsl(var(--text));
+  font-family:var(--font-body);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.locked{overflow:hidden;height:100vh}
+::selection{background:#B8E4C7;color:#111111}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid #B8E4C7;outline-offset:3px;border-radius:4px}
+img,video{display:block;max-width:100%}
+/* Syncopate no tiene italic: el énfasis va en mayúsculas + menta */
+em{font-family:var(--font-display);font-weight:500;color:hsl(var(--accent));
+  font-style:normal;text-transform:uppercase;letter-spacing:.02em}
+/* dentro de la pastilla clara el menta no contrasta */
+.card-label span em{color:inherit}
+
+/* ---------- animaciones ---------- */
+@keyframes scroll-down{
+  0%{transform:translateY(-100%)}
+  100%{transform:translateY(200%)}
+}
+@keyframes role-fade-in{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes gradient-shift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes pulse-dot{50%{opacity:.3}}
+
+/* ---------- utilidades ---------- */
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+@media(min-width:768px){.wrap{padding:0 2.5rem}}
+@media(min-width:1024px){.wrap{padding:0 4rem}}
+
+.eyebrow{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.75rem;color:hsl(var(--muted));text-transform:uppercase;letter-spacing:.3em;
+}
+.eyebrow::before{content:"";width:2rem;height:1px;background:hsl(var(--stroke))}
+
+.h2{
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(1.5rem,3.8vw,2.6rem);font-weight:500;line-height:1.08;letter-spacing:-.02em;
+  margin:1.5rem 0 1rem;
+}
+.sub{font-size:.95rem;color:hsl(var(--muted));max-width:44ch;line-height:1.6}
+
+/* botón con anillo degradado (patrón base del sistema) */
+.btn{
+  position:relative;display:inline-flex;align-items:center;gap:.5rem;
+  border-radius:999px;font-size:.875rem;padding:.875rem 1.75rem;
+  transition:transform .35s var(--ease-out),background-color .35s,color .35s,border-color .35s;
+  isolation:isolate;
+}
+.btn::before{
+  content:"";position:absolute;inset:-2px;border-radius:999px;z-index:-1;
+  background:linear-gradient(90deg,#B8E4C7 0%,#F3EFE6 50%,#B8E4C7 100%);
+  background-size:200% 100%;animation:gradient-shift 6s ease infinite;
+  opacity:0;transition:opacity .35s;
+}
+.btn:hover{transform:scale(1.05)}
+.btn:hover::before{opacity:1}
+
+.btn-solid{background:hsl(var(--text));color:hsl(var(--bg))}
+.btn-solid:hover{background:hsl(var(--bg));color:hsl(var(--text))}
+
+.btn-ghost{border:2px solid hsl(var(--stroke));background:hsl(var(--bg));color:hsl(var(--text))}
+.btn-ghost:hover{border-color:transparent}
+
+.btn-sm{font-size:.8125rem;padding:.7rem 1.25rem;border:1px solid hsl(var(--stroke))}
+.btn-sm:hover{border-color:transparent;background:hsl(var(--surface))}
+
+/* reveal (equivalente a whileInView) */
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}
+.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* ============================================================
+   1. LOADING SCREEN
+   ============================================================ */
+#loader{
+  position:fixed;inset:0;z-index:9999;background:hsl(var(--bg));
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:2rem 1.5rem;transition:opacity .8s var(--ease),visibility .8s;
+}
+#loader.done{opacity:0;visibility:hidden}
+@media(min-width:768px){#loader{padding:2.5rem}}
+.load-top{
+  display:flex;align-items:center;gap:.85rem;
+  font-size:.75rem;color:hsl(var(--muted));text-transform:uppercase;letter-spacing:.3em;
+  opacity:0;transform:translateY(-20px);transition:opacity .8s var(--ease),transform .8s var(--ease);
+}
+#loader.ready .load-top{opacity:1;transform:none}
+.load-mid{flex:1;display:grid;place-items:center;position:relative}
+.load-word{
+  font-family:var(--font-display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;
+  font-size:clamp(2.25rem,7vw,4.5rem);color:hsl(var(--text) / .8);
+  position:absolute;transition:opacity .35s var(--ease),transform .35s var(--ease);
+}
+.load-word.out{opacity:0;transform:translateY(-20px)}
+.load-word.enter{opacity:0;transform:translateY(20px)}
+.load-bot{display:flex;flex-direction:column;gap:1.5rem}
+.load-count{
+  align-self:flex-end;font-family:var(--font-display);font-weight:700;
+  font-size:clamp(3.75rem,13vw,8rem);line-height:.85;font-variant-numeric:tabular-nums;
+}
+.load-bar{height:3px;background:hsl(var(--stroke) / .5);position:relative;overflow:hidden;border-radius:2px}
+.load-bar i{
+  position:absolute;inset:0;transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,#B8E4C7 0%,#F3EFE6 100%);
+  box-shadow:0 0 8px rgba(184,228,199,.35);
+}
+
+/* ============================================================
+   2. NAVBAR
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;
+  padding:1rem 1rem 0;
+}
+@media(min-width:768px){.nav{padding:1.5rem 1rem 0}}
+.nav-pill{
+  display:flex;align-items:center;justify-content:space-between;
+  width:min(100%,38rem);border-radius:999px;padding:.5rem;
+  border:1px solid rgba(255,255,255,.1);background:hsl(var(--surface));
+  backdrop-filter:blur(12px);transition:box-shadow .4s var(--ease);
+}
+.nav-pill.scrolled{box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+.nav-side{display:flex;align-items:center;flex:1 1 0;gap:.15rem}
+.nav-side.r{justify-content:flex-end}
+.nav-logo{
+  flex:none;display:grid;place-items:center;padding:.35rem 1rem;
+  color:hsl(var(--accent));transition:transform .5s var(--ease-out),color .35s;
+}
+.nav-logo:hover{transform:scale(1.08);color:#F3EFE6}
+.nav-logo svg{height:15px;width:auto;display:block}
+.logo-sm{height:13px;width:auto;color:hsl(var(--accent));flex:none}
+.logo-ft{height:14px;width:auto;color:hsl(var(--accent));flex:none}
+.nav-div{width:1px;height:1.25rem;background:hsl(var(--stroke));margin:0 .25rem}
+.nav-link{
+  font-size:.75rem;border-radius:999px;padding:.375rem .75rem;color:hsl(var(--muted));
+  transition:color .3s,background-color .3s;white-space:nowrap;
+}
+@media(min-width:640px){.nav-link{font-size:.875rem;padding:.5rem 1rem}}
+.nav-link:hover,.nav-link.active{color:hsl(var(--text));background:hsl(var(--stroke) / .5)}
+.nav-cta{
+  position:relative;font-size:.75rem;border-radius:999px;isolation:isolate;
+}
+@media(min-width:640px){.nav-cta{font-size:.875rem}}
+.nav-cta::before{
+  content:"";position:absolute;inset:-2px;border-radius:999px;z-index:-1;
+  background:linear-gradient(90deg,#B8E4C7 0%,#F3EFE6 50%,#B8E4C7 100%);
+  background-size:200% 100%;animation:gradient-shift 6s ease infinite;
+  opacity:0;transition:opacity .35s;
+}
+.nav-cta:hover::before{opacity:1}
+.nav-cta span{
+  display:block;background:hsl(var(--surface));border-radius:999px;backdrop-filter:blur(12px);
+  padding:.375rem .75rem;
+}
+@media(min-width:640px){.nav-cta span{padding:.5rem 1rem}}
+@media(max-width:600px){.nav-div,.nav-link.opt{display:none}}
+
+/* ============================================================
+   3. HERO
+   ============================================================ */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 40%,#16202a 0%,transparent 70%),
+  radial-gradient(ellipse 60% 50% at 20% 80%,#1a1620 0%,transparent 70%),
+  hsl(var(--bg));}
+.hero-media video{
+  position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;
+  width:auto;height:auto;object-fit:cover;transform:translate(-50%,-50%);
+  opacity:0;transition:opacity 1.4s var(--ease);
+}
+.hero-media video.ready{opacity:1}
+.hero-media .veil{position:absolute;inset:0;background:rgba(0,0,0,.2)}
+.hero-media .fade{position:absolute;left:0;right:0;bottom:0;height:12rem;
+  background:linear-gradient(to top,hsl(var(--bg)),transparent)}
+
+.hero-inner{position:relative;z-index:10;text-align:center;padding:8rem 1.5rem 6rem;max-width:56rem}
+.hero-eyebrow{
+  font-size:.75rem;color:hsl(var(--muted));text-transform:uppercase;letter-spacing:.3em;
+  margin-bottom:2rem;
+}
+.hero-name{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(2.6rem,8.5vw,6.5rem);line-height:.92;letter-spacing:-.005em;margin-bottom:1.5rem;
+}
+.hero-role{font-size:clamp(1rem,2.2vw,1.35rem);color:hsl(var(--muted));margin-bottom:1.5rem}
+.hero-role em{color:hsl(var(--accent));display:inline-block;animation:role-fade-in .4s ease-out}
+.hero-desc{
+  font-size:.875rem;color:hsl(var(--muted));max-width:28rem;margin:0 auto 3rem;line-height:1.7;
+}
+@media(min-width:768px){.hero-desc{font-size:1rem}}
+.hero-btns{display:inline-flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+
+/* entrada tipo GSAP */
+.name-reveal{opacity:0;transform:translateY(50px);transition:opacity 1.2s var(--ease-out),transform 1.2s var(--ease-out)}
+.blur-in{opacity:0;filter:blur(10px);transform:translateY(20px);
+  transition:opacity 1s var(--ease-out),filter 1s var(--ease-out),transform 1s var(--ease-out)}
+body.entered .name-reveal{opacity:1;transform:none;transition-delay:.1s}
+body.entered .blur-in{opacity:1;filter:blur(0);transform:none}
+body.entered .blur-in:nth-of-type(1){transition-delay:.3s}
+body.entered .b1{transition-delay:.3s}body.entered .b2{transition-delay:.4s}
+body.entered .b3{transition-delay:.5s}body.entered .b4{transition-delay:.6s}
+
+.scroll-ind{
+  position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);z-index:10;
+  display:flex;flex-direction:column;align-items:center;gap:.75rem;
+}
+.scroll-ind span{font-size:.75rem;color:hsl(var(--muted));text-transform:uppercase;letter-spacing:.2em}
+.scroll-ind i{width:1px;height:2.5rem;background:hsl(var(--stroke));position:relative;overflow:hidden}
+.scroll-ind i::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,#B8E4C7,transparent);
+  animation:scroll-down 1.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   4. DESARROLLOS — bento
+   ============================================================ */
+.section{padding:3rem 0}
+@media(min-width:768px){.section{padding:4rem 0}}
+.section-lg{padding:4rem 0}
+@media(min-width:768px){.section-lg{padding:6rem 0}}
+
+.sec-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;
+  flex-wrap:wrap;margin-bottom:3rem;
+}
+.sec-head .h2 em{color:hsl(var(--accent))}
+.view-all{display:none}
+@media(min-width:768px){.view-all{display:inline-flex}}
+
+.bento{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media(min-width:768px){.bento{grid-template-columns:repeat(12,1fr);gap:1.5rem}}
+.span7{grid-column:span 7}
+.span5{grid-column:span 5}
+@media(max-width:767px){.span7,.span5{grid-column:auto}}
+
+.card{
+  position:relative;display:block;overflow:hidden;border-radius:1.5rem;
+  background:hsl(var(--surface));border:1px solid hsl(var(--stroke));
+  aspect-ratio:16/11;cursor:pointer;
+}
+@media(max-width:767px){.card{aspect-ratio:4/3}}
+.card canvas{width:100%;height:100%;transition:transform .7s var(--ease-out)}
+.card:hover canvas{transform:scale(1.05)}
+.card .halftone{
+  position:absolute;inset:0;pointer-events:none;opacity:.2;mix-blend-mode:multiply;
+  background-image:radial-gradient(circle,#000 1px,transparent 1px);background-size:4px 4px;
+}
+.card .meta{
+  position:absolute;left:1.5rem;bottom:1.5rem;right:1.5rem;z-index:2;
+  transition:opacity .4s var(--ease);
+}
+.card .meta .idx{font-size:.7rem;color:hsl(var(--muted));letter-spacing:.2em;text-transform:uppercase}
+.card .meta .ttl{font-size:1.25rem;margin-top:.35rem;font-weight:400}
+.card .meta .tag{font-size:.8rem;color:hsl(var(--muted));margin-top:.2rem}
+.card .veil{
+  position:absolute;inset:0;display:grid;place-items:center;z-index:3;
+  background:hsl(var(--bg) / .7);backdrop-filter:blur(16px);
+  opacity:0;transition:opacity .45s var(--ease);
+}
+.card:hover .veil{opacity:1}
+.card:hover .meta{opacity:0}
+.card-label{
+  position:relative;isolation:isolate;border-radius:999px;
+}
+.card-label::before{
+  content:"";position:absolute;inset:-2px;border-radius:999px;z-index:-1;
+  background:linear-gradient(90deg,#B8E4C7 0%,#F3EFE6 50%,#B8E4C7 100%);
+  background-size:200% 100%;animation:gradient-shift 6s ease infinite;
+}
+.card-label span{
+  display:block;background:hsl(var(--text));color:hsl(var(--bg));
+  border-radius:999px;padding:.65rem 1.4rem;font-size:.875rem;white-space:nowrap;
+}
+
+/* ============================================================
+   5. ARCHIVO — pills horizontales
+   ============================================================ */
+.rows{display:flex;flex-direction:column;gap:1rem}
+.row{
+  display:flex;align-items:center;gap:1.5rem;padding:1rem;
+  border-radius:40px;border:1px solid hsl(var(--stroke));
+  background:hsl(var(--surface) / .3);transition:background-color .4s var(--ease);
+}
+@media(min-width:640px){.row{border-radius:999px}}
+.row:hover{background:hsl(var(--surface))}
+.row canvas{
+  width:5rem;height:5rem;border-radius:999px;flex:none;
+  border:1px solid hsl(var(--stroke));
+}
+@media(max-width:640px){.row{flex-wrap:wrap}.row canvas{width:3.5rem;height:3.5rem}}
+.row-main{flex:1;min-width:0}
+.row-main h3{font-size:1.05rem;font-weight:400;letter-spacing:-.01em}
+.row-main p{font-size:.8rem;color:hsl(var(--muted));margin-top:.2rem}
+.row-meta{
+  display:flex;align-items:center;gap:1.25rem;padding-right:1rem;
+  font-size:.75rem;color:hsl(var(--muted));white-space:nowrap;
+}
+.row-meta .seal{
+  border:1px solid hsl(var(--stroke));border-radius:999px;padding:.3rem .7rem;
+  letter-spacing:.14em;text-transform:uppercase;font-size:.65rem;
+}
+.row-meta .seal.nda{color:#B8E4C7;border-color:rgba(184,228,199,.35)}
+@media(max-width:640px){.row-meta{padding-right:0;width:100%;justify-content:space-between}}
+
+/* ============================================================
+   6. EXPLORACIONES — parallax
+   ============================================================ */
+.expl{position:relative;min-height:300vh}
+.expl-pin{
+  position:sticky;top:0;height:100vh;display:grid;place-items:center;
+  text-align:center;z-index:10;padding:0 1.5rem;
+}
+.expl-pin .h2{max-width:16ch;margin-left:auto;margin-right:auto}
+.expl-pin .sub{margin:0 auto 2rem}
+.expl-cols{
+  position:absolute;inset:0;z-index:20;pointer-events:none;
+  max-width:1400px;margin:0 auto;padding:12vh 1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+}
+@media(min-width:768px){
+  .expl-cols{gap:10rem;padding:12vh 2.5rem}
+  .tile{max-width:320px}
+}
+.expl-col{display:flex;flex-direction:column;gap:14vh;will-change:transform}
+.expl-col.b{margin-top:22vh}
+.tile{
+  position:relative;aspect-ratio:1;max-width:180px;width:100%;overflow:hidden;
+  border-radius:1.5rem;border:1px solid hsl(var(--stroke));background:hsl(var(--surface));
+  pointer-events:auto;cursor:pointer;transition:transform .6s var(--ease-out);
+}
+.expl-col.b .tile{margin-left:auto}
+.tile:hover{transform:scale(1.04) rotate(0deg) !important}
+.tile canvas{width:100%;height:100%}
+.tile .halftone{
+  position:absolute;inset:0;pointer-events:none;opacity:.2;mix-blend-mode:multiply;
+  background-image:radial-gradient(circle,#000 1px,transparent 1px);background-size:4px 4px;
+}
+.tile b{
+  position:absolute;left:1.25rem;bottom:1.15rem;font-weight:400;font-size:.8rem;
+  letter-spacing:.2em;text-transform:uppercase;color:hsl(var(--text) / .85);
+}
+
+/* ============================================================
+   7. STATS
+   ============================================================ */
+.stats{
+  display:grid;grid-template-columns:1fr;gap:2.5rem;
+  border-top:1px solid hsl(var(--stroke));padding-top:4rem;
+}
+@media(min-width:768px){.stats{grid-template-columns:repeat(3,1fr);gap:2rem}}
+.stat .n{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(3rem,7vw,5rem);line-height:1;font-variant-numeric:tabular-nums;
+}
+.stat .l{font-size:.8rem;color:hsl(var(--muted));text-transform:uppercase;letter-spacing:.2em;margin-top:.75rem}
+
+/* ============================================================
+   8. CONTACTO / FOOTER
+   ============================================================ */
+.contact{position:relative;overflow:hidden;padding:4rem 0 2rem}
+@media(min-width:768px){.contact{padding:5rem 0 3rem}}
+.contact-media{position:absolute;inset:0;z-index:0;background:hsl(var(--bg))}
+.contact-media video{
+  position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;
+  transform:translate(-50%,-50%) scaleY(-1);object-fit:cover;opacity:0;
+  transition:opacity 1.4s var(--ease);
+}
+.contact-media video.ready{opacity:1}
+.contact-media .veil{position:absolute;inset:0;background:
+  linear-gradient(to bottom,rgba(0,0,0,.6) 0%,rgba(0,0,0,.6) 55%,hsl(var(--bg) / .92) 100%)}
+.contact-inner{position:relative;z-index:2}
+
+.marquee{overflow:hidden;padding:1.5rem 0;position:relative;z-index:2;
+  border-top:1px solid hsl(var(--stroke));border-bottom:1px solid hsl(var(--stroke));
+  margin-bottom:4rem}
+.marquee-track{display:flex;width:max-content;will-change:transform}
+.marquee-track span{
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.04em;
+  font-size:clamp(1.5rem,4vw,2.75rem);padding-right:2.5rem;white-space:nowrap;
+  color:hsl(var(--text) / .55);
+}
+.marquee-track span.dot{color:#F3EFE6}
+
+.contact-cta{text-align:center;padding:2rem 0 4rem}
+.contact-cta h2{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(2rem,7vw,5rem);line-height:.95;letter-spacing:-.02em;
+}
+.contact-list{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.25rem;
+  margin:2rem auto 2.5rem;max-width:40rem;font-size:.95rem;color:hsl(var(--muted));
+}
+.contact-list li{list-style:none}
+.contact-list li:last-child{color:hsl(var(--text))}
+.contact-fine{font-size:.8rem;color:hsl(var(--muted));margin-top:1.5rem}
+
+.footbar{
+  display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;
+  border-top:1px solid hsl(var(--stroke));padding-top:2rem;font-size:.8rem;color:hsl(var(--muted));
+}
+.footbar nav{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footbar nav a{transition:color .3s}
+.footbar nav a:hover{color:hsl(var(--text))}
+.footbar .status{display:flex;align-items:center;gap:.6rem}
+.footbar .status i{width:.5rem;height:.5rem;border-radius:50%;background:#B8E4C7;animation:pulse-dot 2s infinite}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox{
+  position:fixed;inset:0;z-index:200;background:hsl(var(--bg) / .92);backdrop-filter:blur(20px);
+  display:grid;place-items:center;padding:1.5rem;opacity:0;visibility:hidden;
+  transition:opacity .5s var(--ease),visibility .5s;
+}
+.lightbox.open{opacity:1;visibility:visible}
+.lightbox-inner{max-width:56rem;width:100%;text-align:center}
+.lightbox .lb-idx{font-size:.75rem;color:hsl(var(--muted));letter-spacing:.3em;text-transform:uppercase}
+.lightbox h3{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.8rem,5.5vw,3.6rem);line-height:1;margin:1rem 0 .5rem;
+}
+.lightbox .lb-tag{font-size:1.05rem;color:#B8E4C7;margin-bottom:2rem}
+.lightbox p{color:hsl(var(--muted));line-height:1.75;max-width:44rem;margin:0 auto 1.25rem;font-size:.95rem}
+.lightbox .lb-spec{
+  display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-top:2.5rem;
+  border-top:1px solid hsl(var(--stroke));padding-top:2rem;
+}
+.lightbox .lb-spec div{text-align:left}
+.lightbox .lb-spec span{display:block;font-size:.7rem;color:hsl(var(--muted));
+  text-transform:uppercase;letter-spacing:.2em;margin-bottom:.35rem}
+.lightbox .lb-spec b{font-weight:400;font-size:.9rem}
+.lb-close{
+  position:fixed;top:1.5rem;right:1.5rem;border:1px solid hsl(var(--stroke));
+  border-radius:999px;padding:.6rem 1.1rem;font-size:.8rem;background:hsl(var(--surface));
+  transition:background-color .3s,color .3s;
+}
+.lb-close:hover{background:hsl(var(--text));color:hsl(var(--bg))}
+
+
+/* Syncopate ya trae su propio espaciado ancho: se anula el tracking negativo */
+.hero-name,.h2,.contact-cta h2,.lightbox h3,.stat .n,.row-main h3{letter-spacing:0}
+
+/* etiquetas y metadatos en JetBrains Mono, como indica el manual */
+.eyebrow,.hero-eyebrow,.load-top,.scroll-ind span,.card .meta .idx,.row-meta,
+.stat .l,.contact-fine,.footbar,.lightbox .lb-idx,.lightbox .lb-spec span{
+  font-family:var(--font-mono)
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- marca Capi Collections — SVG tomado del proyecto de Framer -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="capi-mark" viewBox="0 0 91 28">
+    <path d="M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<!-- ============ 1. LOADING ============ -->
+<div id="loader">
+  <div class="load-top"><svg class="logo-sm" viewBox="0 0 91 28" role="img" aria-label="Capi Collections"><use href="#capi-mark"/></svg><span>Portafolio</span></div>
+  <div class="load-mid"><div class="load-word" id="loadWord">Crear</div></div>
+  <div class="load-bot">
+    <div class="load-count" id="loadCount">000</div>
+    <div class="load-bar"><i id="loadBar"></i></div>
+  </div>
+</div>
+
+<!-- ============ 2. NAVBAR ============ -->
+<div class="nav">
+  <div class="nav-pill" id="navPill">
+    <div class="nav-side l">
+      <a href="#top" class="nav-link active">Inicio</a>
+      <a href="#desarrollos" class="nav-link">Desarrollos</a>
+    </div>
+    <a href="#top" class="nav-logo" aria-label="Capi Collections — inicio"><svg viewBox="0 0 91 28" role="img" aria-label="Capi Collections"><use href="#capi-mark"/></svg></a>
+    <div class="nav-side r">
+      <a href="#archivo" class="nav-link opt">Archivo</a>
+      <a href="#contacto" class="nav-cta"><span>Hablemos ↗</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3. HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <video id="heroVideo" autoplay muted loop playsinline></video>
+    <div class="veil"></div>
+    <div class="fade"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow blur-in b1">Colección '26</div>
+    <h1 class="hero-name name-reveal">Capi Collections</h1>
+    <p class="hero-role blur-in b2">Un <em id="role">creative technologist</em> que construye cosas reales.</p>
+    <p class="hero-desc blur-in b3">Ideas, sistemas, marcas y desarrollos que se salieron del archivo de “algún día”. Aquí no existe lo básico.</p>
+    <div class="hero-btns blur-in b4">
+      <a href="#desarrollos" class="btn btn-solid">Explorar la colección</a>
+      <a href="#contacto" class="btn btn-ghost">Hablemos ↗</a>
+    </div>
+  </div>
+
+  <div class="scroll-ind"><span>Scroll</span><i></i></div>
+</section>
+
+<!-- ============ 4. DESARROLLOS ============ -->
+<section class="section" id="desarrollos">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Desarrollos</div>
+        <h2 class="h2">Piezas de <em>colección</em></h2>
+        <p class="sub">Cada una existe, opera y produce resultados. Nada de conceptos que nunca salieron del PDF.</p>
+      </div>
+      <a href="#archivo" class="btn btn-sm view-all">Ver el archivo →</a>
+    </div>
+
+    <div class="bento">
+      <article class="card span7 rv" data-viz="flow" data-lb="zetty">
+        <canvas></canvas><div class="halftone"></div>
+        <div class="meta">
+          <div class="idx">01 — Zetty</div>
+          <div class="ttl">La IA con colmillo</div>
+          <div class="tag">IA · CRM · Automatización</div>
+        </div>
+        <div class="veil"><div class="card-label"><span>Abrir — <em>Zetty</em></span></div></div>
+      </article>
+
+      <article class="card span5 rv d1" data-viz="graph" data-lb="jarvis">
+        <canvas></canvas><div class="halftone"></div>
+        <div class="meta">
+          <div class="idx">02 — Jarvis</div>
+          <div class="ttl">Cerebro operativo</div>
+          <div class="tag">Agentes · Orquestación</div>
+        </div>
+        <div class="veil"><div class="card-label"><span>Abrir — <em>Jarvis</em></span></div></div>
+      </article>
+
+      <article class="card span5 rv" data-viz="curve" data-lb="axen">
+        <canvas></canvas><div class="halftone"></div>
+        <div class="meta">
+          <div class="idx">03 — Axen</div>
+          <div class="ttl">Broker Academy</div>
+          <div class="tag">Educación · Trading</div>
+        </div>
+        <div class="veil"><div class="card-label"><span>Abrir — <em>Axen</em></span></div></div>
+      </article>
+
+      <article class="card span7 rv d1" data-viz="grid" data-lb="archivo">
+        <canvas></canvas><div class="halftone"></div>
+        <div class="meta">
+          <div class="idx">04 — El archivo</div>
+          <div class="ttl">Todo lo demás</div>
+          <div class="tag">Confidencial · Bajo firma</div>
+        </div>
+        <div class="veil"><div class="card-label"><span>Abrir — <em>El archivo</em></span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ARCHIVO ============ -->
+<section class="section-lg" id="archivo">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Detrás de escena</div>
+        <h2 class="h2">Algunas cosas llevan mi <em>firma</em></h2>
+        <p class="sub">Otras, simplemente saben quién estuvo detrás. He trabajado en productos y negocios que quizás ya conoces.</p>
+      </div>
+      <a href="#contacto" class="btn btn-sm view-all">Trabajemos juntos →</a>
+    </div>
+    <div class="rows" id="rows"></div>
+  </div>
+</section>
+
+<!-- ============ 6. EXPLORACIONES ============ -->
+<section class="expl" id="construido">
+  <div class="expl-pin">
+    <div>
+      <div class="eyebrow rv" style="justify-content:center">He construido de todo</div>
+      <h2 class="h2 rv d1">No hago solo <em>websites</em></h2>
+      <p class="sub rv d2">Desde productos digitales y plataformas completas hasta cerebros operativos, sistemas agénticos, educación, automatización y marcas.</p>
+      <a href="#desarrollos" class="btn btn-sm rv d3">Ver los desarrollos →</a>
+    </div>
+  </div>
+  <div class="expl-cols">
+    <div class="expl-col a" data-speed="-0.14"></div>
+    <div class="expl-col b" data-speed="0.09"></div>
+  </div>
+</section>
+
+<!-- ============ 7. STATS ============ -->
+<section class="section-lg">
+  <div class="wrap">
+    <div class="eyebrow rv">He estado detrás de gigantes</div>
+    <h2 class="h2 rv d1" style="max-width:20ch">Proyectos, sistemas y estrategias que ayudaron a construir <em>resultados grandes</em></h2>
+    <div class="stats" style="margin-top:3rem">
+      <div class="stat rv d1"><div class="n" data-count="20" data-prefix="+$" data-suffix="M">+$0M</div><div class="l">USD en casos de éxito</div></div>
+      <div class="stat rv d2"><div class="n" data-count="95" data-prefix="+" data-suffix="">+0</div><div class="l">Proyectos y sistemas</div></div>
+      <div class="stat rv d3"><div class="n">0</div><div class="l">Proyectos básicos</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. CONTACTO ============ -->
+<section class="contact" id="contacto">
+  <div class="contact-media">
+    <video id="footVideo" autoplay muted loop playsinline></video>
+    <div class="veil"></div>
+  </div>
+
+  <div class="marquee"><div class="marquee-track" id="mq"></div></div>
+
+  <div class="contact-inner wrap">
+    <div class="contact-cta">
+      <div class="eyebrow rv" style="justify-content:center">Última pieza</div>
+      <h2 class="rv d1" style="margin-top:1.5rem">¿Qué quieres armar?</h2>
+      <ul class="contact-list rv d2">
+        <li>Una idea.</li><li>Una marca.</li><li>Un sistema.</li>
+        <li>Un producto.</li><li>Algo que todavía no existe.</li>
+      </ul>
+      <a href="mailto:hola@capicollections.com" class="btn btn-solid rv d3">hola@capicollections.com ↗</a>
+      <p class="contact-fine rv d4">Si es básico, probablemente no me llames.</p>
+    </div>
+
+    <div class="footbar">
+      <span class="status"><i></i>Disponible para nuevas piezas</span>
+      <nav>
+        <a href="#top">Inicio</a><a href="#desarrollos">Desarrollos</a>
+        <a href="#archivo">Archivo</a><a href="#contacto">Contacto</a>
+      </nav>
+      <span style="display:inline-flex;align-items:center;gap:.7rem"><svg class="logo-ft" viewBox="0 0 91 28" role="img" aria-label="Capi Collections"><use href="#capi-mark"/></svg>© 2026 Capi Collections</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lb-close" id="lbClose">Cerrar ✕</button>
+  <div class="lightbox-inner" id="lbInner"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+<script>
+(() => {
+"use strict";
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const DPR = Math.min(devicePixelRatio||1, 2);
+
+/* ============================================================
+   VIDEO HLS
+   ============================================================ */
+const SRC="https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
+function mount(v){
+  if(!v) return;
+  const ok=()=>v.classList.add("ready");
+  if(window.Hls && Hls.isSupported()){
+    const h=new Hls({capLevelToPlayerSize:true});
+    h.loadSource(SRC); h.attachMedia(v);
+    h.on(Hls.Events.MANIFEST_PARSED,()=>{ v.play().catch(()=>{}); ok(); });
+    h.on(Hls.Events.ERROR,(_,d)=>{ if(d.fatal) h.destroy(); });
+  }else if(v.canPlayType("application/vnd.apple.mpegurl")){
+    v.src=SRC; v.addEventListener("loadeddata",ok,{once:true}); v.play().catch(()=>{});
+  }
+}
+mount(document.getElementById("heroVideo"));
+mount(document.getElementById("footVideo"));
+
+/* ============================================================
+   1. LOADING SCREEN — 000 → 100 en 2700ms
+   ============================================================ */
+const loader=document.getElementById("loader"),
+      countEl=document.getElementById("loadCount"),
+      barEl=document.getElementById("loadBar"),
+      wordEl=document.getElementById("loadWord");
+
+requestAnimationFrame(()=>loader.classList.add("ready"));
+
+const WORDS=["Crear","Construir","Escalar"];
+let wi=0;
+const wordTimer=setInterval(()=>{
+  wordEl.classList.add("out");
+  setTimeout(()=>{
+    wi=(wi+1)%WORDS.length;
+    wordEl.textContent=WORDS[wi];
+    wordEl.classList.remove("out"); wordEl.classList.add("enter");
+    requestAnimationFrame(()=>wordEl.classList.remove("enter"));
+  },320);
+},900);
+
+const T0=performance.now(), DUR = RM ? 400 : 2700;
+(function count(){
+  const p=clamp((performance.now()-T0)/DUR,0,1);
+  const n=Math.round(p*100);
+  countEl.textContent=String(n).padStart(3,"0");
+  barEl.style.transform=`scaleX(${p})`;
+  if(p<1) requestAnimationFrame(count);
+  else setTimeout(()=>{
+    clearInterval(wordTimer);
+    loader.classList.add("done");
+    document.body.classList.add("entered");
+    boot();
+  },400);
+})();
+
+/* ============================================================
+   2. ROL ROTATIVO
+   ============================================================ */
+const ROLES=["creative technologist","constructor de sistemas","fundador","arquitecto de producto"];
+let roleEl=document.getElementById("role"), ri=0;
+setInterval(()=>{
+  ri=(ri+1)%ROLES.length;
+  // se reemplaza el nodo para re-disparar la animación role-fade-in
+  const fresh=roleEl.cloneNode(false);
+  fresh.textContent=ROLES[ri];
+  roleEl.replaceWith(fresh);
+  roleEl=fresh;
+},2000);
+
+/* ============================================================
+   3. REVEALS
+   ============================================================ */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+},{threshold:.15, rootMargin:"0px 0px -100px 0px"});
+function boot(){ document.querySelectorAll(".rv").forEach(el=>io.observe(el)); }
+
+/* Syncopate es mucho más ancha que Technor: el nombre del hero se calza
+   al contenedor para que "COLLECTIONS" nunca se corte */
+function fitHero(){
+  const h=document.querySelector(".hero-name");
+  if(!h) return;
+  h.style.fontSize="";
+  const cs=getComputedStyle(h);
+  const box=h.parentElement, bcs=getComputedStyle(box);
+  // el contenedor se estira si el texto desborda: se acota al viewport real
+  const pad=parseFloat(bcs.paddingLeft)+parseFloat(bcs.paddingRight);
+  const avail=Math.min(box.clientWidth, document.documentElement.clientWidth-pad);
+  const probe=document.createElement("span");
+  probe.style.cssText="position:absolute;visibility:hidden;white-space:nowrap;left:-9999px";
+  probe.style.fontFamily=cs.fontFamily;
+  probe.style.fontWeight=cs.fontWeight;
+  probe.style.fontSize=cs.fontSize;
+  probe.style.letterSpacing=cs.letterSpacing;
+  probe.style.textTransform=cs.textTransform;
+  document.body.appendChild(probe);
+  let widest=0;
+  h.textContent.trim().split(/\s+/).forEach(w=>{
+    probe.textContent=w;
+    widest=Math.max(widest, probe.getBoundingClientRect().width);
+  });
+  probe.remove();
+  if(widest>avail) h.style.fontSize=(parseFloat(cs.fontSize)*avail/widest)+"px";
+}
+(document.fonts?document.fonts.ready:Promise.resolve()).then(fitHero);
+addEventListener("resize",fitHero,{passive:true});
+
+/* ============================================================
+   4. NAV
+   ============================================================ */
+const pill=document.getElementById("navPill");
+addEventListener("scroll",()=>{ pill.classList.toggle("scrolled", scrollY>100); },{passive:true});
+
+const navLinks=[...document.querySelectorAll(".nav-link")];
+const secMap={top:0,desarrollos:1,archivo:2};
+Object.keys(secMap).forEach(id=>{
+  const el=document.getElementById(id); if(!el) return;
+  new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting)
+      navLinks.forEach((l,k)=>l.classList.toggle("active",k===secMap[id])); });
+  },{threshold:.3}).observe(el);
+});
+
+/* ============================================================
+   5. ARTE GENERATIVO — visuales propios, sin imágenes externas
+   ============================================================ */
+const STEEL="#B8E4C7", DEEP="#F3EFE6";
+
+function fit(c){
+  const r=c.getBoundingClientRect();
+  c.width=Math.max(1,r.width*DPR); c.height=Math.max(1,r.height*DPR);
+  const g=c.getContext("2d"); g.setTransform(DPR,0,0,DPR,0,0);
+  return {g,w:r.width,h:r.height};
+}
+function bgWash(g,w,h,seedHue){
+  const grd=g.createLinearGradient(0,0,w,h);
+  grd.addColorStop(0,"#101319"); grd.addColorStop(1,"#0A0A0C");
+  g.fillStyle=grd; g.fillRect(0,0,w,h);
+  const rad=g.createRadialGradient(w*seedHue,h*.25,0,w*seedHue,h*.25,Math.max(w,h)*.8);
+  rad.addColorStop(0,"rgba(243,239,230,.28)"); rad.addColorStop(1,"transparent");
+  g.fillStyle=rad; g.fillRect(0,0,w,h);
+}
+
+const VIZ={
+  /* conversaciones que avanzan → Zetty */
+  flow(g,w,h,t){
+    bgWash(g,w,h,.68);
+    const rows=9;
+    for(let r=0;r<rows;r++){
+      const y=(r+1)/(rows+1)*h;
+      g.strokeStyle="rgba(255,255,255,.05)"; g.lineWidth=1;
+      g.beginPath(); g.moveTo(0,y); g.lineTo(w,y); g.stroke();
+      const p=((t*.16 + r*.13)%1), x=p*w, len=w*.22;
+      const grd=g.createLinearGradient(x-len,0,x,0);
+      grd.addColorStop(0,"rgba(184,228,199,0)"); grd.addColorStop(1,STEEL);
+      g.strokeStyle=grd; g.lineWidth=1.6;
+      g.beginPath(); g.moveTo(x-len,y); g.lineTo(x,y); g.stroke();
+      g.fillStyle=STEEL; g.beginPath(); g.arc(x,y,2,0,6.2832); g.fill();
+    }
+  },
+  /* red de agentes → Jarvis */
+  graph(g,w,h,t){
+    bgWash(g,w,h,.3);
+    const n=22, pts=[];
+    for(let i=0;i<n;i++){
+      const a=i*2.399+t*.12, r=(.16+((i*37)%53)/53*.32)*Math.min(w,h);
+      pts.push([w/2+Math.cos(a)*r, h/2+Math.sin(a)*r*.85]);
+    }
+    for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){
+      const d=Math.hypot(pts[i][0]-pts[j][0],pts[i][1]-pts[j][1]);
+      const lim=Math.min(w,h)*.3;
+      if(d<lim){
+        g.strokeStyle=`rgba(184,228,199,${(1-d/lim)*.35})`; g.lineWidth=1;
+        g.beginPath(); g.moveTo(pts[i][0],pts[i][1]); g.lineTo(pts[j][0],pts[j][1]); g.stroke();
+      }
+    }
+    pts.forEach((p,i)=>{
+      g.fillStyle=i%5===0?"#EDEDED":STEEL;
+      g.beginPath(); g.arc(p[0],p[1],i%5===0?3.2:1.8,0,6.2832); g.fill();
+    });
+  },
+  /* progresión de aprendizaje → Axen */
+  curve(g,w,h,t){
+    bgWash(g,w,h,.5);
+    const n=26, bw=w/n;
+    for(let i=0;i<n;i++){
+      const v=(Math.sin(t*.9+i*.38)*.5+.5)*.55 + i/n*.35;
+      const bh=v*h*.8;
+      g.fillStyle = i%4===0 ? "rgba(184,228,199,.7)" : "rgba(255,255,255,.14)";
+      g.fillRect(i*bw+bw*.24, h-bh, bw*.52, bh);
+    }
+    g.strokeStyle=DEEP; g.lineWidth=1.8; g.beginPath();
+    for(let i=0;i<n;i++){
+      const v=(Math.sin(t*.9+i*.38)*.5+.5)*.55 + i/n*.35;
+      const x=i*bw+bw*.5, y=h-v*h*.8-8;
+      i?g.lineTo(x,y):g.moveTo(x,y);
+    }
+    g.stroke();
+  },
+  /* retícula de catálogo → El archivo */
+  grid(g,w,h,t){
+    bgWash(g,w,h,.42);
+    const cols=14, rows=9, cw=w/cols, ch=h/rows;
+    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+      const seed=(x*13+y*7)%17;
+      const on=(seed + Math.floor(t*1.1))%17 < 4;
+      g.fillStyle = on ? "rgba(184,228,199,.55)" : "rgba(255,255,255,.07)";
+      g.fillRect(x*cw+cw*.28, y*ch+ch*.28, cw*.44, ch*.44);
+    }
+  },
+  /* mancha suave para miniaturas del archivo */
+  blob(g,w,h,t,seed){
+    bgWash(g,w,h,.4+((seed%5)/10));
+    g.strokeStyle="rgba(184,228,199,.5)"; g.lineWidth=1;
+    for(let k=0;k<5;k++){
+      g.beginPath();
+      for(let a=0;a<=64;a++){
+        const th=a/64*6.2832;
+        const r=Math.min(w,h)*(.14+k*.055)*(1+Math.sin(th*3+seed+t*.5+k)*.16);
+        const x=w/2+Math.cos(th)*r, y=h/2+Math.sin(th)*r;
+        a?g.lineTo(x,y):g.moveTo(x,y);
+      }
+      g.closePath(); g.stroke();
+    }
+  },
+  /* tarjetas de disciplina */
+  disc(g,w,h,t,seed){
+    bgWash(g,w,h,.35+((seed%4)/8));
+    const m=Math.min(w,h);
+    g.save(); g.translate(w/2,h/2);
+    for(let k=0;k<7;k++){
+      g.rotate(.18+Math.sin(t*.25+seed)*.012);
+      const s=m*(.5-k*.055);
+      g.strokeStyle=`rgba(184,228,199,${.5-k*.05})`; g.lineWidth=1;
+      g.strokeRect(-s/2,-s/2,s,s);
+    }
+    g.restore();
+  }
+};
+
+/* motor: dibuja una vez, anima solo en hover / en viewport */
+function attach(canvas, kind, seed=0){
+  let raf=null, t=seed, live=false;
+  const draw=()=>{ const {g,w,h}=fit(canvas); VIZ[kind](g,w,h,t,seed); };
+  const loop=()=>{ t+=.016; const {g,w,h}=fit(canvas); VIZ[kind](g,w,h,t,seed); raf=requestAnimationFrame(loop); };
+  const on =()=>{ if(!live && !RM){ live=true; loop(); } };
+  const off=()=>{ if(live){ cancelAnimationFrame(raf); live=false; } };
+  const host=canvas.parentElement;
+  host.addEventListener("pointerenter",on);
+  host.addEventListener("pointerleave",off);
+  new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting) draw(); else off(); }); },
+    {threshold:.05}).observe(canvas);
+  addEventListener("resize",()=>{ if(!live) draw(); });
+  draw();
+}
+document.querySelectorAll(".card").forEach((c,i)=>attach(c.querySelector("canvas"), c.dataset.viz, i*1.7));
+
+/* ============================================================
+   6. ARCHIVO — filas
+   ============================================================ */
+const ENTRIES=[
+  {n:"Zetty",            s:"IA · CRM · Producto",          y:"2024 —", seal:"Firmado"},
+  {n:"Jarvis",           s:"Sistema agéntico · Infra",     y:"2025 —", seal:"Firmado"},
+  {n:"Axen Broker Academy", s:"Educación · Trading",       y:"2024 —", seal:"Firmado"},
+  {n:"Fintech LATAM",    s:"Marca · Plataforma",           y:"2023",   seal:"NDA", nda:1},
+  {n:"Ecommerce a escala", s:"Funnels · Automatización",   y:"2023",   seal:"NDA", nda:1},
+  {n:"Real estate",      s:"Sistema de ventas",            y:"2022",   seal:"NDA", nda:1}
+];
+document.getElementById("rows").innerHTML = ENTRIES.map((e,i)=>`
+  <div class="row rv ${i>2?'d1':''}">
+    <canvas></canvas>
+    <div class="row-main">
+      <h3>${e.n}</h3>
+      <p>${e.s}</p>
+    </div>
+    <div class="row-meta">
+      <span>${e.y}</span>
+      <span class="seal ${e.nda?'nda':''}">${e.seal}</span>
+    </div>
+  </div>`).join("");
+document.querySelectorAll(".row canvas").forEach((c,i)=>attach(c,"blob",i*2.3));
+
+/* ============================================================
+   7. EXPLORACIONES — parallax
+   ============================================================ */
+const DISCIPLINAS=[
+  ["Products","disc"],["Systems","grid"],["AI","graph"],
+  ["Automation","flow"],["Brands","disc"],["Platforms","curve"]
+];
+const colA=document.querySelector(".expl-col.a"), colB=document.querySelector(".expl-col.b");
+DISCIPLINAS.forEach(([d,kind],i)=>{
+  const tile=document.createElement("div");
+  tile.className="tile";
+  tile.dataset.kind=kind;
+  tile.style.transform=`rotate(${(i%2?1:-1)*(1.2+i*.25)}deg)`;
+  tile.innerHTML=`<canvas></canvas><div class="halftone"></div><b>${d}</b>`;
+  (i%2?colB:colA).appendChild(tile);
+});
+document.querySelectorAll(".tile").forEach((t,i)=>attach(t.querySelector("canvas"),t.dataset.kind,i*1.9));
+
+const expl=document.getElementById("construido");
+const cols=[...document.querySelectorAll(".expl-col")];
+let py=0, pyT=0;
+function parallax(){
+  const r=expl.getBoundingClientRect();
+  if(r.bottom>0 && r.top<innerHeight){
+    const prog=clamp((innerHeight-r.top)/(innerHeight+r.height),0,1);
+    pyT=prog;
+  }
+  py=lerp(py,pyT,.12);
+  cols.forEach(c=>{
+    const sp=parseFloat(c.dataset.speed);
+    c.style.transform=`translate3d(0,${(py-.5)*sp*expl.offsetHeight}px,0)`;
+  });
+  requestAnimationFrame(parallax);
+}
+if(!RM) requestAnimationFrame(parallax);
+
+/* ============================================================
+   8. STATS
+   ============================================================ */
+document.querySelectorAll("[data-count]").forEach(el=>{
+  new IntersectionObserver((es,ob)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      ob.unobserve(e.target);
+      const to=+el.dataset.count, pre=el.dataset.prefix||"", suf=el.dataset.suffix||"";
+      const s=performance.now(), dur = RM?200:1800;
+      (function run(){
+        const p=clamp((performance.now()-s)/dur,0,1);
+        const v=Math.round((1-Math.pow(1-p,3))*to);
+        el.textContent=pre+v+suf;
+        if(p<1) requestAnimationFrame(run);
+      })();
+    });
+  },{threshold:.5}).observe(el);
+});
+
+/* ============================================================
+   9. MARQUEE
+   ============================================================ */
+const mq=document.getElementById("mq");
+mq.innerHTML=Array.from({length:20},()=>
+  `<span>Aquí no existe lo básico</span><span class="dot">•</span>`).join("");
+let mx=0;
+if(!RM)(function marquee(){
+  mx-=0.55;
+  const half=mq.scrollWidth/2;
+  if(-mx>=half) mx+=half;
+  mq.style.transform=`translateX(${mx}px)`;
+  requestAnimationFrame(marquee);
+})();
+
+/* ============================================================
+   10. LIGHTBOX
+   ============================================================ */
+const LB={
+  zetty:{idx:"01 — Zetty", t:"La IA con colmillo", tag:"Plataforma de IA, CRM y automatización.",
+    p:[`<b>Zetty convierte conversaciones en ventas.</b> Junta inteligencia artificial, CRM y automatización en un solo lugar: los agentes responden, califican y dan seguimiento mientras el equipo se dedica a cerrar.`,
+       `No es un chatbot con guion. Es una capa de operación comercial: contexto compartido entre canales, reglas de negocio reales, embudos que se mueven solos y visibilidad de cada conversación desde el primer mensaje hasta el pago.`,
+       `El reto no fue la IA. Fue diseñar el sistema alrededor: qué recuerda, cuándo escala a un humano, cómo mide y qué hace cuando se equivoca.`],
+    spec:[["Rol","Producto · Sistema · Marca"],["Stack","IA · CRM · Automatización"],["Estado","En operación"]]},
+  jarvis:{idx:"02 — Jarvis", t:"Cerebro operativo", tag:"Ecosistema agéntico que piensa, conecta y ejecuta.",
+    p:[`<b>Un sistema que opera procesos completos.</b> Jarvis coordina agentes especializados sobre una misma memoria: cada uno hace una parte, todos comparten el contexto, y el sistema decide la ruta.`,
+       `Debajo hay orquestación real — colas, estados, reintentos, permisos y trazas. Arriba se siente simple: pides algo y pasa.`,
+       `Se construyó para operar un negocio, no para una demo.`],
+    spec:[["Rol","Arquitectura · Desarrollo"],["Stack","Agentes · Orquestación · Infra"],["Estado","Activo"]]},
+  axen:{idx:"03 — Axen Broker Academy", t:"Aprender. Operar. Evolucionar.", tag:"Plataforma educativa y ecosistema digital.",
+    p:[`<b>Conocimiento convertido en experiencia.</b> El trading se enseña como una progresión: ruta clara, práctica, métricas y comunidad.`,
+       `El diseño trata el avance como producto: cada módulo desbloquea algo, cada sesión deja rastro, y el alumno ve exactamente dónde está parado.`,
+       `Marca, plataforma y ecosistema construidos como una sola pieza.`],
+    spec:[["Rol","Marca · Plataforma · Producto"],["Stack","Educación · Dashboards"],["Estado","En operación"]]},
+  archivo:{idx:"04 — El archivo", t:"Todo lo demás", tag:"Lo que existe bajo firma.",
+    p:[`<b>Algunas cosas llevan mi firma. Otras simplemente saben quién estuvo detrás.</b> Fintech, ecommerce a escala, real estate, productos digitales y marcas que no puedo nombrar.`,
+       `Mismo trabajo, distinto crédito: arquitectura, sistemas, marca y la parte incómoda donde hay que decidir qué se construye y qué se descarta.`],
+    spec:[["Rol","Variable"],["Alcance","Producto · Marca · Sistemas"],["Estado","Confidencial"]]}
+};
+const lb=document.getElementById("lb"), lbInner=document.getElementById("lbInner"),
+      lbClose=document.getElementById("lbClose");
+let lastFocus=null;
+
+function open(key){
+  const d=LB[key]; if(!d) return;
+  lastFocus=document.activeElement;
+  lbInner.innerHTML=`
+    <div class="lb-idx">${d.idx}</div>
+    <h3>${d.t}</h3>
+    <div class="lb-tag">${d.tag}</div>
+    ${d.p.map(x=>`<p>${x}</p>`).join("")}
+    <div class="lb-spec">${d.spec.map(s=>`<div><span>${s[0]}</span><b>${s[1]}</b></div>`).join("")}</div>`;
+  lb.classList.add("open"); lb.setAttribute("aria-hidden","false");
+  document.body.classList.add("locked"); lbClose.focus();
+}
+function close(){
+  lb.classList.remove("open"); lb.setAttribute("aria-hidden","true");
+  document.body.classList.remove("locked");
+  if(lastFocus) lastFocus.focus();
+}
+document.querySelectorAll("[data-lb]").forEach(el=>{
+  el.setAttribute("tabindex","0");
+  el.addEventListener("click",()=>open(el.dataset.lb));
+  el.addEventListener("keydown",e=>{
+    if(e.key==="Enter"||e.key===" "){ e.preventDefault(); open(el.dataset.lb); }
+  });
+});
+lbClose.addEventListener("click",close);
+lb.addEventListener("click",e=>{ if(e.target===lb) close(); });
+addEventListener("keydown",e=>{ if(e.key==="Escape" && lb.classList.contains("open")) close(); });
+})();
+</script>
+</body>
+</html>
