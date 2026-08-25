@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPRAF — Propuesta técnica y económica · Capi Collections</title>
-<meta name="description" content="Propuesta técnica y económica — Fase 1. Proyecto 329.">
+<title>IPRAF — Propuesta y Desarrollo Técnico · Capi Collections</title>
+<meta name="description" content="Propuesta y Desarrollo Técnico — Fase 1. Proyecto 329.">
 <meta name="robots" content="noindex,nofollow">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 91 28'%3E%3Crect width='91' height='28' fill='%23B8E4C7'/%3E%3Cpath d='M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z' fill='%23111111'/%3E%3C/svg%3E">
@@ -150,6 +150,12 @@ ul.plain li::before{
   display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;
   flex-wrap:wrap;
 }
+/* en mobile el monto siempre cae debajo del título, sin importar qué tan
+   corto sea (si no, algunos títulos cortos dejaban el precio en la misma
+   línea y otros lo empujaban abajo, viéndose inconsistente) */
+@media(max-width:640px){
+  .item-hd{flex-direction:column;align-items:flex-start;gap:.35rem}
+}
 .item-hd .t{display:flex;align-items:baseline;gap:.85rem}
 .item-hd .t .idx{
   font-family:var(--f-mono);font-size:.85rem;color:var(--muted);
@@ -274,7 +280,7 @@ ul.plain li::before{
 
   <!-- ============ PORTADA ============ -->
   <section class="cover">
-    <div class="doc-lbl rv in">Propuesta técnica y económica · Proyecto N.º 329</div>
+    <div class="doc-lbl rv in">Propuesta y Desarrollo Técnico · Proyecto N.º 329</div>
     <h1 class="rv in">IPRAF</h1>
     <p class="full-name rv in">Integrated Professional Relicensure Adaptation Framework — Fase 1: desarrollo de la plataforma.</p>
 
