@@ -93,9 +93,10 @@ a{color:inherit}
   padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;
   gap:1rem;flex-wrap:wrap;
 }
-.invest-box .num{font-family:var(--f-display);font-weight:700;font-size:clamp(2.2rem,6vw,3.4rem)}
+.invest-box .num{font-family:var(--f-mono);font-weight:700;font-size:clamp(1.4rem,3vw,1.8rem);
+  letter-spacing:.02em;white-space:nowrap}
 .invest-box .lbl{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;
-  text-transform:uppercase;max-width:16rem;text-align:right}
+  text-transform:uppercase;line-height:1.6}
 
 .disclaimer{
   margin-top:1.5rem;border:1px dashed var(--ink);border-radius:4px;
@@ -498,8 +499,8 @@ ul.plain li::before{
     </div>
 
     <div class="invest-box">
-      <div class="num">$9,997 USD</div>
       <div class="lbl">Inversión total — Fase 1<br>(desarrollo, sin costos recurrentes)</div>
+      <div class="num">$9,997 USD</div>
     </div>
   </section>
 
@@ -607,7 +608,6 @@ ul.plain li::before{
       <li>Creación o redefinición de la metodología IPRAF</li>
       <li>Nuevos módulos no especificados en este alcance</li>
       <li>Nuevas integraciones no especificadas</li>
-      <li>Funcionalidades de inteligencia artificial no descritas aquí</li>
       <li>Servicios de marketing</li>
       <li>Creación de contenido educativo</li>
       <li>Costos de terceros</li>
