@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPRAF — Propuesta técnica y económica · Capi Collections</title>
+<meta name="description" content="Propuesta técnica y económica — Fase 1. Proyecto 329.">
+<meta name="robots" content="noindex,nofollow">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 91 28'%3E%3Crect width='91' height='28' fill='%23B8E4C7'/%3E%3Cpath d='M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z' fill='%23111111'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --mint:#B8E4C7;
+  --ink:#111111;
+  --cream:#F3EFE6;
+  --line:rgba(17,17,17,.12);
+  --muted:rgba(17,17,17,.58);
+  --f-display:'Syncopate',sans-serif;
+  --f-body:'Inter',system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);color:var(--ink);
+  font-family:var(--f-body);font-weight:400;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--ink);color:var(--mint)}
+a{color:inherit}
+.wrap{max-width:920px;margin:0 auto;padding:0 1.5rem}
+@media(min-width:900px){.wrap{padding:0 2.5rem}}
+
+.mono{font-family:var(--f-mono)}
+.mono-lbl{
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:.75rem;
+}
+.mono-lbl::before{content:"";width:1.5rem;height:1px;background:var(--ink);opacity:.35}
+
+/* -------- reveal -------- */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--e),transform .8s var(--e)}
+.rv.in{opacity:1;transform:none}
+
+/* -------- topbar -------- */
+.topbar{
+  position:sticky;top:0;z-index:40;background:var(--cream);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1rem 1.5rem;max-width:920px;margin:0 auto;
+}
+@media(min-width:900px){.topbar-in{padding:1.1rem 2.5rem}}
+.brand{display:flex;align-items:center;gap:.65rem}
+.brand svg{height:16px;width:auto;color:var(--mint)}
+.print-btn{
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--ink);border-radius:999px;padding:.55rem 1.1rem;
+  background:transparent;cursor:pointer;transition:background-color .3s,color .3s;
+}
+.print-btn:hover{background:var(--ink);color:var(--mint)}
+
+/* -------- cover -------- */
+.cover{padding:4.5rem 0 3rem;border-bottom:1px solid var(--line)}
+.cover .doc-lbl{
+  font-family:var(--f-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.5rem;
+}
+.cover h1{
+  font-family:var(--f-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(3rem,9vw,5.5rem);line-height:.92;letter-spacing:-.01em;
+}
+.cover .full-name{
+  font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:42ch;margin-top:1rem;
+}
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;margin-top:2.25rem;
+  padding-top:1.5rem;border-top:1px solid var(--line);
+}
+.meta-row div{font-family:var(--f-mono);font-size:.7rem}
+.meta-row span{display:block;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
+  font-size:.62rem;margin-bottom:.3rem}
+
+.invest-box{
+  margin-top:2.25rem;background:var(--mint);border-radius:4px;
+  padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+.invest-box .num{font-family:var(--f-display);font-weight:700;font-size:clamp(2.2rem,6vw,3.4rem)}
+.invest-box .lbl{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;max-width:16rem;text-align:right}
+
+.disclaimer{
+  margin-top:1.5rem;border:1px dashed var(--ink);border-radius:4px;
+  padding:1rem 1.25rem;font-family:var(--f-mono);font-size:.74rem;line-height:1.7;
+  color:var(--muted);
+}
+.disclaimer b{color:var(--ink);font-weight:600}
+
+/* -------- secciones -------- */
+section.blk{padding:3.5rem 0;border-bottom:1px solid var(--line)}
+section.blk:last-of-type{border-bottom:none}
+.idx{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);letter-spacing:.1em}
+h2{
+  font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:600;letter-spacing:-.01em;
+  margin:.85rem 0 1.25rem;
+}
+h3{font-size:1rem;font-weight:600;margin-bottom:.6rem}
+p{color:rgba(17,17,17,.82);max-width:62ch}
+p+p{margin-top:.9rem}
+.lead{font-size:1.05rem;max-width:60ch}
+
+ul.plain{list-style:none;margin-top:.5rem}
+ul.plain li{
+  position:relative;padding-left:1.15rem;color:rgba(17,17,17,.82);
+  font-size:.94rem;line-height:1.75;
+}
+ul.plain li::before{
+  content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;
+  background:var(--ink);border-radius:1px;
+}
+
+/* -------- objetivo: grid de alcance -------- */
+.scope-grid{
+  display:grid;grid-template-columns:1fr;gap:.15rem 2rem;margin-top:1.25rem;
+}
+@media(min-width:640px){.scope-grid{grid-template-columns:1fr 1fr}}
+.scope-grid li{
+  display:flex;align-items:baseline;gap:.65rem;padding:.5rem 0;
+  border-bottom:1px solid var(--line);font-size:.92rem;
+}
+.scope-grid li::before{
+  content:"";flex:none;width:6px;height:6px;background:var(--mint);
+  border:1px solid var(--ink);border-radius:1px;margin-top:.4em;
+}
+
+/* -------- desglose -------- */
+.item{
+  border:1px solid var(--line);border-radius:4px;padding:1.5rem;margin-top:1.25rem;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.item-hd{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;
+  flex-wrap:wrap;
+}
+.item-hd .t{display:flex;align-items:baseline;gap:.85rem}
+.item-hd .t .idx{
+  font-family:var(--f-mono);font-size:.85rem;color:var(--muted);
+}
+.item-hd h3{margin:0;font-size:1.05rem}
+.item-hd .price{
+  font-family:var(--f-mono);font-weight:600;font-size:1.15rem;white-space:nowrap;
+}
+.item-note{
+  margin-top:.85rem;font-size:.82rem;color:var(--muted);font-style:normal;
+  border-left:2px solid var(--mint);padding-left:.75rem;
+}
+.item ul.plain{margin-top:.9rem;columns:1;}
+@media(min-width:640px){.item ul.plain{columns:2;column-gap:1.5rem}}
+.item ul.plain li{break-inside:avoid;font-size:.86rem;padding-bottom:.2rem}
+
+.total-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-top:1.75rem;padding-top:1.5rem;border-top:2px solid var(--ink);
+}
+.total-row .lbl{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.total-row .val{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,4vw,2.4rem)}
+
+/* -------- cronograma -------- */
+.timeline{margin-top:2rem}
+.tl-track{
+  position:relative;height:2px;background:var(--line);border-radius:2px;margin:0 .5rem;
+}
+.tl-fill{position:absolute;inset:0;width:100%;background:var(--ink)}
+.tl-points{display:flex;justify-content:space-between;margin-top:-.4rem}
+.tl-pt{display:flex;flex-direction:column;align-items:center;gap:.85rem;width:33%}
+.tl-pt:first-child{align-items:flex-start;width:auto}
+.tl-pt:last-child{align-items:flex-end;width:auto}
+.tl-dot{width:.7rem;height:.7rem;border-radius:50%;background:var(--ink);border:3px solid var(--cream);
+  box-shadow:0 0 0 1px var(--ink)}
+.tl-lbl{text-align:center;max-width:11rem}
+.tl-pt:first-child .tl-lbl,.tl-pt:last-child .tl-lbl{text-align:left}
+.tl-lbl .d{font-family:var(--f-mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.1em;margin-bottom:.25rem}
+.tl-lbl .t{font-size:.86rem;font-weight:500}
+.tl-note{margin-top:2.5rem;font-size:.85rem;color:var(--muted);max-width:56ch}
+
+@media(max-width:560px){
+  .tl-track{display:none}
+  .tl-points{flex-direction:column;align-items:flex-start;gap:1.5rem;margin-top:0}
+  .tl-pt,.tl-pt:first-child,.tl-pt:last-child{
+    width:100%;flex-direction:row;align-items:flex-start;gap:1rem;
+  }
+  .tl-dot{flex:none;margin-top:.2rem;box-shadow:none;border:none;background:var(--ink);width:.6rem;height:.6rem}
+  .tl-lbl,.tl-pt:first-child .tl-lbl,.tl-pt:last-child .tl-lbl{text-align:left;max-width:none}
+}
+
+/* -------- propiedad / garantia: dos columnas -------- */
+.cols2{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:1.25rem}
+@media(min-width:640px){.cols2{grid-template-columns:1fr 1fr}}
+.col-card{padding:1.5rem;border:1px solid var(--line);border-radius:4px}
+.col-card.on{background:transparent;border:1.5px solid var(--mint)}
+.col-card h3{display:flex;align-items:center;gap:.5rem}
+
+/* -------- no incluido / exclusiones -------- */
+.card-dashed{
+  border:1px dashed var(--ink);border-radius:4px;padding:1.5rem;margin-top:1.25rem;
+}
+.pill-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+.pill{
+  font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;
+  border:1.5px solid var(--mint);border-radius:999px;padding:.4rem .85rem;
+  color:var(--muted);background:transparent;
+}
+
+/* -------- roadmap -------- */
+.chip-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem}
+.chip{
+  font-size:.84rem;border:1.5px solid var(--mint);border-radius:999px;
+  padding:.5rem 1rem;background:transparent;
+}
+
+/* -------- footer -------- */
+.closing{padding:4rem 0 5rem;text-align:center}
+.closing h2{font-size:clamp(1.6rem,4vw,2.4rem)}
+.closing p{margin:0 auto 2rem;color:var(--muted)}
+.cta-btn{
+  display:inline-block;font-family:var(--f-mono);font-size:.85rem;letter-spacing:.06em;
+  background:var(--ink);color:var(--mint);border-radius:999px;padding:1rem 2.2rem;
+  text-decoration:none;transition:transform .3s var(--e);
+}
+.cta-btn:hover{transform:scale(1.04)}
+.foot-meta{
+  margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;
+  font-family:var(--f-mono);font-size:.68rem;color:var(--muted);letter-spacing:.06em;
+}
+
+@media print{
+  .topbar,.print-btn{display:none}
+  body{background:#fff}
+  .invest-box{background:#E8F4EC;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rv{opacity:1!important;transform:none!important}
+  section.blk{padding:1.5rem 0;border-bottom:1px solid #ddd}
+  .item{border:1px solid #ddd}
+  a[href]:after{content:""}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <svg viewBox="0 0 91 28" role="img" aria-label="Capi Collections">
+        <path d="M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z" fill="currentColor"/>
+      </svg>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar / Imprimir</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ============ PORTADA ============ -->
+  <section class="cover">
+    <div class="doc-lbl rv in">Propuesta técnica y económica · Proyecto N.º 329</div>
+    <h1 class="rv in">IPRAF</h1>
+    <p class="full-name rv in">Integrated Professional Relicensure Adaptation Framework — Fase 1: desarrollo de la plataforma.</p>
+
+    <div class="meta-row rv in">
+      <div><span>Fecha de emisión</span>25 de agosto, 2026</div>
+      <div><span>Para</span>Gabriela Briseño</div>
+      <div><span>Referencia</span>COT-329-IPRAF</div>
+    </div>
+
+  </section>
+
+  <!-- ============ 01 CONTEXTO ============ -->
+  <section class="blk rv" id="contexto">
+    <div class="idx">01 — Contexto</div>
+    <h2>El proyecto</h2>
+    <p class="lead">
+      IPRAF es un sistema analítico estructurado para la reacreditación y actualización de
+      licencias profesionales. Su contenido, metodología, clasificación y lógica editorial
+      ya existen y son propiedad del cliente — no es un curso tradicional ni un banco
+      convencional de preguntas.
+    </p>
+    <p>
+      Nuestro rol como proveedor tecnológico es transformar esa estructura
+      existente en una plataforma web funcional, propietaria y escalable. No se creará,
+      reproducirá ni redefinirá la metodología o el contenido intelectual del cliente.
+    </p>
+    <p>
+      La base contiene actualmente <b>aproximadamente 388 registros analíticos principales</b>,
+      organizados por materias y subcategorías, además de información relacionada que deberá
+      preservarse durante la migración. El cliente proporcionará un archivo Excel correspondiente
+      a una muestra del módulo <i>Real Property</i>, que servirá como referencia para entender
+      la estructura de la información.
+    </p>
+    <p>
+      La plataforma se diseñará para permitir, en el futuro, la incorporación de nuevo
+      contenido y potencialmente otros ámbitos de licenciamiento profesional.
+    </p>
+  </section>
+
+  <!-- ============ 02 OBJETIVO / ALCANCE ============ -->
+  <section class="blk rv" id="objetivo">
+    <div class="idx">02 — Objetivo de la Fase 1</div>
+    <h2>Alcance funcional</h2>
+    <p class="lead">
+      Desarrollar una aplicación web responsiva, funcional y escalable que digitalice y
+      administre la estructura existente de IPRAF.
+    </p>
+    <ul class="scope-grid">
+      <li>Registro y administración de usuarios</li>
+      <li>Organización por materias y subcategorías</li>
+      <li>Búsqueda y filtros</li>
+      <li>Consulta de registros</li>
+      <li>Modo de práctica</li>
+      <li>Autoevaluación</li>
+      <li>Seguimiento del progreso individual</li>
+      <li>Panel administrativo / editorial</li>
+      <li>Importación inicial desde Excel</li>
+      <li>Exportación de la base</li>
+      <li>Historial de modificaciones</li>
+      <li>Respaldos (backups)</li>
+      <li>Controles de acceso</li>
+      <li>Integración con dominio</li>
+      <li>Hosting e infraestructura</li>
+      <li>Base de datos</li>
+      <li>Integración con pasarela de pagos</li>
+    </ul>
+  </section>
+
+  <!-- ============ 03 DESGLOSE ============ -->
+  <section class="blk rv" id="desglose">
+    <div class="idx">03 — Inversión</div>
+    <h2>Desglose del proyecto</h2>
+    <p class="lead">Este desarrollo se organiza en 9 componentes de la Fase 1.</p>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">01</span><h3>Planeación del proyecto</h3></div>
+        <div class="price">$425</div>
+      </div>
+      <ul class="plain">
+        <li>Estructura general del proyecto</li>
+        <li>Análisis de requerimientos</li>
+        <li>Plan de acción</li>
+        <li>Arquitectura funcional</li>
+        <li>Organización de módulos</li>
+        <li>Roadmap inicial</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">02</span><h3>Conceptualización del proyecto</h3></div>
+        <div class="price">$850</div>
+      </div>
+      <ul class="plain">
+        <li>Conceptualización del producto</li>
+        <li>Canvas del proyecto</li>
+        <li>Estructura visual y wireframes</li>
+        <li>Dirección visual</li>
+        <li>Aplicación del branding</li>
+        <li>Definición de experiencia de usuario</li>
+        <li>Sistema visual inicial de la plataforma</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">03</span><h3>Desarrollo de aplicación web responsiva</h3></div>
+        <div class="price">$6,500</div>
+      </div>
+      <ul class="plain">
+        <li>Desarrollo frontend y backend</li>
+        <li>Sistema de usuarios</li>
+        <li>Gestión de contenidos</li>
+        <li>Materias y subcategorías</li>
+        <li>Búsqueda y filtros</li>
+        <li>Consulta de registros</li>
+        <li>Modo práctica y autoevaluación</li>
+        <li>Seguimiento de progreso</li>
+        <li>Panel administrativo y editorial</li>
+        <li>Gestión de accesos</li>
+        <li>Importación inicial desde Excel</li>
+        <li>Exportación de información</li>
+        <li>Historial de modificaciones</li>
+        <li>Aplicación mobile responsive</li>
+        <li>Arquitectura preparada para crecimiento</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">04</span><h3>Integración con dominio</h3></div>
+        <div class="price">$150</div>
+      </div>
+      <ul class="plain">
+        <li>Conexión del dominio</li>
+        <li>Configuración técnica</li>
+        <li>SSL / HTTPS</li>
+        <li>Validación del dominio</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">05</span><h3>Gestión de hosting</h3></div>
+        <div class="price">$250</div>
+      </div>
+      <ul class="plain">
+        <li>Configuración inicial del hosting</li>
+        <li>Deployment</li>
+        <li>Configuración del entorno</li>
+        <li>Configuración básica de seguridad</li>
+        <li>Preparación para producción</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">06</span><h3>Infraestructura de base de datos</h3></div>
+        <div class="price">$672</div>
+      </div>
+      <ul class="plain">
+        <li>Diseño de base de datos</li>
+        <li>Modelado de información</li>
+        <li>Relaciones entre registros</li>
+        <li>Configuración inicial</li>
+        <li>Preparación para crecimiento</li>
+        <li>Migración / importación inicial</li>
+        <li>Backups</li>
+        <li>Estructura para futuras expansiones</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">07</span><h3>Versión Draft / Beta</h3></div>
+        <div class="price">$425</div>
+      </div>
+      <p style="margin-bottom:.5rem;font-size:.9rem">Primera versión funcional para pruebas. Debe permitir:</p>
+      <ul class="plain">
+        <li>Probar la navegación</li>
+        <li>Validar estructura</li>
+        <li>Probar usuarios</li>
+        <li>Validar contenido</li>
+        <li>Probar materias y categorías</li>
+        <li>Probar práctica y autoevaluación</li>
+        <li>Revisar progreso</li>
+        <li>Validar administración</li>
+      </ul>
+      <div class="item-note">Tiempo estimado: 15 días.</div>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">08</span><h3>Versión final lista para público</h3></div>
+        <div class="price">$500</div>
+      </div>
+      <ul class="plain">
+        <li>Correcciones de la versión Draft</li>
+        <li>Ajustes de funcionamiento</li>
+        <li>Optimización</li>
+        <li>Configuración de producción</li>
+        <li>Revisión final</li>
+        <li>Preparación para publicación</li>
+      </ul>
+      <div class="item-note">Tiempo total estimado del proyecto: 30 días.</div>
+    </div>
+
+    <div class="item">
+      <div class="item-hd">
+        <div class="t"><span class="idx">09</span><h3>Integración con pasarela de pagos</h3></div>
+        <div class="price">$225</div>
+      </div>
+      <ul class="plain">
+        <li>Integración inicial con una pasarela de pagos</li>
+        <li>Configuración del flujo de pago</li>
+        <li>Integración con usuarios</li>
+        <li>Validación del acceso posterior al pago</li>
+      </ul>
+      <div class="item-note">Las comisiones de la pasarela de pago serán responsabilidad del cliente.</div>
+    </div>
+
+    <div class="invest-box">
+      <div class="num">$9,997 USD</div>
+      <div class="lbl">Inversión total — Fase 1<br>(desarrollo, sin costos recurrentes)</div>
+    </div>
+  </section>
+
+  <!-- ============ 04 CRONOGRAMA ============ -->
+  <section class="blk rv" id="cronograma">
+    <div class="idx">04 — Cronograma</div>
+    <h2>Tiempo de Entrega</h2>
+    <p class="lead">
+      El cronograma es estimado y depende de que el cliente proporcione oportunamente
+      contenido, información, accesos, aprobaciones y retroalimentación.
+    </p>
+    <div class="timeline">
+      <div class="tl-track"><div class="tl-fill"></div></div>
+      <div class="tl-points">
+        <div class="tl-pt">
+          <div class="tl-dot"></div>
+          <div class="tl-lbl"><div class="d">Día 0</div><div class="t">Inicio del proyecto</div></div>
+        </div>
+        <div class="tl-pt">
+          <div class="tl-dot"></div>
+          <div class="tl-lbl"><div class="d">Día 15</div><div class="t">Versión Draft / Beta funcional</div></div>
+        </div>
+        <div class="tl-pt">
+          <div class="tl-dot"></div>
+          <div class="tl-lbl"><div class="d">Día 30</div><div class="t">Versión final lista para operación pública</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="tl-note">
+      Fase Draft — 15 días: entrega de una versión funcional para pruebas y validación.
+      Fase Publicación — 30 días totales: entrega de la versión final lista para operación pública.
+    </p>
+  </section>
+
+  <!-- ============ 05 PROPIEDAD ============ -->
+  <section class="blk rv" id="propiedad">
+    <div class="idx">05 — Propiedad del proyecto</div>
+    <h2>A quién pertenece qué</h2>
+    <div class="cols2">
+      <div class="col-card on">
+        <h3>Propiedad del cliente</h3>
+        <ul class="plain">
+          <li>100% del código fuente desarrollado específicamente para IPRAF</li>
+          <li>100% de la interfaz diseñada/desarrollada específicamente para el proyecto</li>
+          <li>Contenido, metodología y base intelectual</li>
+          <li>Clasificación y materiales propietarios</li>
+          <li>Documentación e información proporcionada</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h3>Fuera de la transferencia</h3>
+        <ul class="plain">
+          <li>Librerías, frameworks y APIs de terceros mantienen sus licencias originales</li>
+          <li>Servicios cloud y componentes open-source mantienen sus licencias originales</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:1.25rem;font-size:.9rem">
+      La propiedad del código y la interfaz quedan transferidas al cliente una vez completadas
+      las obligaciones de pago acordadas.
+    </p>
+  </section>
+
+  <!-- ============ 06 GARANTÍA ============ -->
+  <section class="blk rv" id="garantia">
+    <div class="idx">06 — Garantía</div>
+    <h2>30 días posteriores a la entrega final</h2>
+    <p class="lead">Cubre errores técnicos relacionados directamente con el alcance aprobado.</p>
+    <h3 style="margin-top:1.5rem">No incluye</h3>
+    <ul class="plain">
+      <li>Nuevas funcionalidades</li>
+      <li>Cambios de alcance o nuevos módulos</li>
+      <li>Nuevas integraciones</li>
+      <li>Cambios de metodología</li>
+      <li>Modificaciones realizadas por terceros</li>
+      <li>Problemas ocasionados por servicios externos</li>
+    </ul>
+  </section>
+
+  <!-- ============ 07 COSTOS RECURRENTES ============ -->
+  <section class="blk rv" id="recurrentes">
+    <div class="idx">07 — Costos recurrentes</div>
+    <h2>No incluidos en los $9,997</h2>
+    <p class="lead">
+      Estos costos son operativos e independientes de la inversión de desarrollo.
+      Se cotizan por separado según el proveedor seleccionado.
+    </p>
+    <div class="card-dashed">
+      <div class="pill-row">
+        <span class="pill">Base de datos — Supabase</span>
+        <span class="pill">Dominio — por definir</span>
+        <span class="pill">Servicios de correo — por definir</span>
+        <span class="pill">Pasarela de pagos (comisiones) — a cargo del cliente</span>
+        <span class="pill">Otras herramientas externas — por definir</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 EXCLUSIONES ============ -->
+  <section class="blk rv" id="exclusiones">
+    <div class="idx">08 — Exclusiones</div>
+    <h2>Fuera de esta cotización</h2>
+    <ul class="plain" style="columns:1">
+      <li>Creación del contenido</li>
+      <li>Creación o redefinición de la metodología IPRAF</li>
+      <li>Nuevos módulos no especificados en este alcance</li>
+      <li>Nuevas integraciones no especificadas</li>
+      <li>Funcionalidades de inteligencia artificial no descritas aquí</li>
+      <li>Servicios de marketing</li>
+      <li>Creación de contenido educativo</li>
+      <li>Costos de terceros</li>
+    </ul>
+    <p style="margin-top:1rem;font-size:.88rem;color:var(--muted)">
+      Las futuras expansiones se cotizan por separado.
+    </p>
+  </section>
+
+  <!-- ============ 09 ROADMAP ============ -->
+  <section class="blk rv" id="roadmap">
+    <div class="idx">09 — Roadmap potencial</div>
+    <h2>Futuras expansiones</h2>
+    <p class="lead">No forman parte de la Fase 1. Se mencionan como posible dirección futura del producto.</p>
+    <div class="chip-row">
+      <span class="chip">Nuevas materias</span>
+      <span class="chip">Nuevos ámbitos de licenciamiento</span>
+      <span class="chip">Analytics avanzados</span>
+      <span class="chip">Dashboards</span>
+      <span class="chip">Inteligencia artificial</span>
+      <span class="chip">Gamificación</span>
+      <span class="chip">Notificaciones</span>
+      <span class="chip">Suscripciones</span>
+      <span class="chip">Automatizaciones</span>
+      <span class="chip">Reportes avanzados</span>
+      <span class="chip">Integraciones externas</span>
+    </div>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section class="closing rv">
+    <div class="idx" style="justify-content:center;display:flex">Siguiente paso</div>
+    <h2>Confirmar Proyecto</h2>
+    <p>Cualquier modificación al alcance implicará un recálculo de esta cotización.</p>
+    <a href="mailto:capi@zetty.io?subject=IPRAF%20—%20Proyecto%20329" class="cta-btn">capi@zetty.io ↗</a>
+
+    <p class="mono" style="font-size:.68rem;color:var(--muted);margin-top:2.5rem">
+      Servicio tecnológico prestado por Zetty Technology LLC.
+    </p>
+
+    <div class="foot-meta">
+      <span>Zetty Technology LLC — Documento confidencial, uso exclusivo del destinatario</span>
+      <span>COT-329-IPRAF · 25 ago 2026</span>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(() => {
+"use strict";
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+},{threshold:.08,rootMargin:"0px 0px -60px 0px"});
+document.querySelectorAll("section.blk.rv, section.closing.rv").forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
