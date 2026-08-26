@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPRAF — Propuesta y Desarrollo Técnico · Capi Collections</title>
-<meta name="description" content="Propuesta y Desarrollo Técnico — Fase 1. Proyecto 329.">
+<title>IPRAF — Proposal &amp; Technical Development · Capi Collections</title>
+<meta name="description" content="Proposal &amp; Technical Development — Phase 1. Project 329.">
 <meta name="robots" content="noindex,nofollow">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 91 28'%3E%3Crect width='91' height='28' fill='%23B8E4C7'/%3E%3Cpath d='M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z' fill='%23111111'/%3E%3C/svg%3E">
@@ -105,7 +105,7 @@ a{color:inherit}
 }
 .disclaimer b{color:var(--ink);font-weight:600}
 
-/* -------- secciones -------- */
+/* -------- sections -------- */
 section.blk{padding:3.5rem 0;border-bottom:1px solid var(--line)}
 section.blk:last-of-type{border-bottom:none}
 .idx{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);letter-spacing:.1em}
@@ -128,7 +128,7 @@ ul.plain li::before{
   background:var(--ink);border-radius:1px;
 }
 
-/* -------- objetivo: grid de alcance -------- */
+/* -------- objective: scope grid -------- */
 .scope-grid{
   display:grid;grid-template-columns:1fr;gap:.15rem 2rem;margin-top:1.25rem;
 }
@@ -142,7 +142,7 @@ ul.plain li::before{
   border:1px solid var(--ink);border-radius:1px;margin-top:.4em;
 }
 
-/* -------- arquitectura técnica -------- */
+/* -------- technical architecture -------- */
 .tech-grid{
   display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.25rem;
 }
@@ -157,7 +157,7 @@ ul.plain li::before{
 }
 .tech-card p{font-size:.88rem;line-height:1.65;max-width:none}
 
-/* -------- desglose -------- */
+/* -------- breakdown -------- */
 .item{
   border:1px solid var(--line);border-radius:4px;padding:1.5rem;margin-top:1.25rem;
   break-inside:avoid;page-break-inside:avoid;
@@ -166,9 +166,9 @@ ul.plain li::before{
   display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;
   flex-wrap:wrap;
 }
-/* en mobile el monto siempre cae debajo del título, sin importar qué tan
-   corto sea (si no, algunos títulos cortos dejaban el precio en la misma
-   línea y otros lo empujaban abajo, viéndose inconsistente) */
+/* on mobile the price always falls below the title, regardless of how
+   short it is (otherwise some short titles kept the price on the same
+   line while others pushed it down, looking inconsistent) */
 @media(max-width:640px){
   .item-hd{flex-direction:column;align-items:flex-start;gap:.35rem}
 }
@@ -195,7 +195,7 @@ ul.plain li::before{
 .total-row .lbl{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
 .total-row .val{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,4vw,2.4rem)}
 
-/* -------- cronograma -------- */
+/* -------- timeline -------- */
 .timeline{margin-top:2rem}
 .tl-track{
   position:relative;height:2px;background:var(--line);border-radius:2px;margin:0 .5rem;
@@ -224,14 +224,14 @@ ul.plain li::before{
   .tl-lbl,.tl-pt:first-child .tl-lbl,.tl-pt:last-child .tl-lbl{text-align:left;max-width:none}
 }
 
-/* -------- propiedad / garantia: dos columnas -------- */
+/* -------- ownership / warranty: two columns -------- */
 .cols2{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:1.25rem}
 @media(min-width:640px){.cols2{grid-template-columns:1fr 1fr}}
 .col-card{padding:1.5rem;border:1px solid var(--line);border-radius:4px}
 .col-card.on{background:transparent;border:1.5px solid var(--mint)}
 .col-card h3{display:flex;align-items:center;gap:.5rem}
 
-/* -------- no incluido / exclusiones -------- */
+/* -------- not included / exclusions -------- */
 .card-dashed{
   border:1px dashed var(--ink);border-radius:4px;padding:1.5rem;margin-top:1.25rem;
 }
@@ -288,432 +288,432 @@ ul.plain li::before{
         <path d="M 14 0 L 0 0 L 0 28 L 42 28 L 42 14 L 14 14 Z M 63 28 L 63 14 L 77 14 L 77 28 L 91 28 L 91 0 L 49 0 L 49 28 Z" fill="currentColor"/>
       </svg>
     </div>
-    <button class="print-btn" onclick="window.print()">Descargar / Imprimir</button>
+    <button class="print-btn" onclick="window.print()">Download / Print</button>
   </div>
 </div>
 
 <main class="wrap">
 
-  <!-- ============ PORTADA ============ -->
+  <!-- ============ COVER ============ -->
   <section class="cover">
-    <div class="doc-lbl rv in">Propuesta y Desarrollo Técnico · Proyecto N.º 329</div>
+    <div class="doc-lbl rv in">Proposal &amp; Technical Development · Project No. 329</div>
     <h1 class="rv in">IPRAF</h1>
-    <p class="full-name rv in">Integrated Professional Relicensure Adaptation Framework — Fase 1: desarrollo de la plataforma.</p>
+    <p class="full-name rv in">Integrated Professional Relicensure Adaptation Framework — Phase 1: platform development.</p>
 
     <div class="meta-row rv in">
-      <div><span>Fecha de emisión</span>26 de agosto, 2026</div>
-      <div><span>Para</span>Gabriela Briseño</div>
-      <div><span>Referencia</span>COT-329-IPRAF</div>
+      <div><span>Issue Date</span>August 26, 2026</div>
+      <div><span>To</span>Gabriela Briseño</div>
+      <div><span>Reference</span>COT-329-IPRAF</div>
     </div>
 
   </section>
 
-  <!-- ============ 01 CONTEXTO ============ -->
-  <section class="blk rv" id="contexto">
-    <div class="idx">01 — Contexto</div>
-    <h2>El proyecto</h2>
+  <!-- ============ 01 CONTEXT ============ -->
+  <section class="blk rv" id="context">
+    <div class="idx">01 — Context</div>
+    <h2>The Project</h2>
     <p class="lead">
-      IPRAF es un sistema analítico estructurado para la reacreditación y actualización de
-      licencias profesionales. Su contenido, metodología, clasificación y lógica editorial
-      ya existen y son propiedad del cliente — no es un curso tradicional ni un banco
-      convencional de preguntas.
+      IPRAF is a structured analytical system for professional license reaccreditation and
+      renewal. Its content, methodology, classification, and editorial logic already exist and
+      belong to the client — this is not a traditional course or a conventional question bank.
     </p>
     <p>
-      Nuestro rol como proveedor tecnológico es transformar esa estructura
-      existente en una plataforma web funcional, propietaria y escalable. No se creará,
-      reproducirá ni redefinirá la metodología o el contenido intelectual del cliente.
+      Our role as the technology provider is to turn that existing structure into a functional,
+      proprietary, and scalable web platform. We will not create, reproduce, or redefine the
+      client's methodology or intellectual content.
     </p>
     <p>
-      La base contiene actualmente <b>aproximadamente 388 registros analíticos principales</b>,
-      organizados por materias y subcategorías, además de información relacionada que deberá
-      preservarse durante la migración. El cliente proporcionará un archivo Excel para el desarrollo.
+      The database currently holds <b>approximately 388 core analytical records</b>, organized
+      by subjects and subcategories, plus related information that must be preserved during
+      migration. The client will provide an Excel file for development.
     </p>
   </section>
 
-  <!-- ============ 02 OBJETIVO / ALCANCE ============ -->
-  <section class="blk rv" id="objetivo">
-    <div class="idx">02 — Objetivo de la Fase 1</div>
-    <h2>Alcance funcional</h2>
+  <!-- ============ 02 OBJECTIVE / SCOPE ============ -->
+  <section class="blk rv" id="objective">
+    <div class="idx">02 — Phase 1 Objective</div>
+    <h2>Functional Scope</h2>
     <p class="lead">
-      Desarrollar una aplicación web responsiva, funcional y escalable que digitalice y
-      administre la estructura existente de IPRAF.
+      Develop a responsive, functional, and scalable web application that digitizes and
+      manages IPRAF's existing structure.
     </p>
     <ul class="scope-grid">
-      <li>Página de Login / Registro</li>
-      <li>Portal de la Aplicación</li>
-      <li>Registro y administración de usuarios</li>
-      <li>Organización por materias y subcategorías</li>
-      <li>Búsqueda y filtros</li>
-      <li>Consulta de registros</li>
-      <li>Modo de práctica</li>
-      <li>Autoevaluación</li>
-      <li>Seguimiento del progreso individual</li>
-      <li>Panel administrativo / editorial</li>
-      <li>Importación inicial desde Excel</li>
-      <li>Exportación de la base</li>
-      <li>Historial de modificaciones</li>
-      <li>Respaldos (backups)</li>
-      <li>Controles de acceso</li>
-      <li>Integración con dominio</li>
-      <li>Hosting e infraestructura</li>
-      <li>Base de datos</li>
-      <li>Integración con pasarela de pagos</li>
+      <li>Login / Sign-up Page</li>
+      <li>Application Portal</li>
+      <li>User registration and management</li>
+      <li>Organization by subjects and subcategories</li>
+      <li>Search and filters</li>
+      <li>Record lookup</li>
+      <li>Practice mode</li>
+      <li>Self-assessment</li>
+      <li>Individual progress tracking</li>
+      <li>Admin / editorial panel</li>
+      <li>Initial import from Excel</li>
+      <li>Database export</li>
+      <li>Change history</li>
+      <li>Backups</li>
+      <li>Access controls</li>
+      <li>Domain integration</li>
+      <li>Hosting and infrastructure</li>
+      <li>Database</li>
+      <li>Payment gateway integration</li>
     </ul>
   </section>
 
-  <!-- ============ 03 ARQUITECTURA TÉCNICA ============ -->
-  <section class="blk rv" id="arquitectura">
-    <div class="idx">03 — Arquitectura técnica</div>
-    <h2>Cómo se construye</h2>
+  <!-- ============ 03 TECHNICAL ARCHITECTURE ============ -->
+  <section class="blk rv" id="architecture">
+    <div class="idx">03 — Technical Architecture</div>
+    <h2>How It's Built</h2>
     <div class="tech-grid">
       <div class="tech-card">
         <div class="lbl">Frontend</div>
-        <p>Next.js (App Router) + TypeScript + Tailwind. Renderizado en servidor por defecto:
-           el contenido nunca viaja como JSON abierto al cliente, lo que protege el activo del
-           cliente y da la mejor lectura en móvil.</p>
+        <p>Next.js (App Router) + TypeScript + Tailwind. Server-rendered by default: content
+           never travels to the client as open JSON, which protects the client's asset and
+           gives the best mobile reading experience.</p>
       </div>
       <div class="tech-card">
         <div class="lbl">Backend</div>
-        <p>Supabase — Postgres, Auth y Storage. La lógica de acceso vive en RLS, no en el frontend.</p>
+        <p>Supabase — Postgres, Auth, and Storage. Access logic lives in RLS, not in the
+           frontend.</p>
       </div>
       <div class="tech-card">
         <div class="lbl">Hosting</div>
-        <p>Vercel. Dominio propio, SSL automático, previews por rama para la validación del Draft.</p>
+        <p>Vercel. Custom domain, automatic SSL, branch previews for Draft validation.</p>
       </div>
       <div class="tech-card">
-        <div class="lbl">Búsqueda</div>
-        <p>Postgres nativo: tsvector + GIN, pg_trgm, unaccent. Sin servicio externo — a 388
-           registros no se justifica y evita un costo recurrente más.</p>
+        <div class="lbl">Search</div>
+        <p>Native Postgres: tsvector + GIN, pg_trgm, unaccent. No external service — at 388
+           records it isn't justified, and it avoids one more recurring cost.</p>
       </div>
       <div class="tech-card">
-        <div class="lbl">Autenticación</div>
-        <p>Supabase Auth, correo + enlace mágico y contraseña. Sesión en servidor.</p>
+        <div class="lbl">Authentication</div>
+        <p>Supabase Auth, email + magic link and password. Server-side session.</p>
       </div>
       <div class="tech-card">
-        <div class="lbl">Pagos</div>
-        <p>Stripe Checkout + webhook firmado que escribe en entitlements. El acceso lo concede
-           la base de datos, nunca el navegador.</p>
+        <div class="lbl">Payments</div>
+        <p>Stripe Checkout + signed webhook that writes to entitlements. Access is granted by
+           the database, never by the browser.</p>
       </div>
       <div class="tech-card">
-        <div class="lbl">Importación</div>
-        <p>Script Node con exceljs → staging → informe de validación → upsert idempotente.
-           Ejecutable tantas veces como haga falta.</p>
+        <div class="lbl">Import</div>
+        <p>Node script with exceljs → staging → validation report → idempotent upsert.
+           Runnable as many times as needed.</p>
       </div>
       <div class="tech-card">
         <div class="lbl">Admin</div>
-        <p>Panel propio dentro de la misma app, con rol editor, historial en audit_log y
-           exportación a xlsx/csv.</p>
+        <p>Custom panel within the same app, with an editor role, audit_log history, and
+           xlsx/csv export.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ 04 DESGLOSE ============ -->
-  <section class="blk rv" id="desglose">
-    <div class="idx">04 — Inversión</div>
-    <h2>Desglose del proyecto</h2>
-    <p class="lead">Este desarrollo se organiza en 9 componentes de la Fase 1.</p>
+  <!-- ============ 04 BREAKDOWN ============ -->
+  <section class="blk rv" id="breakdown">
+    <div class="idx">04 — Investment</div>
+    <h2>Project Breakdown</h2>
+    <p class="lead">This development is organized into 9 components of Phase 1.</p>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">01</span><h3>Planeación del proyecto</h3></div>
+        <div class="t"><span class="idx">01</span><h3>Project Planning</h3></div>
         <div class="price">$425</div>
       </div>
       <ul class="plain">
-        <li>Estructura general del proyecto</li>
-        <li>Análisis de requerimientos</li>
-        <li>Plan de acción</li>
-        <li>Arquitectura funcional</li>
-        <li>Organización de módulos</li>
-        <li>Roadmap inicial</li>
+        <li>Overall project structure</li>
+        <li>Requirements analysis</li>
+        <li>Action plan</li>
+        <li>Functional architecture</li>
+        <li>Module organization</li>
+        <li>Initial roadmap</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">02</span><h3>Conceptualización del proyecto</h3></div>
+        <div class="t"><span class="idx">02</span><h3>Project Conceptualization</h3></div>
         <div class="price">$850</div>
       </div>
       <ul class="plain">
-        <li>Conceptualización del producto</li>
-        <li>Canvas del proyecto</li>
-        <li>Estructura visual y wireframes</li>
-        <li>Dirección visual</li>
-        <li>Desarrollo de Branding</li>
-        <li>Definición de experiencia de usuario</li>
-        <li>Sistema visual inicial de la plataforma</li>
+        <li>Product conceptualization</li>
+        <li>Project canvas</li>
+        <li>Visual structure and wireframes</li>
+        <li>Visual direction</li>
+        <li>Brand Development</li>
+        <li>User experience definition</li>
+        <li>Initial visual system for the platform</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">03</span><h3>Desarrollo de aplicación web responsiva</h3></div>
+        <div class="t"><span class="idx">03</span><h3>Responsive Web Application Development</h3></div>
         <div class="price">$6,500</div>
       </div>
       <ul class="plain">
-        <li>Desarrollo frontend y backend</li>
-        <li>Sistema de usuarios</li>
-        <li>Gestión de contenidos</li>
-        <li>Materias y subcategorías</li>
-        <li>Búsqueda y filtros</li>
-        <li>Consulta de registros</li>
-        <li>Modo práctica y autoevaluación</li>
-        <li>Seguimiento de progreso</li>
-        <li>Panel administrativo y editorial</li>
-        <li>Gestión de accesos</li>
-        <li>Importación inicial desde Excel</li>
-        <li>Exportación de información</li>
-        <li>Historial de modificaciones</li>
-        <li>Aplicación mobile responsive</li>
-        <li>Arquitectura preparada para crecimiento</li>
+        <li>Frontend and backend development</li>
+        <li>User system</li>
+        <li>Content management</li>
+        <li>Subjects and subcategories</li>
+        <li>Search and filters</li>
+        <li>Record lookup</li>
+        <li>Practice mode and self-assessment</li>
+        <li>Progress tracking</li>
+        <li>Admin and editorial panel</li>
+        <li>Access management</li>
+        <li>Initial import from Excel</li>
+        <li>Data export</li>
+        <li>Change history</li>
+        <li>Mobile-responsive application</li>
+        <li>Architecture built for growth</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">04</span><h3>Integración con dominio</h3></div>
+        <div class="t"><span class="idx">04</span><h3>Domain Integration</h3></div>
         <div class="price">$150</div>
       </div>
       <ul class="plain">
-        <li>Conexión del dominio</li>
-        <li>Configuración técnica</li>
+        <li>Domain connection</li>
+        <li>Technical configuration</li>
         <li>SSL / HTTPS</li>
-        <li>Validación del dominio</li>
+        <li>Domain validation</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">05</span><h3>Gestión de hosting</h3></div>
+        <div class="t"><span class="idx">05</span><h3>Hosting Management</h3></div>
         <div class="price">$250</div>
       </div>
       <ul class="plain">
-        <li>Configuración inicial del hosting</li>
+        <li>Initial hosting setup</li>
         <li>Deployment</li>
-        <li>Configuración del entorno</li>
-        <li>Configuración básica de seguridad</li>
-        <li>Preparación para producción</li>
+        <li>Environment configuration</li>
+        <li>Basic security configuration</li>
+        <li>Production readiness</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">06</span><h3>Infraestructura de base de datos</h3></div>
+        <div class="t"><span class="idx">06</span><h3>Database Infrastructure</h3></div>
         <div class="price">$672</div>
       </div>
       <ul class="plain">
-        <li>Diseño de base de datos</li>
-        <li>Modelado de información</li>
-        <li>Relaciones entre registros</li>
-        <li>Configuración inicial</li>
-        <li>Preparación para crecimiento</li>
-        <li>Migración / importación inicial</li>
+        <li>Database design</li>
+        <li>Data modeling</li>
+        <li>Record relationships</li>
+        <li>Initial configuration</li>
+        <li>Prepared for growth</li>
+        <li>Migration / initial import</li>
         <li>Backups</li>
-        <li>Estructura para futuras expansiones</li>
+        <li>Structure for future expansion</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">07</span><h3>Versión Draft / Beta</h3></div>
+        <div class="t"><span class="idx">07</span><h3>Draft / Beta Version</h3></div>
         <div class="price">$425</div>
       </div>
-      <p style="margin-bottom:.5rem;font-size:.9rem">Primera versión funcional para pruebas. Debe permitir:</p>
+      <p style="margin-bottom:.5rem;font-size:.9rem">First functional version for testing. It must allow:</p>
       <ul class="plain">
-        <li>Probar la navegación</li>
-        <li>Validar estructura</li>
-        <li>Probar usuarios</li>
-        <li>Validar contenido</li>
-        <li>Probar materias y categorías</li>
-        <li>Probar práctica y autoevaluación</li>
-        <li>Revisar progreso</li>
-        <li>Validar administración</li>
+        <li>Testing navigation</li>
+        <li>Validating structure</li>
+        <li>Testing users</li>
+        <li>Validating content</li>
+        <li>Testing subjects and categories</li>
+        <li>Testing practice and self-assessment</li>
+        <li>Reviewing progress</li>
+        <li>Validating administration</li>
       </ul>
-      <div class="item-note">Tiempo: 15 días.</div>
+      <div class="item-note">Time: 15 days.</div>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">08</span><h3>Versión final lista para público</h3></div>
+        <div class="t"><span class="idx">08</span><h3>Final Public-Ready Version</h3></div>
         <div class="price">$500</div>
       </div>
       <ul class="plain">
-        <li>Correcciones de la versión Draft</li>
-        <li>Ajustes de funcionamiento</li>
-        <li>Optimización</li>
-        <li>Configuración de producción</li>
-        <li>Revisión final</li>
-        <li>Preparación para publicación</li>
+        <li>Draft version fixes</li>
+        <li>Functional adjustments</li>
+        <li>Optimization</li>
+        <li>Production configuration</li>
+        <li>Final review</li>
+        <li>Launch preparation</li>
       </ul>
-      <div class="item-note">Tiempo total del proyecto: 30 días.</div>
+      <div class="item-note">Total project time: 30 days.</div>
     </div>
 
     <div class="item">
       <div class="item-hd">
-        <div class="t"><span class="idx">09</span><h3>Integración con pasarela de pagos</h3></div>
+        <div class="t"><span class="idx">09</span><h3>Payment Gateway Integration</h3></div>
         <div class="price">$225</div>
       </div>
       <ul class="plain">
-        <li>Integración inicial con una pasarela de pagos</li>
-        <li>Configuración del flujo de pago</li>
-        <li>Integración con usuarios</li>
-        <li>Validación del acceso posterior al pago</li>
+        <li>Initial integration with a payment gateway</li>
+        <li>Payment flow configuration</li>
+        <li>User integration</li>
+        <li>Post-payment access validation</li>
       </ul>
-      <div class="item-note">Las comisiones de la pasarela de pago serán responsabilidad del cliente.</div>
+      <div class="item-note">Payment gateway fees are the client's responsibility.</div>
     </div>
 
     <div class="invest-box">
-      <div class="lbl">Inversión total — Fase 1<br>(desarrollo, sin costos recurrentes)</div>
+      <div class="lbl">Total Investment — Phase 1<br>(development, excluding recurring costs)</div>
       <div class="num">$9,997 USD</div>
     </div>
   </section>
 
-  <!-- ============ 04 CRONOGRAMA ============ -->
-  <section class="blk rv" id="cronograma">
-    <div class="idx">05 — Cronograma</div>
-    <h2>Tiempo de Entrega</h2>
+  <!-- ============ 05 TIMELINE ============ -->
+  <section class="blk rv" id="timeline">
+    <div class="idx">05 — Timeline</div>
+    <h2>Delivery Time</h2>
     <p class="lead">
-      El cronograma es estimado y depende de que el cliente proporcione oportunamente
-      contenido, información, accesos, aprobaciones y retroalimentación.
+      The timeline is an estimate and depends on the client providing content, information,
+      access, approvals, and feedback in a timely manner.
     </p>
     <div class="timeline">
       <div class="tl-track"><div class="tl-fill"></div></div>
       <div class="tl-points">
         <div class="tl-pt">
           <div class="tl-dot"></div>
-          <div class="tl-lbl"><div class="d">Día 0</div><div class="t">Inicio del proyecto</div></div>
+          <div class="tl-lbl"><div class="d">Day 0</div><div class="t">Project kickoff</div></div>
         </div>
         <div class="tl-pt">
           <div class="tl-dot"></div>
-          <div class="tl-lbl"><div class="d">Día 15</div><div class="t">Versión Draft / Beta funcional</div></div>
+          <div class="tl-lbl"><div class="d">Day 15</div><div class="t">Functional Draft / Beta version</div></div>
         </div>
         <div class="tl-pt">
           <div class="tl-dot"></div>
-          <div class="tl-lbl"><div class="d">Día 30</div><div class="t">Versión final lista para operación pública</div></div>
+          <div class="tl-lbl"><div class="d">Day 30</div><div class="t">Final version ready for public launch</div></div>
         </div>
       </div>
     </div>
     <p class="tl-note">
-      Fase Draft — 15 días: entrega de una versión funcional para pruebas y validación.
-      Fase Publicación — 30 días totales: entrega de la versión final lista para operación pública.
+      Draft Phase — 15 days: delivery of a functional version for testing and validation.
+      Launch Phase — 30 days total: delivery of the final version ready for public operation.
     </p>
   </section>
 
-  <!-- ============ 05 PROPIEDAD ============ -->
-  <section class="blk rv" id="propiedad">
-    <div class="idx">06 — Propiedad del proyecto</div>
-    <h2>A quién pertenece qué</h2>
+  <!-- ============ 06 OWNERSHIP ============ -->
+  <section class="blk rv" id="ownership">
+    <div class="idx">06 — Project Ownership</div>
+    <h2>Who Owns What</h2>
     <div class="cols2">
       <div class="col-card on">
-        <h3>Propiedad del cliente</h3>
+        <h3>Client Ownership</h3>
         <ul class="plain">
-          <li>100% del código fuente desarrollado específicamente para IPRAF</li>
-          <li>100% de la interfaz diseñada/desarrollada específicamente para el proyecto</li>
-          <li>Contenido, metodología y base intelectual</li>
-          <li>Clasificación y materiales propietarios</li>
-          <li>Documentación e información proporcionada</li>
+          <li>100% of the source code developed specifically for IPRAF</li>
+          <li>100% of the interface designed/developed specifically for the project</li>
+          <li>Content, methodology, and intellectual foundation</li>
+          <li>Classification and proprietary materials</li>
+          <li>Documentation and information provided</li>
         </ul>
       </div>
       <div class="col-card">
-        <h3>Fuera de la transferencia</h3>
+        <h3>Outside the Transfer</h3>
         <ul class="plain">
-          <li>Librerías, frameworks y APIs de terceros mantienen sus licencias originales</li>
-          <li>Servicios cloud y componentes open-source mantienen sus licencias originales</li>
+          <li>Third-party libraries, frameworks, and APIs retain their original licenses</li>
+          <li>Cloud services and open-source components retain their original licenses</li>
         </ul>
       </div>
     </div>
     <p style="margin-top:1.25rem;font-size:.9rem">
-      La propiedad del código y la interfaz quedan transferidas al cliente una vez completadas
-      las obligaciones de pago acordadas.
+      Ownership of the code and interface transfers to the client once the agreed payment
+      obligations are completed.
     </p>
   </section>
 
-  <!-- ============ 06 GARANTÍA ============ -->
-  <section class="blk rv" id="garantia">
-    <div class="idx">07 — Garantía</div>
-    <h2>30 días posteriores a la entrega final</h2>
-    <p class="lead">Cubre errores técnicos relacionados directamente con el alcance aprobado.</p>
-    <h3 style="margin-top:1.5rem">No incluye</h3>
+  <!-- ============ 07 WARRANTY ============ -->
+  <section class="blk rv" id="warranty">
+    <div class="idx">07 — Warranty</div>
+    <h2>30 Days After Final Delivery</h2>
+    <p class="lead">Covers technical issues directly related to the approved scope.</p>
+    <h3 style="margin-top:1.5rem">Does not include</h3>
     <ul class="plain">
-      <li>Nuevas funcionalidades</li>
-      <li>Cambios de alcance o nuevos módulos</li>
-      <li>Nuevas integraciones</li>
-      <li>Cambios de metodología</li>
-      <li>Modificaciones realizadas por terceros</li>
-      <li>Problemas ocasionados por servicios externos</li>
+      <li>New features</li>
+      <li>Scope changes or new modules</li>
+      <li>New integrations</li>
+      <li>Methodology changes</li>
+      <li>Modifications made by third parties</li>
+      <li>Issues caused by external services</li>
     </ul>
   </section>
 
-  <!-- ============ 07 COSTOS RECURRENTES ============ -->
-  <section class="blk rv" id="recurrentes">
-    <div class="idx">08 — Costos recurrentes</div>
-    <h2>No incluidos en los $9,997</h2>
+  <!-- ============ 08 RECURRING COSTS ============ -->
+  <section class="blk rv" id="recurring">
+    <div class="idx">08 — Recurring Costs</div>
+    <h2>Not Included in the $9,997</h2>
     <p class="lead">
-      Estos costos son operativos e independientes de la inversión de desarrollo.
-      Se cotizan por separado según el proveedor seleccionado.
+      These costs are operational and independent of the development investment. They are
+      quoted separately depending on the provider selected.
     </p>
     <div class="card-dashed">
       <div class="pill-row">
-        <span class="pill">Base de datos — Supabase</span>
-        <span class="pill">Dominio — por definir</span>
-        <span class="pill">Servicios de correo — por definir</span>
-        <span class="pill">Pasarela de pagos (comisiones) — a cargo del cliente</span>
-        <span class="pill">Otras herramientas externas — por definir</span>
+        <span class="pill">Database — Supabase</span>
+        <span class="pill">Domain — TBD</span>
+        <span class="pill">Email services — TBD</span>
+        <span class="pill">Payment gateway (fees) — client's responsibility</span>
+        <span class="pill">Other external tools — TBD</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ 08 EXCLUSIONES ============ -->
-  <section class="blk rv" id="exclusiones">
-    <div class="idx">09 — Exclusiones</div>
-    <h2>Fuera de esta cotización</h2>
+  <!-- ============ 09 EXCLUSIONS ============ -->
+  <section class="blk rv" id="exclusions">
+    <div class="idx">09 — Exclusions</div>
+    <h2>Outside This Quote</h2>
     <ul class="plain" style="columns:1">
-      <li>Creación del contenido</li>
-      <li>Creación o redefinición de la metodología IPRAF</li>
-      <li>Nuevos módulos no especificados en este alcance</li>
-      <li>Nuevas integraciones no especificadas</li>
-      <li>Servicios de marketing</li>
-      <li>Creación de contenido educativo</li>
-      <li>Costos de terceros</li>
+      <li>Content creation</li>
+      <li>Creation or redefinition of the IPRAF methodology</li>
+      <li>New modules not specified in this scope</li>
+      <li>New integrations not specified</li>
+      <li>Marketing services</li>
+      <li>Educational content creation</li>
+      <li>Third-party costs</li>
     </ul>
     <p style="margin-top:1rem;font-size:.88rem;color:var(--muted)">
-      Las futuras expansiones se cotizan por separado.
+      Future expansions are quoted separately.
     </p>
   </section>
 
-  <!-- ============ 09 ROADMAP ============ -->
+  <!-- ============ 10 ROADMAP ============ -->
   <section class="blk rv" id="roadmap">
-    <div class="idx">10 — Roadmap potencial</div>
-    <h2>Futuras expansiones</h2>
-    <p class="lead">No forman parte de la Fase 1. Se mencionan como posible dirección futura del producto.</p>
+    <div class="idx">10 — Potential Roadmap</div>
+    <h2>Future Expansions</h2>
+    <p class="lead">Not part of Phase 1. Mentioned as a possible future direction for the product.</p>
     <div class="chip-row">
-      <span class="chip">Nuevas materias</span>
-      <span class="chip">Nuevos ámbitos de licenciamiento</span>
-      <span class="chip">Analytics avanzados</span>
+      <span class="chip">New subjects</span>
+      <span class="chip">New licensing domains</span>
+      <span class="chip">Advanced analytics</span>
       <span class="chip">Dashboards</span>
-      <span class="chip">Inteligencia artificial</span>
-      <span class="chip">Gamificación</span>
-      <span class="chip">Notificaciones</span>
-      <span class="chip">Suscripciones</span>
-      <span class="chip">Automatizaciones</span>
-      <span class="chip">Reportes avanzados</span>
-      <span class="chip">Integraciones externas</span>
+      <span class="chip">Artificial intelligence</span>
+      <span class="chip">Gamification</span>
+      <span class="chip">Notifications</span>
+      <span class="chip">Subscriptions</span>
+      <span class="chip">Automations</span>
+      <span class="chip">Advanced reporting</span>
+      <span class="chip">External integrations</span>
     </div>
   </section>
 
-  <!-- ============ CIERRE ============ -->
+  <!-- ============ CLOSING ============ -->
   <section class="closing rv">
-    <div class="idx" style="justify-content:center;display:flex">Siguiente paso</div>
-    <h2>Confirmar Proyecto</h2>
-    <p>Cualquier modificación al alcance implicará un recálculo de esta cotización.</p>
-    <a href="mailto:capi@zetty.io?subject=IPRAF%20—%20Proyecto%20329" class="cta-btn">capi@zetty.io ↗</a>
+    <div class="idx" style="justify-content:center;display:flex">Next Step</div>
+    <h2>Confirm Project</h2>
+    <p>Any change to the scope will require this quote to be recalculated.</p>
+    <a href="mailto:capi@zetty.io?subject=IPRAF%20—%20Project%20329" class="cta-btn">capi@zetty.io ↗</a>
 
     <p class="mono" style="font-size:.68rem;color:var(--muted);margin-top:2.5rem">
-      Servicio tecnológico prestado por Zetty Technology LLC.
+      Technology services provided by Zetty Technology LLC.
     </p>
 
     <div class="foot-meta">
-      <span>Zetty Technology LLC — Documento confidencial, uso exclusivo del destinatario</span>
-      <span>COT-329-IPRAF · 26 ago 2026</span>
+      <span>Zetty Technology LLC — Confidential document, for the exclusive use of the recipient</span>
+      <span>COT-329-IPRAF · Aug 26, 2026</span>
     </div>
   </section>
 
