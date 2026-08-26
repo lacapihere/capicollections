@@ -142,6 +142,21 @@ ul.plain li::before{
   border:1px solid var(--ink);border-radius:1px;margin-top:.4em;
 }
 
+/* -------- arquitectura técnica -------- */
+.tech-grid{
+  display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.25rem;
+}
+@media(min-width:640px){.tech-grid{grid-template-columns:1fr 1fr}}
+.tech-card{
+  border:1px solid var(--line);border-radius:4px;padding:1.25rem 1.5rem;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.tech-card .lbl{
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.5rem;
+}
+.tech-card p{font-size:.88rem;line-height:1.65;max-width:none}
+
 /* -------- desglose -------- */
 .item{
   border:1px solid var(--line);border-radius:4px;padding:1.5rem;margin-top:1.25rem;
@@ -346,9 +361,55 @@ ul.plain li::before{
     </ul>
   </section>
 
-  <!-- ============ 03 DESGLOSE ============ -->
+  <!-- ============ 03 ARQUITECTURA TÉCNICA ============ -->
+  <section class="blk rv" id="arquitectura">
+    <div class="idx">03 — Arquitectura técnica</div>
+    <h2>Cómo se construye</h2>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="lbl">Frontend</div>
+        <p>Next.js (App Router) + TypeScript + Tailwind. Renderizado en servidor por defecto:
+           el contenido nunca viaja como JSON abierto al cliente, lo que protege el activo del
+           cliente y da la mejor lectura en móvil.</p>
+      </div>
+      <div class="tech-card">
+        <div class="lbl">Backend</div>
+        <p>Supabase — Postgres, Auth y Storage. La lógica de acceso vive en RLS, no en el frontend.</p>
+      </div>
+      <div class="tech-card">
+        <div class="lbl">Hosting</div>
+        <p>Vercel. Dominio propio, SSL automático, previews por rama para la validación del Draft.</p>
+      </div>
+      <div class="tech-card">
+        <div class="lbl">Búsqueda</div>
+        <p>Postgres nativo: tsvector + GIN, pg_trgm, unaccent. Sin servicio externo — a 388
+           registros no se justifica y evita un costo recurrente más.</p>
+      </div>
+      <div class="tech-card">
+        <div class="lbl">Autenticación</div>
+        <p>Supabase Auth, correo + enlace mágico y contraseña. Sesión en servidor.</p>
+      </div>
+      <div class="tech-card">
+        <div class="lbl">Pagos</div>
+        <p>Stripe Checkout + webhook firmado que escribe en entitlements. El acceso lo concede
+           la base de datos, nunca el navegador.</p>
+      </div>
+      <div class="tech-card">
+        <div class="lbl">Importación</div>
+        <p>Script Node con exceljs → staging → informe de validación → upsert idempotente.
+           Ejecutable tantas veces como haga falta.</p>
+      </div>
+      <div class="tech-card">
+        <div class="lbl">Admin</div>
+        <p>Panel propio dentro de la misma app, con rol editor, historial en audit_log y
+           exportación a xlsx/csv.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 DESGLOSE ============ -->
   <section class="blk rv" id="desglose">
-    <div class="idx">03 — Inversión</div>
+    <div class="idx">04 — Inversión</div>
     <h2>Desglose del proyecto</h2>
     <p class="lead">Este desarrollo se organiza en 9 componentes de la Fase 1.</p>
 
@@ -508,7 +569,7 @@ ul.plain li::before{
 
   <!-- ============ 04 CRONOGRAMA ============ -->
   <section class="blk rv" id="cronograma">
-    <div class="idx">04 — Cronograma</div>
+    <div class="idx">05 — Cronograma</div>
     <h2>Tiempo de Entrega</h2>
     <p class="lead">
       El cronograma es estimado y depende de que el cliente proporcione oportunamente
@@ -539,7 +600,7 @@ ul.plain li::before{
 
   <!-- ============ 05 PROPIEDAD ============ -->
   <section class="blk rv" id="propiedad">
-    <div class="idx">05 — Propiedad del proyecto</div>
+    <div class="idx">06 — Propiedad del proyecto</div>
     <h2>A quién pertenece qué</h2>
     <div class="cols2">
       <div class="col-card on">
@@ -568,7 +629,7 @@ ul.plain li::before{
 
   <!-- ============ 06 GARANTÍA ============ -->
   <section class="blk rv" id="garantia">
-    <div class="idx">06 — Garantía</div>
+    <div class="idx">07 — Garantía</div>
     <h2>30 días posteriores a la entrega final</h2>
     <p class="lead">Cubre errores técnicos relacionados directamente con el alcance aprobado.</p>
     <h3 style="margin-top:1.5rem">No incluye</h3>
@@ -584,7 +645,7 @@ ul.plain li::before{
 
   <!-- ============ 07 COSTOS RECURRENTES ============ -->
   <section class="blk rv" id="recurrentes">
-    <div class="idx">07 — Costos recurrentes</div>
+    <div class="idx">08 — Costos recurrentes</div>
     <h2>No incluidos en los $9,997</h2>
     <p class="lead">
       Estos costos son operativos e independientes de la inversión de desarrollo.
@@ -603,7 +664,7 @@ ul.plain li::before{
 
   <!-- ============ 08 EXCLUSIONES ============ -->
   <section class="blk rv" id="exclusiones">
-    <div class="idx">08 — Exclusiones</div>
+    <div class="idx">09 — Exclusiones</div>
     <h2>Fuera de esta cotización</h2>
     <ul class="plain" style="columns:1">
       <li>Creación del contenido</li>
@@ -621,7 +682,7 @@ ul.plain li::before{
 
   <!-- ============ 09 ROADMAP ============ -->
   <section class="blk rv" id="roadmap">
-    <div class="idx">09 — Roadmap potencial</div>
+    <div class="idx">10 — Roadmap potencial</div>
     <h2>Futuras expansiones</h2>
     <p class="lead">No forman parte de la Fase 1. Se mencionan como posible dirección futura del producto.</p>
     <div class="chip-row">
