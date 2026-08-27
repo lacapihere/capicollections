@@ -561,9 +561,13 @@
 
 <div class="atmosphere" aria-hidden="true"><div class="filament filament--2"></div></div>
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="scrim" id="scrim"></div>
-
 <div class="shell">
+
+  <!-- El velo va DENTRO de .shell a propósito. Fuera de aquí quedaba en el
+       contexto de apilado raíz y competía contra .shell (z-index 1), no
+       contra el menú (z-index 20): con su 19 ganaba y tapaba el menú,
+       oscureciéndolo y quedándose con los toques. -->
+  <div class="scrim" id="scrim"></div>
 
   <aside class="side" id="side">
     <img class="wordmark" src="assets/ipraf-wordmark.png" alt="IPRAF" width="900" height="491">
