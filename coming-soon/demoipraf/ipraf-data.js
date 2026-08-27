@@ -59,11 +59,14 @@
       /* ---- sesión ---- */
       sesion: function () { return leer(K_SESION, null); },
 
-      entrar: function (email, nombre) {
+      // El segundo argumento (password) solo existe para igualar la firma
+      // de Remoto.entrar — modo local no verifica contraseña y NUNCA debe
+      // guardarla ni usarla como nombre para mostrar.
+      entrar: function (email, password) {
         var s = {
           id: "local-" + (email || "invitado"),
           email: email || "invitado@ipraf.local",
-          nombre: nombre || (email ? email.split("@")[0] : "Invitado"),
+          nombre: email ? email.split("@")[0] : "Invitado",
           plan: "premium"
         };
         escribir(K_SESION, s);
