@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" class="ipraf-gate-pending">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
+<!-- Sin sesión local, no hay nada que mostrar aquí: fuera antes de pintar
+     nada, para no depender de un segundo campo de código (y su propio
+     input type=password, que algunos gestores de contraseñas detectan y
+     cubren con su propio popup, bloqueando el resto de la página). -->
+<script>
+(function(){
+  try { if(!localStorage.getItem("ipraf.sesion")) window.location.replace("index.html"); }
+  catch(e){ window.location.replace("index.html"); }
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inicio — IPRAF</title>
 <meta name="robots" content="noindex,nofollow">
@@ -480,98 +490,6 @@
 </style>
 </head>
 <body>
-<!-- Puerta de acceso del demo. No es seguridad real: es un filtro simple
-     para que nadie llegue por casualidad al link. Cualquiera con el código
-     (o con las herramientas de desarrollador) puede pasarla. -->
-<style>
-  html.ipraf-gate-pending body > *:not(#ipraf-gate){display:none!important}
-  #ipraf-gate{
-    position:fixed;inset:0;z-index:99999;
-    background:#08090B;
-    display:flex;align-items:center;justify-content:center;
-    padding:1.25rem;
-    font-family:'Inter',system-ui,-apple-system,sans-serif;
-  }
-  #ipraf-gate .box{
-    width:100%;max-width:360px;
-    background:#111110;border:1px solid rgba(244,244,246,.09);
-    border-radius:14px;padding:2rem 1.75rem;
-    text-align:center;
-  }
-  #ipraf-gate img{width:110px;height:auto;margin:0 auto 1.5rem;display:block}
-  #ipraf-gate p{margin:0 0 1.25rem;color:rgba(244,244,246,.58);font-size:.9rem;line-height:1.5}
-  #ipraf-gate input{
-    width:100%;height:46px;box-sizing:border-box;
-    background:#15161A;border:1px solid rgba(244,244,246,.09);
-    border-radius:10px;padding:0 1rem;margin-bottom:.75rem;
-    color:#F4F4F5;font-size:.95rem;text-align:center;letter-spacing:.04em;
-  }
-  #ipraf-gate input:focus{outline:2px solid #C4944F;outline-offset:2px;border-color:#C4944F}
-  #ipraf-gate button{
-    width:100%;height:46px;border:0;border-radius:10px;
-    background:linear-gradient(160deg,#C99A55,#A1773B,#7D5B2A);
-    color:#140B04;font-weight:600;font-size:.95rem;cursor:pointer;
-  }
-  #ipraf-gate .err{
-    min-height:1.2rem;margin-top:.6rem;color:#D4674F;font-size:.82rem;
-  }
-</style>
-<div id="ipraf-gate" role="dialog" aria-modal="true" aria-label="Acceso al demo">
-  <div class="box">
-    <img src="assets/ipraf-wordmark.png" alt="IPRAF">
-    <p>Demo privado de validación. Escribe el código que te compartieron para entrar.</p>
-    <input type="password" id="ipraf-gate-input" placeholder="Código de acceso" autocomplete="off" inputmode="text">
-    <button type="button" id="ipraf-gate-go">Entrar</button>
-    <p class="err" id="ipraf-gate-err"></p>
-  </div>
-</div>
-<script>
-(function(){
-  "use strict";
-  var CODIGO = "bAFG4tGfCuUM";        // filtro simple, no es seguridad real
-
-  function desbloquear(){
-    document.documentElement.classList.remove("ipraf-gate-pending");
-    var g = document.getElementById("ipraf-gate");
-    if(g) g.remove();
-  }
-
-  // Igual que en index.html: una sesión local ya guardada es prueba de que
-  // el código se validó antes. Evita pedirlo de nuevo en cada carga.
-  try {
-    if(localStorage.getItem("ipraf.sesion")){ desbloquear(); return; }
-  } catch(e) { /* sin localStorage: se pide el código en cada carga */ }
-
-  var input = document.getElementById("ipraf-gate-input");
-  var boton = document.getElementById("ipraf-gate-go");
-  var error = document.getElementById("ipraf-gate-err");
-
-  function intentar(){
-    if(input.value.trim() === CODIGO){
-      // Quien llega directo a portal.html sin pasar por index.html también
-      // necesita una sesión, con la misma identidad por defecto del demo.
-      try {
-        if(!localStorage.getItem("ipraf.sesion")){
-          localStorage.setItem("ipraf.sesion", JSON.stringify({
-            id: "demo-gabriela", email: "demo@ipraf.io",
-            nombre: "Gabriela Briceño", plan: "premium"
-          }));
-        }
-      } catch(e) {}
-      desbloquear();
-    } else {
-      error.textContent = "Código incorrecto.";
-      input.focus();
-      input.select();
-    }
-  }
-  boton.addEventListener("click", intentar);
-  input.addEventListener("keydown", function(e){
-    if(e.key === "Enter") intentar();
-  });
-  setTimeout(function(){ input.focus(); }, 50);
-})();
-</script>
 
 <div class="atmosphere" aria-hidden="true"><div class="filament filament--2"></div></div>
 <a class="skip-link" href="#main">Ir al contenido</a>
