@@ -521,6 +521,20 @@
       white-space:nowrap;
     }
 
+    /* Las ocho materias se envolvían en cuatro filas (179px) y empujaban
+       los casos casi dos pantallas hacia abajo. Misma tira que los filtros. */
+    .subject-bar{
+      flex-wrap:nowrap;
+      min-width:0;
+      max-width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:var(--sp-2);
+      scrollbar-width:none;
+    }
+    .subject-bar::-webkit-scrollbar{display:none}
+    .subject-bar a{flex:0 0 auto;white-space:nowrap}
+
     /* Comparador: columnas más estrechas para que entre más de un caso.
        Con una sola columna visible la comparación no se puede hacer. */
     .cmp table{min-width:0}
