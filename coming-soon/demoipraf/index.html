@@ -106,6 +106,15 @@
      script; nada más depende de ellos.
      --------------------------------------------------------------- */
   body.intro-activa .stage{visibility:hidden}
+  /* El acceso entra cuando la obertura ya terminó de irse. Si ambos se
+     solapan, la última frase se cruza con la tarjeta. */
+  body.intro-revela .stage{
+    animation:accesoEntra .62s cubic-bezier(.22,.61,.36,1) both;
+  }
+  @keyframes accesoEntra{
+    from{opacity:0; transform:translateY(10px)}
+    to  {opacity:1; transform:none}
+  }
 
   #intro{
     position:fixed;inset:0;z-index:60;
@@ -119,7 +128,7 @@
   /* La salida atenúa la obertura y deja ver el acceso que hay detrás. */
   #intro.saliendo{
     opacity:0;
-    transition:opacity .8s cubic-bezier(.4,0,.2,1);
+    transition:opacity .5s cubic-bezier(.4,0,.2,1);
     pointer-events:none;
   }
 
@@ -144,7 +153,7 @@
     right:0;
     transform:translate(34%, -50%) rotate(90deg);
   }
-  @keyframes aguaEntra{ to{opacity:.07} }
+  @keyframes aguaEntra{ to{opacity:.14} }
 
   .intro-in{
     position:relative;
@@ -212,7 +221,7 @@
 
   /* Quien pide menos movimiento ve el remate fijo, sin secuencia. */
   @media (prefers-reduced-motion: reduce){
-    .intro-agua{animation:none; opacity:.07}
+    .intro-agua{animation:none; opacity:.14}
     .intro-frases span{animation:none; opacity:0; transform:none}
     .intro-frases span:nth-child(4){opacity:1}
     .intro-saltar{animation:none; opacity:1}
@@ -307,12 +316,15 @@
     if(cerrada) return;
     cerrada = true;
     intro.classList.add("saliendo");
-    document.body.classList.remove("intro-activa");
+    // Primero se va la obertura; solo entonces entra el acceso. Revelarlo
+    // a la vez cruzaba la última frase con la tarjeta.
     window.setTimeout(function(){
       intro.remove();
+      document.body.classList.remove("intro-activa");
+      document.body.classList.add("intro-revela");
       var campo = document.getElementById("code");
       if(campo) campo.focus();
-    }, 900);
+    }, 560);
   }
 
   // Se cierra sola al terminar la secuencia, o antes si tocan / teclean.
