@@ -623,7 +623,7 @@
         <div class="user-wrap">
           <button class="user" id="user-btn" aria-haspopup="true" aria-expanded="false" aria-controls="user-panel">
             <span class="avatar">G</span>
-            <span class="user-meta"><b>Gabriela Briseño</b><span>PREMIUM</span></span>
+            <span class="user-meta"><b>—</b><span>PREMIUM</span></span>
             <svg class="user-caret" width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" style="color:var(--text-faint)"><path d="m5.4 7.4 3.6 3.4 3.6-3.4"/></svg>
           </button>
 
@@ -631,13 +631,13 @@
             <div class="user-panel-head">
               <span class="avatar avatar--lg">G</span>
               <div>
-                <b>Gabriela Briseño</b>
-                <span>gabriela@ipraf.com</span>
+                <b>—</b>
+                <span class="user-email">—</span>
               </div>
             </div>
             <dl class="user-fields">
-              <div><dt>Nombre</dt><dd>Gabriela Briseño</dd></div>
-              <div><dt>Correo</dt><dd>gabriela@ipraf.com</dd></div>
+              <div><dt>Nombre</dt><dd>—</dd></div>
+              <div><dt>Correo</dt><dd>—</dd></div>
               <div><dt>Tipo de plan</dt><dd><span class="chip chip--gold">Premium</span></dd></div>
             </dl>
             <div class="user-panel-foot">
@@ -1703,7 +1703,7 @@
     var head = userPanel.querySelector(".user-panel-head");
     if(head){
       head.querySelector("b").textContent = s.nombre;
-      head.querySelector("span").textContent = s.email;
+      head.querySelector(".user-email").textContent = s.email;
     }
     var dd = userPanel.querySelectorAll(".user-fields dd");
     if(dd.length >= 3){
