@@ -169,7 +169,7 @@
   .activity time{font-size:var(--t-xs);color:var(--text-faint);font-family:var(--f-ui)}
   ul{list-style:none;margin:0;padding:0}
 
-  /* ---------- Cases: facetas + lista ---------- */
+  /* ---------- Casos: facetas + lista ---------- */
   .split{display:grid;grid-template-columns:236px 1fr;gap:var(--sp-5);align-items:start}
   @media (max-width:900px){.split{grid-template-columns:1fr}}
 
@@ -234,7 +234,7 @@
   .compare-bar p{margin:0;font-size:var(--t-sm);color:var(--text-2)}
   .compare-bar .btn{height:38px;font-size:var(--t-sm)}
 
-  /* ---------- Compare ---------- */
+  /* ---------- Comparador ---------- */
   .cmp{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
   .cmp table{border-collapse:collapse;width:100%;min-width:640px}
   .cmp th,.cmp td{padding:var(--sp-4);border-bottom:1px solid var(--line);
@@ -259,7 +259,7 @@
   .authority{font-family:var(--f-ui);font-size:var(--t-sm);line-height:1.7;
     color:var(--text-muted);margin:0}
 
-  /* ---------- Subjects ---------- */
+  /* ---------- Materias ---------- */
   .subj{padding:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-3);
     text-decoration:none;color:inherit;transition:border-color var(--dur) var(--ease)}
   a.subj:hover{border-color:var(--line-gold)}
@@ -271,7 +271,7 @@
   .empty{padding:var(--sp-7) var(--sp-5);text-align:center;color:var(--text-muted)}
   .empty p{margin:0 0 var(--sp-4)}
 
-  /* ---------- The method: pasos del READ ME ---------- */
+  /* ---------- El método: pasos del READ ME ---------- */
   .step{padding:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-4)}
   .step-head{display:flex;align-items:center;gap:var(--sp-3);margin:0;
     font-size:var(--t-md);font-weight:600;color:var(--text);line-height:1.35}
@@ -311,7 +311,7 @@
   .commit textarea::placeholder{color:var(--text-faint)}
   .commit .insight{margin:0;font-size:var(--t-sm);color:var(--text-muted)}
 
-  /* Name de arquetipo sin cápsula: el color lo aporta la barra de la fila. */
+  /* Nombre de arquetipo sin cápsula: el color lo aporta la barra de la fila. */
   .arch-name{font-size:var(--t-sm);font-weight:600;letter-spacing:.02em}
 
   /* ---------- Autoevaluación de un caso ---------- */
@@ -385,7 +385,7 @@
     .user-panel{position:fixed;right:var(--sp-4);left:var(--sp-4);width:auto;top:70px}
   }
 
-  /* ---------- Home: la secuencia de pasos ---------- */
+  /* ---------- Inicio: la secuencia de pasos ---------- */
   .steps-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:var(--sp-4)}
   .step-card{padding:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-4)}
   .step-card-head{display:flex;align-items:flex-start;gap:var(--sp-3)}
@@ -409,7 +409,7 @@
   }
   .subject-bar b{font-variant-numeric:tabular-nums;color:var(--text-faint);font-weight:500;margin-left:4px}
 
-  /* ---------- Essay layers (MEE) ---------- */
+  /* ---------- Capa de ensayos (MEE) ---------- */
   /* El READ ME del ensayo exige que los límites de Issue Count y de
      Required Explicit Statement se declaren donde esos campos aparezcan. */
   .caveat{
@@ -741,7 +741,7 @@
         }
         else { html = viewMee(r.params); title = "Essay questions"; }
         break;
-      // El avance vive en Home; la ruta queda como alias para no romper
+      // El avance vive en Inicio; la ruta queda como alias para no romper
       // enlaces guardados a #/progreso.
       case "progreso":
       default:         html = viewHome();                     title = "Home";
@@ -753,14 +753,14 @@
     closeSide();
   }
 
-  /* ---------------- Home ---------------- */
+  /* ---------------- Inicio ---------------- */
   function viewHome(){
     var T = D.totals;
     var arch = D.archetypes.filter(function(a){ return a.count > 0; });
     var maxArch = Math.max.apply(null, arch.map(function(a){ return a.count; }));
     var totalU = T.units + T.meeUnits;
 
-    // Home es una secuencia, no un escaparate: qué hacer, y en qué orden.
+    // Inicio es una secuencia, no un escaparate: qué hacer, y en qué orden.
     var pasos = [
       { n: 1, titulo: "Understand why you miss", cifra: "15 min",
         cuerpo: "A problem you should get wrong. It shows that your instinct applies " +
@@ -881,7 +881,7 @@
     return s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/,"") + "…" : s;
   }
 
-  /* ---------------- Subjects ---------------- */
+  /* ---------------- Materias ---------------- */
   function viewSubjects(){
     var T = D.totals;
     return '<div class="page-head"><h1>Subjects</h1>' +
@@ -1023,7 +1023,7 @@
       '</span></div>';
   }
 
-  /* ---------------- Compare ---------------- */
+  /* ---------------- Comparador ---------------- */
   function viewCompare(params){
     var T = S();
     // El tope de MAX_PICK vale también por URL directa: más de cuatro columnas
@@ -1070,7 +1070,7 @@
       '</div>';
   }
 
-  /* ---------------- Units ---------------- */
+  /* ---------------- Unidades ---------------- */
   function viewUnits(params){
     var T = S();
     var arch = params.get("arch");
@@ -1199,7 +1199,7 @@
       '</article>';
   }
 
-  /* ---------------- The method: el READ ME, guiado ---------------- */
+  /* ---------------- El método: el READ ME, guiado ---------------- */
   // El READ ME del Excel pide comprometerse a una respuesta antes de leer
   // la siguiente línea. En una hoja eso depende del honor; aquí se cumple:
   // los pasos posteriores no existen en el DOM hasta que el lector responde.
@@ -1309,7 +1309,7 @@
       }).join("") + '</div>';
   }
 
-  /* ---------------- Essay layers (MEE) ---------------- */
+  /* ---------------- Capa de ensayos (MEE) ---------------- */
   function viewMee(params){
     var M = D.mee;
     var fam = params && params.get("family");
@@ -1692,7 +1692,7 @@
 
   window.addEventListener("hashchange", render);
 
-  // Sesión y avance antes del primer pintado, para que Home no parpadee
+  // Sesión y avance antes del primer pintado, para que Inicio no parpadee
   // de cero a datos reales.
   U.auth.iniciar()
     .then(function(){ return U.progress.resumen(); })
