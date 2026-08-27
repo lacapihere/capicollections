@@ -175,6 +175,7 @@
 
   .facets{position:sticky;top:88px;display:flex;flex-direction:column;gap:var(--sp-2)}
   .facets .label{padding:0 var(--sp-2) var(--sp-2)}
+  .facet-list{display:flex;flex-direction:column;gap:var(--sp-2)}
   .facet{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);
     width:100%;padding:var(--sp-2) var(--sp-3);border-radius:var(--r-sm);
     background:none;border:1px solid transparent;cursor:pointer;text-align:left;
@@ -490,6 +491,55 @@
     .search{min-width:0;flex:1 1 auto}
     .user-meta{display:none}
     .facets{position:static}
+  }
+
+  /* ---------- Móvil: el contenido, no solo el armazón ----------
+     El breakpoint de 920px mueve la barra lateral, pero lo que va dentro
+     de cada vista seguía maquetado para escritorio. Esto lo corrige. */
+  @media (max-width:720px){
+    /* Filtros de familia: de 25 filas apiladas a una tira que se desliza.
+       Antes había que recorrer toda la lista para ver el primer caso.
+       Los min-width:0 son imprescindibles: un hijo de grid o flex arranca
+       con min-width:auto y se niega a encogerse por debajo de su contenido,
+       así que sin ellos la tira se estira y arrastra toda la página. */
+    .split, .split > *{min-width:0}
+    .facets{min-width:0}
+    .facet-list{
+      flex-direction:row;
+      min-width:0;
+      max-width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:var(--sp-2);
+      scrollbar-width:none;
+    }
+    .facet-list::-webkit-scrollbar{display:none}
+    .facet{
+      width:auto;flex:0 0 auto;
+      border-radius:99px;
+      border-color:var(--line);
+      white-space:nowrap;
+    }
+
+    /* Comparador: columnas más estrechas para que entre más de un caso.
+       Con una sola columna visible la comparación no se puede hacer. */
+    .cmp table{min-width:0}
+    .cmp tbody th{width:74px;padding:var(--sp-3) var(--sp-2)}
+    .cmp td{min-width:150px;padding:var(--sp-3) var(--sp-2)}
+    .cmp th,.cmp td{font-size:var(--t-xs)}
+    .cmp .cmp-title{font-size:var(--t-sm)}
+
+    /* Objetivo táctil: 44px es el mínimo cómodo con el dedo. El flex:0 0 auto
+       hace falta porque la barra superior lo encogía a 32px. */
+    .side-toggle{width:44px;height:44px;flex:0 0 auto}
+    .user{min-height:44px}
+    .facet{min-height:38px}
+    /* La casilla de selección de caso es el objetivo más pequeño de la vista. */
+    .case-pick{width:24px;height:24px}
+
+    /* La barra de comparación no debe comerse la pantalla. */
+    .compare-bar{left:var(--sp-3);right:var(--sp-3);padding:var(--sp-3)}
+    .compare-bar p{font-size:var(--t-xs)}
   }
 </style>
 </head>
@@ -946,14 +996,15 @@
     });
 
     var facets = '<div class="facets"><span class="label">Doctrinal family</span>' +
+      '<div class="facet-list">' +
       '<button class="facet" aria-pressed="' + (!fam) + '" data-fam="">All <b>' + T.cases.length + '</b></button>' +
       T.families.map(function(f){
         return '<button class="facet" aria-pressed="' + (fam === f.name) + '" data-fam="' + esc(f.name) + '">' +
           esc(f.name) + ' <b>' + f.count + '</b></button>';
-      }).join("") + '</div>';
+      }).join("") + '</div></div>';
 
     var body = '<div class="list-head">' +
-      '<span class="list-count">' + list.length + ' caso' + (list.length === 1 ? "" : "s") +
+      '<span class="list-count">' + list.length + ' case' + (list.length === 1 ? "" : "s") +
         (fam ? ' · ' + esc(fam) : '') + (q ? ' · «' + esc(q) + '»' : '') + '</span>' +
       '<span class="label">Check 2 to 4 to compare</span></div>';
 
