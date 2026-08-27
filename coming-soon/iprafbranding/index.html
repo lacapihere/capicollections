@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPRAF — Branding</title>
+<meta name="robots" content="noindex,nofollow">
+<base href="/iprafbranding/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  html, body{background:#000}
+  html{overflow-x:clip}
+
+  body{
+    min-height:100vh;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    color:var(--text);
+    /* El halo de la lámina se sale del encuadre a propósito; sin esto
+       ensancharía el documento y aparecería scroll lateral. */
+    overflow-x:clip;
+  }
+
+  .marco{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(1.6rem, 5vh, 3rem);
+    padding:clamp(1.8rem, 6vh, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+
+  .encabezado{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:var(--sp-3);
+  }
+  .encabezado .wordmark{
+    width:clamp(96px, 15vw, 128px);
+    height:auto;
+  }
+  .encabezado p{
+    margin:0;
+    font-size:var(--t-sm);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+
+  .lamina{
+    position:relative;
+    width:100%;
+    max-width:1535px;
+    margin:0;
+    line-height:0;
+  }
+  /* El archivo no trae negro puro sino un gris muy oscuro (#161616). Este
+     halo lo prolonga por fuera del encuadre y lo disuelve hacia el negro de
+     la página, así no se ve el rectángulo donde termina la foto. */
+  .lamina::before{
+    content:'';
+    position:absolute;
+    inset:-7% -5%;
+    background:radial-gradient(ellipse at center,
+                 #161616 0%, #161616 52%, rgba(22,22,22,.55) 72%, transparent 88%);
+    pointer-events:none;
+  }
+  .lamina img{
+    position:relative;
+    display:block;
+    width:100%;
+    height:auto;
+    /* Los cuatro bordes se desvanecen sobre ese halo. El margen es corto
+       para no comerse el cuaderno ni la bolsa, que llegan cerca del filo. */
+    -webkit-mask-image:
+      linear-gradient(to right,  transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 4%,   #000 96%,   transparent 100%);
+    -webkit-mask-composite:source-in;
+            mask-image:
+      linear-gradient(to right,  transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 4%,   #000 96%,   transparent 100%);
+            mask-composite:intersect;
+  }
+
+  .pie{
+    padding:0 clamp(1rem, 4vw, 3rem) clamp(1.8rem, 5vh, 3rem);
+    text-align:center;
+    font-size:var(--t-xs);
+    letter-spacing:.06em;
+    color:var(--text-faint);
+  }
+
+  /* En vertical el mosaico apaisado quedaría diminuto: se muestra a tamaño
+     legible y se desliza en horizontal. */
+  @media (max-aspect-ratio: 3/4){
+    .lamina{overflow-x:auto; -webkit-overflow-scrolling:touch}
+    .lamina::before{display:none}
+    .lamina img{
+      width:auto;
+      height:min(64vh, 640px);
+      max-width:none;
+      -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);
+              mask-image:linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);
+      -webkit-mask-composite:source-over;
+              mask-composite:add;
+    }
+    .pie::after{content:" · desliza para ver todo"}
+  }
+</style>
+</head>
+<body>
+
+<main class="marco">
+  <header class="encabezado">
+    <img class="wordmark" src="ipraf-wordmark.png" alt="IPRAF" width="900" height="491">
+    <p>Branding</p>
+  </header>
+
+  <figure class="lamina">
+    <img src="ipraf-mockups.png"
+         alt="Aplicaciones de la marca IPRAF: cuaderno, pluma, taza, tarjetas de presentación, carpeta y bolsa de tela, todas en negro con el logotipo en dorado."
+         width="1535" height="1024">
+  </figure>
+</main>
+
+<p class="pie">IPRAF — Integrated Professional Relicensure Adaptation Framework</p>
+
+</body>
+</html>
