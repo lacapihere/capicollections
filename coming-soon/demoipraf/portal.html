@@ -529,7 +529,6 @@
 (function(){
   "use strict";
   var CODIGO = "bAFG4tGfCuUM";        // filtro simple, no es seguridad real
-  var LLAVE  = "ipraf_demo_gate_ok";
 
   function desbloquear(){
     document.documentElement.classList.remove("ipraf-gate-pending");
@@ -537,9 +536,11 @@
     if(g) g.remove();
   }
 
+  // Igual que en index.html: una sesión local ya guardada es prueba de que
+  // el código se validó antes. Evita pedirlo de nuevo en cada carga.
   try {
-    if(sessionStorage.getItem(LLAVE) === "1"){ desbloquear(); return; }
-  } catch(e) { /* sin sessionStorage: se pide el código en cada carga */ }
+    if(localStorage.getItem("ipraf.sesion")){ desbloquear(); return; }
+  } catch(e) { /* sin localStorage: se pide el código en cada carga */ }
 
   var input = document.getElementById("ipraf-gate-input");
   var boton = document.getElementById("ipraf-gate-go");
@@ -547,7 +548,16 @@
 
   function intentar(){
     if(input.value.trim() === CODIGO){
-      try { sessionStorage.setItem(LLAVE, "1"); } catch(e){}
+      // Quien llega directo a portal.html sin pasar por index.html también
+      // necesita una sesión, con la misma identidad por defecto del demo.
+      try {
+        if(!localStorage.getItem("ipraf.sesion")){
+          localStorage.setItem("ipraf.sesion", JSON.stringify({
+            id: "demo-gabriela", email: "demo@ipraf.io",
+            nombre: "Gabriela Briceño", plan: "premium"
+          }));
+        }
+      } catch(e) {}
       desbloquear();
     } else {
       error.textContent = "Código incorrecto.";
