@@ -766,7 +766,7 @@
         cuerpo: "A problem you should get wrong. It shows that your instinct applies " +
                 "the wrong system correctly, and it names the five types of friction.",
         cta: "Take the walkthrough", href: "#/metodo", primario: true },
-      { n: 2, titulo: "Compare cases", cifra: T.cases + " casos",
+      { n: 2, titulo: "Compare cases", cifra: T.cases + " cases",
         cuerpo: "Filter one doctrinal family, read the cases back to back and look for the single element " +
                 "that changes between two that come out differently. " + T.units + " analytical units explain why.",
         cta: "Open the cases", href: "#/casos?subject=" + D.subjects[0].slug },
@@ -834,7 +834,7 @@
           }).join("") + '</div>'
         : '') +
       (A.ensayo && A.ensayo.intentos
-        ? '<p class="insight">Ensayo: ' + A.ensayo.intentos + ' conteo' +
+        ? '<p class="insight">Essay: ' + A.ensayo.intentos + ' conteo' +
           (A.ensayo.intentos === 1 ? '' : 's') + ', diferencia media de ' +
           A.ensayo.brechaMedia + ' issues relative to what the question raises.</p>'
         : '') +
@@ -891,14 +891,14 @@
       '<section class="grid-3">' + D.subjects.map(function(x){
         return '<a class="card subj" href="#/casos?subject=' + x.slug + '">' +
           '<h3>' + esc(x.name) + '</h3>' +
-          '<div class="nums"><span><b>' + x.cases.length + '</b> casos</span>' +
-          '<span><b>' + x.units.length + '</b> unidades</span></div>' +
-          '<span class="chip chip--gold">' + x.families.length + ' familias doctrinales</span></a>';
+          '<div class="nums"><span><b>' + x.cases.length + '</b> cases</span>' +
+          '<span><b>' + x.units.length + '</b> units</span></div>' +
+          '<span class="chip chip--gold">' + x.families.length + ' doctrinal families</span></a>';
       }).join("") +
       '<a class="card subj" href="#/mee">' +
         '<h3>' + esc(D.mee.name) + '</h3>' +
         '<div class="nums"><span><b>' + D.mee.issues.length + '</b> issues</span>' +
-        '<span><b>' + D.mee.units.length + '</b> unidades</span></div>' +
+        '<span><b>' + D.mee.units.length + '</b> units</span></div>' +
         '<span class="chip chip--cognate">Essay layer · MEE</span></a>' +
       '</section>' +
 
@@ -945,7 +945,7 @@
       return (c.summary + " " + c.rule + " " + c.trigger + " " + c.sub + " " + c.family).toLowerCase().indexOf(q) >= 0;
     });
 
-    var facets = '<div class="facets"><span class="label">Familia doctrinal</span>' +
+    var facets = '<div class="facets"><span class="label">Doctrinal family</span>' +
       '<button class="facet" aria-pressed="' + (!fam) + '" data-fam="">All <b>' + T.cases.length + '</b></button>' +
       T.families.map(function(f){
         return '<button class="facet" aria-pressed="' + (fam === f.name) + '" data-fam="' + esc(f.name) + '">' +
@@ -1019,7 +1019,7 @@
         (picked.length === 1 ? "" : "s") + (ok ? "" : " — marca al menos 2") + '</p>' +
       '<span style="display:flex;gap:.5rem">' +
         '<button class="btn btn--outline" id="clear-pick" style="width:auto;height:38px;font-size:var(--t-sm)">Limpiar</button>' +
-        (ok ? '<a class="btn btn--gold" href="#/comparar?' + qs("c=" + picked.join(",")) + '" style="height:38px;font-size:var(--t-sm)">Comparar ' + picked.length + '</a>' : '') +
+        (ok ? '<a class="btn btn--gold" href="#/comparar?' + qs("c=" + picked.join(",")) + '" style="height:38px;font-size:var(--t-sm)">Compare ' + picked.length + '</a>' : '') +
       '</span></div>';
   }
 
@@ -1039,7 +1039,7 @@
     }
     var cols = ids.map(cse);
     var fields = [
-      ["Familia","family"],["Sub-materia","sub"],["Hechos","summary"],["Trigger","trigger"],["Regla","rule"]
+      ["Family","family"],["Sub-topic","sub"],["Facts","summary"],["Trigger","trigger"],["Rule","rule"]
     ];
 
     var head = '<thead><tr><th></th>' + cols.map(function(c){
@@ -1122,7 +1122,7 @@
       '</div>' +
       '<section class="unit-grid">' +
         block("Trigger", u.trigger) +
-        block("Regla", u.rule) +
+        block("Rule", u.rule) +
         block("Sensibilidad estructural", u.sensitivity, true) +
         block("Structural misalignment", u.misalignment, true) +
         (u.authority ? '<article class="card block block--wide"><h3>Autoridades legales</h3>' +
@@ -1163,7 +1163,7 @@
       '<section class="unit-grid">' +
         block("The facts", c.summary, true) +
         (c.trigger ? block("Trigger", c.trigger) : "") +
-        (c.rule ? block("Regla", c.rule) : "") +
+        (c.rule ? block("Rule", c.rule) : "") +
       '</section>' +
       autoevaluacion(T.slug, c) +
       '<div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">' +
@@ -1224,7 +1224,7 @@
       '</div>' +
       '<div class="subject-bar" style="margin-bottom:var(--sp-2)">' +
         '<a href="#/metodo" aria-current="' + (!esEnsayo) + '">Multiple choice</a>' +
-        '<a href="#/metodo/ensayo" aria-current="' + esEnsayo + '">Ensayo · MEE</a>' +
+        '<a href="#/metodo/ensayo" aria-current="' + esEnsayo + '">Essay · MEE</a>' +
       '</div>';
 
     // --- Paso 1: el problema, y el compromiso ---
@@ -1324,11 +1324,11 @@
 
     return '<div class="page-head"><h1>Essay questions</h1>' +
       '<p>' + M.issues.length + ' exam issues drawn from ' + M.scenarios.length +
-      ' questions from ' + esc(M.name) + ', agrupados en ' + M.units.length + ' analytical units. ' +
+      ' questions from ' + esc(M.name) + ', grouped into ' + M.units.length + ' analytical units. ' +
       'One row per <strong>issue</strong>, not per question.</p></div>' +
 
       '<section class="grid-3" aria-label="Essay summary">' +
-        stat("Preguntas","Escenarios", String(M.scenarios.length), "Business Associations", "", true) +
+        stat("Questions","Scenarios", String(M.scenarios.length), "Business Associations", "", true) +
         stat("Issues","Total", String(M.issues.length), "Median of " + median + " per question", "", true) +
         stat("Units","Analytical", String(M.units.length), unitsMultiScenario() + " serve more than one", "", true) +
       '</section>' +
@@ -1340,7 +1340,7 @@
         'that difference is your diagnosis, and it will be larger than you expect the first few times.</span></a>' +
 
       (M.families.length ?
-        '<div><span class="label" style="display:block;margin-bottom:var(--sp-3)">Familia doctrinal</span>' +
+        '<div><span class="label" style="display:block;margin-bottom:var(--sp-3)">Doctrinal family</span>' +
         '<div class="subject-bar">' +
           '<a href="#/mee" aria-current="' + (!fam) + '">All <b>' + M.scenarios.length + '</b></a>' +
           M.families.map(function(f){
@@ -1419,7 +1419,7 @@
           '<div class="issue-body">' +
             (i.item ? '<p class="issue-item">' + esc(i.item) + '</p>' : '') +
             (i.summary ? '<p>' + esc(i.summary) + '</p>' : '') +
-            (i.rule ? '<p><strong style="color:var(--text-2)">Regla:</strong> ' + esc(i.rule) + '</p>' : '') +
+            (i.rule ? '<p><strong style="color:var(--text-2)">Rule:</strong> ' + esc(i.rule) + '</p>' : '') +
             '<div class="issue-foot">' +
               (i.family ? '<span class="chip chip--gold">' + esc(i.family) + '</span>' : '') +
               (u && u.archetype ? '<span class="chip ' + archClass(u.archetype) + '">' + esc(u.archetype) + '</span>' : '') +
@@ -1460,7 +1460,7 @@
 
       '<section class="unit-grid">' +
         (u.trigger ? block("Trigger", u.trigger) : "") +
-        (u.rule ? block("Regla", u.rule) : "") +
+        (u.rule ? block("Rule", u.rule) : "") +
         (u.sensitivity ? block("Sensibilidad estructural", u.sensitivity, true) : "") +
         (u.misalignment ? block("Structural misalignment", u.misalignment, true) : "") +
         (u.authority ? '<article class="card block block--wide"><h3>Autoridades legales</h3>' +
