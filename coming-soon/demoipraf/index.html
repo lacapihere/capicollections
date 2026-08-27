@@ -97,6 +97,127 @@
   @media (max-width:420px){
     .auth{border-radius:var(--r-lg)}
   }
+
+  /* ---------------------------------------------------------------
+     Obertura de primera vez. Temporal: se muestra una vez por sesión
+     de navegador, antes de la puerta de acceso. Para volver a verla
+     basta añadir ?intro a la dirección.
+     Para retirarla: borrar este bloque, el <div id="intro"> y su
+     script; nada más depende de ellos.
+     --------------------------------------------------------------- */
+  body.intro-activa .stage{visibility:hidden}
+
+  #intro{
+    position:fixed;inset:0;z-index:60;
+    display:grid;place-items:center;
+    padding:var(--sp-5) var(--sp-4);
+    text-align:center;
+    cursor:pointer;
+    overflow:hidden;
+  }
+  #intro[hidden]{display:none}
+  /* La salida atenúa la obertura y deja ver el acceso que hay detrás. */
+  #intro.saliendo{
+    opacity:0;
+    transition:opacity .8s cubic-bezier(.4,0,.2,1);
+    pointer-events:none;
+  }
+
+  /* Marca de agua: el logotipo de canto a cada lado, muy tenue. */
+  .intro-agua{
+    position:absolute;
+    top:50%;
+    /* El ancho de la ventana también manda: en pantallas angostas, un tamaño
+       atado solo al alto invadiría el centro y competiría con el texto. */
+    width:min(42vh, 38vw, 420px);
+    height:auto;
+    opacity:0;
+    pointer-events:none;
+    user-select:none;
+    animation:aguaEntra 1.6s ease .2s forwards;
+  }
+  .intro-agua--izq{
+    left:0;
+    transform:translate(-34%, -50%) rotate(-90deg);
+  }
+  .intro-agua--der{
+    right:0;
+    transform:translate(34%, -50%) rotate(90deg);
+  }
+  @keyframes aguaEntra{ to{opacity:.07} }
+
+  .intro-in{
+    position:relative;
+    display:grid;
+    place-items:center;
+    width:min(560px, 90vw);
+    min-height:5.2em;
+  }
+
+  /* Las cuatro líneas ocupan la misma casilla: solo una se ve a la vez. */
+  .intro-frases{
+    display:grid;
+    margin:0;
+    place-items:center;
+  }
+  .intro-frases span{
+    grid-area:1 / 1;
+    font-size:clamp(1.02rem, 2.9vw, 1.42rem);
+    font-weight:600;
+    line-height:1.35;
+    letter-spacing:-.01em;
+    color:var(--text);
+    text-wrap:balance;
+    opacity:0;
+    animation:fraseVaViene 1.85s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  .intro-frases span:nth-child(1){animation-delay:.45s}
+  .intro-frases span:nth-child(2){animation-delay:2.05s}
+  .intro-frases span:nth-child(3){animation-delay:3.65s}
+  /* El remate se queda: entra y no vuelve a salir. */
+  .intro-frases span:nth-child(4){
+    animation-name:fraseSeQueda;
+    animation-duration:1.1s;
+    animation-delay:5.25s;
+    background:linear-gradient(96deg, var(--gold-text) 0%, var(--gold-hi) 46%, var(--gold-bright) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:var(--gold-text);
+  }
+
+  @keyframes fraseVaViene{
+    0%  {opacity:0; transform:translateY(9px)}
+    16% {opacity:1; transform:translateY(0)}
+    74% {opacity:1; transform:translateY(0)}
+    100%{opacity:0; transform:translateY(-9px)}
+  }
+  @keyframes fraseSeQueda{
+    0%  {opacity:0; transform:translateY(9px)}
+    100%{opacity:1; transform:translateY(0)}
+  }
+
+  .intro-saltar{
+    position:absolute;
+    left:50%;
+    bottom:clamp(1.6rem, 6vh, 3.2rem);
+    transform:translateX(-50%);
+    font-size:var(--t-xs);
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    opacity:0;
+    animation:introAparece .9s ease 3s forwards;
+  }
+
+  @keyframes introAparece{ to{opacity:1} }
+
+  /* Quien pide menos movimiento ve el remate fijo, sin secuencia. */
+  @media (prefers-reduced-motion: reduce){
+    .intro-agua{animation:none; opacity:.07}
+    .intro-frases span{animation:none; opacity:0; transform:none}
+    .intro-frases span:nth-child(4){opacity:1}
+    .intro-saltar{animation:none; opacity:1}
+    #intro.saliendo{transition:none}
+  }
 </style>
 </head>
 <body>
@@ -104,6 +225,20 @@
 <div class="atmosphere" aria-hidden="true">
   <div class="filament"></div>
   <div class="filament filament--2"></div>
+</div>
+
+<div id="intro" role="status" aria-label="Bienvenida" hidden>
+  <img class="intro-agua intro-agua--izq" src="assets/ipraf-wordmark.png" alt="" aria-hidden="true">
+  <img class="intro-agua intro-agua--der" src="assets/ipraf-wordmark.png" alt="" aria-hidden="true">
+  <div class="intro-in">
+    <p class="intro-frases">
+      <span>El momento de IPRAF llegó.</span>
+      <span>Ha nacido tu app.</span>
+      <span>Que suenen los tambores,</span>
+      <span>que este momento es único.</span>
+    </p>
+  </div>
+  <span class="intro-saltar">Toca para continuar</span>
 </div>
 
 <main class="stage">
@@ -140,6 +275,54 @@
     </form>
   </div>
 </main>
+
+<!-- Obertura de primera vez. Temporal: borrar este script, el bloque
+     #intro del <style> y el <div id="intro"> la retira por completo. -->
+<script>
+(function(){
+  "use strict";
+  var LLAVE = "ipraf_intro_vista";
+  var intro = document.getElementById("intro");
+  if(!intro) return;
+
+  // Con sesión abierta esta página redirige al portal: la obertura no debe
+  // aparecer en ese parpadeo.
+  var haySesion = false;
+  try { haySesion = !!localStorage.getItem("ipraf.sesion"); } catch(e){}
+
+  // Una vez por sesión de navegador, salvo que se pida a propósito con ?intro.
+  var forzada = /(^|[?&])intro\b/.test(location.search);
+  var yaVista = false;
+  try { yaVista = sessionStorage.getItem(LLAVE) === "1"; } catch(e){}
+
+  if(haySesion || (yaVista && !forzada)) return;
+
+  try { sessionStorage.setItem(LLAVE, "1"); } catch(e){}
+
+  document.body.classList.add("intro-activa");
+  intro.hidden = false;
+
+  var cerrada = false;
+  function cerrar(){
+    if(cerrada) return;
+    cerrada = true;
+    intro.classList.add("saliendo");
+    document.body.classList.remove("intro-activa");
+    window.setTimeout(function(){
+      intro.remove();
+      var campo = document.getElementById("code");
+      if(campo) campo.focus();
+    }, 900);
+  }
+
+  // Se cierra sola al terminar la secuencia, o antes si tocan / teclean.
+  // La última línea termina de entrar a los 6,35 s; se deja respirar antes de salir.
+  var solo = window.setTimeout(cerrar, 7600);
+  function cerrarYa(){ window.clearTimeout(solo); cerrar(); }
+  intro.addEventListener("click", cerrarYa);
+  document.addEventListener("keydown", cerrarYa, { once:true });
+})();
+</script>
 
 <script>
 (function(){
@@ -193,7 +376,10 @@
     window.location.href = "portal.html";
   });
 
-  setTimeout(function(){ input.focus(); }, 50);
+  // Durante la obertura no se roba el foco: lo entrega ella misma al cerrarse.
+  if(!document.body.classList.contains("intro-activa")){
+    setTimeout(function(){ input.focus(); }, 50);
+  }
 })();
 </script>
 </body>
