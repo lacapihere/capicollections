@@ -718,7 +718,9 @@
       case "caso":
         setSubject(r.params);
         html = viewCase(parseInt(r.parts[1], 10));
-        title = "Caso " + r.parts[1];
+        // Sin número en la URL no hay caso que nombrar: el título genérico
+        // evita que la pestaña diga "Caso undefined".
+        title = r.parts[1] ? "Caso " + r.parts[1] : "Casos";
         break;
       case "casos":    setSubject(r.params); html = viewCases(r.params);   title = "Casos"; break;
       case "comparar": setSubject(r.params); html = viewCompare(r.params); title = "Comparador"; break;
@@ -726,11 +728,17 @@
       case "unidad":
         setSubject(r.params);
         html = viewUnit(parseInt(r.parts[1], 10));
-        title = "Unidad " + r.parts[1];
+        title = r.parts[1] ? "Unidad " + r.parts[1] : "Unidades analíticas";
         break;
       case "mee":
-        if(r.parts[1] === "escenario"){ html = viewScenario(r.parts[2]); title = "Escenario " + r.parts[2]; }
-        else if(r.parts[1] === "unidad"){ html = viewMeeUnit(parseInt(r.parts[2],10)); title = "MEE · Unidad " + r.parts[2]; }
+        if(r.parts[1] === "escenario"){
+          html = viewScenario(r.parts[2]);
+          title = r.parts[2] ? "Escenario " + r.parts[2] : "Preguntas de ensayo";
+        }
+        else if(r.parts[1] === "unidad"){
+          html = viewMeeUnit(parseInt(r.parts[2],10));
+          title = r.parts[2] ? "MEE · Unidad " + r.parts[2] : "Preguntas de ensayo";
+        }
         else { html = viewMee(r.params); title = "Preguntas de ensayo"; }
         break;
       // El avance vive en Inicio; la ruta queda como alias para no romper
