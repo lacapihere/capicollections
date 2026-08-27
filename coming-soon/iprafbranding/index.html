@@ -77,15 +77,16 @@
     display:block;
     width:100%;
     height:auto;
-    /* Los cuatro bordes se desvanecen sobre ese halo. El margen es corto
-       para no comerse el cuaderno ni la bolsa, que llegan cerca del filo. */
+    /* Cada borde se desvanece sobre ese halo, pero solo dentro del margen de
+       fondo que trae el archivo: arriba son 3,5% y el resto entre 6% y 12%.
+       Pasarse de ahí muerde el cuaderno y la taza, que arrancan casi al filo. */
     -webkit-mask-image:
-      linear-gradient(to right,  transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
-      linear-gradient(to bottom, transparent 0, #000 4%,   #000 96%,   transparent 100%);
+      linear-gradient(to right,  transparent 0, #000 3.4%, #000 96.6%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 2.2%, #000 95%,   transparent 100%);
     -webkit-mask-composite:source-in;
             mask-image:
-      linear-gradient(to right,  transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
-      linear-gradient(to bottom, transparent 0, #000 4%,   #000 96%,   transparent 100%);
+      linear-gradient(to right,  transparent 0, #000 3.4%, #000 96.6%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 2.2%, #000 95%,   transparent 100%);
             mask-composite:intersect;
   }
 
