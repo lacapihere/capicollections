@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <!-- Sin sesión local, no hay nada que mostrar aquí: fuera antes de pintar
@@ -13,7 +13,7 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inicio — IPRAF</title>
+<title>Home — IPRAF</title>
 <meta name="robots" content="noindex,nofollow">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -169,7 +169,7 @@
   .activity time{font-size:var(--t-xs);color:var(--text-faint);font-family:var(--f-ui)}
   ul{list-style:none;margin:0;padding:0}
 
-  /* ---------- Casos: facetas + lista ---------- */
+  /* ---------- Cases: facetas + lista ---------- */
   .split{display:grid;grid-template-columns:236px 1fr;gap:var(--sp-5);align-items:start}
   @media (max-width:900px){.split{grid-template-columns:1fr}}
 
@@ -234,7 +234,7 @@
   .compare-bar p{margin:0;font-size:var(--t-sm);color:var(--text-2)}
   .compare-bar .btn{height:38px;font-size:var(--t-sm)}
 
-  /* ---------- Comparador ---------- */
+  /* ---------- Compare ---------- */
   .cmp{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
   .cmp table{border-collapse:collapse;width:100%;min-width:640px}
   .cmp th,.cmp td{padding:var(--sp-4);border-bottom:1px solid var(--line);
@@ -259,7 +259,7 @@
   .authority{font-family:var(--f-ui);font-size:var(--t-sm);line-height:1.7;
     color:var(--text-muted);margin:0}
 
-  /* ---------- Materias ---------- */
+  /* ---------- Subjects ---------- */
   .subj{padding:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-3);
     text-decoration:none;color:inherit;transition:border-color var(--dur) var(--ease)}
   a.subj:hover{border-color:var(--line-gold)}
@@ -271,7 +271,7 @@
   .empty{padding:var(--sp-7) var(--sp-5);text-align:center;color:var(--text-muted)}
   .empty p{margin:0 0 var(--sp-4)}
 
-  /* ---------- El método: pasos del READ ME ---------- */
+  /* ---------- The method: pasos del READ ME ---------- */
   .step{padding:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-4)}
   .step-head{display:flex;align-items:center;gap:var(--sp-3);margin:0;
     font-size:var(--t-md);font-weight:600;color:var(--text);line-height:1.35}
@@ -311,7 +311,7 @@
   .commit textarea::placeholder{color:var(--text-faint)}
   .commit .insight{margin:0;font-size:var(--t-sm);color:var(--text-muted)}
 
-  /* Nombre de arquetipo sin cápsula: el color lo aporta la barra de la fila. */
+  /* Name de arquetipo sin cápsula: el color lo aporta la barra de la fila. */
   .arch-name{font-size:var(--t-sm);font-weight:600;letter-spacing:.02em}
 
   /* ---------- Autoevaluación de un caso ---------- */
@@ -385,7 +385,7 @@
     .user-panel{position:fixed;right:var(--sp-4);left:var(--sp-4);width:auto;top:70px}
   }
 
-  /* ---------- Inicio: la secuencia de pasos ---------- */
+  /* ---------- Home: la secuencia de pasos ---------- */
   .steps-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:var(--sp-4)}
   .step-card{padding:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-4)}
   .step-card-head{display:flex;align-items:flex-start;gap:var(--sp-3)}
@@ -409,7 +409,7 @@
   }
   .subject-bar b{font-variant-numeric:tabular-nums;color:var(--text-faint);font-weight:500;margin-left:4px}
 
-  /* ---------- Capa de ensayos (MEE) ---------- */
+  /* ---------- Essay layers (MEE) ---------- */
   /* El READ ME del ensayo exige que los límites de Issue Count y de
      Required Explicit Statement se declaren donde esos campos aparezcan. */
   .caveat{
@@ -496,42 +496,42 @@
 <body>
 
 <div class="atmosphere" aria-hidden="true"><div class="filament filament--2"></div></div>
-<a class="skip-link" href="#main">Ir al contenido</a>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="scrim" id="scrim"></div>
 
 <div class="shell">
 
   <aside class="side" id="side">
     <img class="wordmark" src="assets/ipraf-wordmark.png" alt="IPRAF" width="900" height="491">
-    <nav class="nav" id="nav" aria-label="Principal">
+    <nav class="nav" id="nav" aria-label="Main">
       <a href="#/inicio" data-route="inicio">
         <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 7.6 9 2.6l6.5 5v7.3a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V7.6Z"/></svg>
-        Inicio
+        Home
       </a>
       <a href="#/materias" data-route="materias">
         <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="3" width="13" height="12" rx="1.6"/><path d="M2.5 6.7h13M6.8 6.7V15"/></svg>
-        Materias
+        Subjects
       </a>
       <div class="nav-group">
-        <span class="label">Estudio</span>
+        <span class="label">Study</span>
         <a href="#/casos" data-route="casos">
           <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="2.5" width="13" height="13" rx="1.8"/><path d="M5.6 6.4h6.8M5.6 9h6.8M5.6 11.6h4"/></svg>
-          Casos
+          Cases
         </a>
         <a href="#/comparar" data-route="comparar">
           <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.2" y="3.2" width="5.6" height="11.6" rx="1.4"/><rect x="10.2" y="3.2" width="5.6" height="11.6" rx="1.4"/></svg>
-          Comparador
+          Compare
         </a>
         <a href="#/unidades" data-route="unidades">
           <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2.6h7.2L14 5.4v10H4z"/><path d="M6.6 8.4h4.8M6.6 11.2h4.8"/></svg>
-          Unidades analíticas
+          Analytical units
         </a>
       </div>
       <div class="nav-group">
-        <span class="label">Ensayos · MEE</span>
+        <span class="label">Essays · MEE</span>
         <a href="#/mee" data-route="mee">
           <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.4 2.8h11.2v12.4H3.4z"/><path d="M6 6h6M6 9h6M6 12h3.5"/></svg>
-          Preguntas de ensayo
+          Essay questions
         </a>
       </div>
     </nav>
@@ -539,16 +539,16 @@
 
   <div class="main">
     <header class="topbar">
-      <button class="side-toggle" id="side-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <button class="side-toggle" id="side-toggle" aria-label="Open menu" aria-expanded="false">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h12M3 9h12M3 13h12"/></svg>
       </button>
       <label class="search">
         <svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8.2" cy="8.2" r="5.2"/><path d="m12.2 12.2 3 3"/></svg>
-        <input type="search" id="q" placeholder="Buscar casos, reglas o doctrinas" aria-label="Buscar">
+        <input type="search" id="q" placeholder="Search cases, rules or doctrines" aria-label="Search">
         <kbd>⌘K</kbd>
       </label>
       <div class="topbar-right">
-        <div class="streak" title="Racha de estudio">
+        <div class="streak" title="Study streak">
           <svg width="14" height="14" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><path d="M9 1.6s.9 2.6-1.1 4.6C5.5 8.6 4 10 4 12a5 5 0 0 0 10 0c0-2.8-2.2-4.4-2.2-4.4s.2 1.9-1 2.6c0 0 .6-3.3-1.8-8.6Z"/></svg>
           <span class="num">23</span>
         </div>
@@ -568,12 +568,12 @@
               </div>
             </div>
             <dl class="user-fields">
-              <div><dt>Nombre</dt><dd>—</dd></div>
-              <div><dt>Correo</dt><dd>—</dd></div>
-              <div><dt>Tipo de plan</dt><dd><span class="chip chip--gold">Premium</span></dd></div>
+              <div><dt>Name</dt><dd>—</dd></div>
+              <div><dt>Email</dt><dd>—</dd></div>
+              <div><dt>Plan</dt><dd><span class="chip chip--gold">Premium</span></dd></div>
             </dl>
             <div class="user-panel-foot">
-              <button class="btn btn--outline" type="button" role="menuitem" id="logout">Cerrar sesión</button>
+              <button class="btn btn--outline" type="button" role="menuitem" id="logout">Sign out</button>
             </div>
           </div>
         </div>
@@ -644,11 +644,11 @@
   // límites en todo lugar donde aparezcan Issue Count o Required Statement.
   function caveat(kind){
     var body = kind === "count"
-      ? "El <b>Issue Count</b> es un objetivo de cobertura y un marcador de dificultad, " +
-        "no un conteo de puntos de calificación. La mayoría de jurisdicciones califica " +
-        "los ensayos de forma holística y relativa, no otorgando un punto por issue."
-      : "El <b>Required Explicit Statement</b> es una inferencia razonada sobre lo que " +
-        "un calificador debe poder ver, no una rúbrica publicada.";
+      ? "The <b>Issue Count</b> is a coverage target and a difficulty marker, " +
+        "not a tally of scoring points. Most jurisdictions grade " +
+        "essays holistically and relatively, not by awarding one point per issue."
+      : "The <b>Required Explicit Statement</b> is a reasoned inference about what " +
+        "a grader should be able to see, not a published rubric.";
     return '<div class="caveat">' +
       '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">' +
       '<circle cx="8" cy="8" r="6.5"/><path d="M8 4.6v4.2M8 11.1v.2" stroke-linecap="round"/></svg>' +
@@ -710,41 +710,41 @@
     switch(view){
       case "materias":
         bigOpen = r.params.get("big");
-        html = viewSubjects(); title = "Materias"; break;
+        html = viewSubjects(); title = "Subjects"; break;
       case "metodo":
         html = viewMethod(r.parts[1]);
-        title = r.parts[1] === "ensayo" ? "El método · Ensayo" : "El método";
+        title = r.parts[1] === "ensayo" ? "The method · Essay" : "The method";
         break;
       case "caso":
         setSubject(r.params);
         html = viewCase(parseInt(r.parts[1], 10));
         // Sin número en la URL no hay caso que nombrar: el título genérico
         // evita que la pestaña diga "Caso undefined".
-        title = r.parts[1] ? "Caso " + r.parts[1] : "Casos";
+        title = r.parts[1] ? "Case " + r.parts[1] : "Cases";
         break;
-      case "casos":    setSubject(r.params); html = viewCases(r.params);   title = "Casos"; break;
-      case "comparar": setSubject(r.params); html = viewCompare(r.params); title = "Comparador"; break;
-      case "unidades": setSubject(r.params); html = viewUnits(r.params);   title = "Unidades analíticas"; break;
+      case "casos":    setSubject(r.params); html = viewCases(r.params);   title = "Cases"; break;
+      case "comparar": setSubject(r.params); html = viewCompare(r.params); title = "Compare"; break;
+      case "unidades": setSubject(r.params); html = viewUnits(r.params);   title = "Analytical units"; break;
       case "unidad":
         setSubject(r.params);
         html = viewUnit(parseInt(r.parts[1], 10));
-        title = r.parts[1] ? "Unidad " + r.parts[1] : "Unidades analíticas";
+        title = r.parts[1] ? "Unit " + r.parts[1] : "Analytical units";
         break;
       case "mee":
         if(r.parts[1] === "escenario"){
           html = viewScenario(r.parts[2]);
-          title = r.parts[2] ? "Escenario " + r.parts[2] : "Preguntas de ensayo";
+          title = r.parts[2] ? "Scenario " + r.parts[2] : "Essay questions";
         }
         else if(r.parts[1] === "unidad"){
           html = viewMeeUnit(parseInt(r.parts[2],10));
-          title = r.parts[2] ? "MEE · Unidad " + r.parts[2] : "Preguntas de ensayo";
+          title = r.parts[2] ? "MEE · Unit " + r.parts[2] : "Essay questions";
         }
-        else { html = viewMee(r.params); title = "Preguntas de ensayo"; }
+        else { html = viewMee(r.params); title = "Essay questions"; }
         break;
-      // El avance vive en Inicio; la ruta queda como alias para no romper
+      // El avance vive en Home; la ruta queda como alias para no romper
       // enlaces guardados a #/progreso.
       case "progreso":
-      default:         html = viewHome();                     title = "Inicio";
+      default:         html = viewHome();                     title = "Home";
     }
     document.title = title + " — IPRAF";
     main.innerHTML = html;
@@ -753,27 +753,27 @@
     closeSide();
   }
 
-  /* ---------------- Inicio ---------------- */
+  /* ---------------- Home ---------------- */
   function viewHome(){
     var T = D.totals;
     var arch = D.archetypes.filter(function(a){ return a.count > 0; });
     var maxArch = Math.max.apply(null, arch.map(function(a){ return a.count; }));
     var totalU = T.units + T.meeUnits;
 
-    // Inicio es una secuencia, no un escaparate: qué hacer, y en qué orden.
+    // Home es una secuencia, no un escaparate: qué hacer, y en qué orden.
     var pasos = [
-      { n: 1, titulo: "Entiende por qué fallas", cifra: "15 min",
-        cuerpo: "Un problema que deberías responder mal. Enseña que tu instinto aplica " +
-                "correctamente el sistema equivocado, y nombra los cinco tipos de fricción.",
-        cta: "Hacer el recorrido", href: "#/metodo", primario: true },
-      { n: 2, titulo: "Compara casos", cifra: T.cases + " casos",
-        cuerpo: "Filtra una familia doctrinal, lee los casos seguidos y busca el único elemento " +
-                "que cambia entre dos que salen distinto. " + T.units + " unidades explican el porqué.",
-        cta: "Abrir los casos", href: "#/casos?subject=" + D.subjects[0].slug },
-      { n: 3, titulo: "Cuenta tus issues", cifra: D.mee.issues.length + " issues",
-        cuerpo: "En el ensayo se pierde por omitir puntos, resolverlos en mal orden o dejarlos " +
-                "implícitos. Responde una pregunta, cuenta tus puntos y compáralos con los reales.",
-        cta: "Abrir la capa de ensayo", href: "#/mee" }
+      { n: 1, titulo: "Understand why you miss", cifra: "15 min",
+        cuerpo: "A problem you should get wrong. It shows that your instinct applies " +
+                "the wrong system correctly, and it names the five types of friction.",
+        cta: "Take the walkthrough", href: "#/metodo", primario: true },
+      { n: 2, titulo: "Compare cases", cifra: T.cases + " casos",
+        cuerpo: "Filter one doctrinal family, read the cases back to back and look for the single element " +
+                "that changes between two that come out differently. " + T.units + " analytical units explain why.",
+        cta: "Open the cases", href: "#/casos?subject=" + D.subjects[0].slug },
+      { n: 3, titulo: "Count your issues", cifra: D.mee.issues.length + " issues",
+        cuerpo: "On the essay you lose points by missing issues, resolving them out of order, or leaving them " +
+                "implicit. Answer one question, count your issues, and compare them with the real ones.",
+        cta: "Open the essay layer", href: "#/mee" }
     ];
 
     // Avance real. Mientras no haya actividad, las filas siguen en cero y lo
@@ -787,21 +787,21 @@
       .reduce(function(n,k){ return n + A.porArquetipo[k].respondidos; }, 0);
 
     var mide = [
-      { t:"Casos vistos",  n:A.casosVistos,    de:T.cases,
-        pie:"de los " + T.cases + " del framework" },
-      { t:"Unidades leídas", n:A.unidadesLeidas, de:totalU,
-        pie:"de las " + totalU + " de las dos capas" },
-      { t:"Casos autoevaluados", n:arqRespondidos, de:T.cases,
-        pie: arqRespondidos ? "alimentan tu diagnóstico" : "dónde falla tu formación" },
-      { t:"Familias doctrinales tocadas", n:familiasTocadas, de:familiasTotales,
-        pie:"de " + familiasTotales + " en total" }
+      { t:"Cases seen",  n:A.casosVistos,    de:T.cases,
+        pie:"of the " + T.cases + " in the framework" },
+      { t:"Units read", n:A.unidadesLeidas, de:totalU,
+        pie:"of the " + totalU + " across both layers" },
+      { t:"Cases self-assessed", n:arqRespondidos, de:T.cases,
+        pie: arqRespondidos ? "feeding your diagnosis" : "where your training fails" },
+      { t:"Doctrinal families touched", n:familiasTocadas, de:familiasTotales,
+        pie:"of " + familiasTotales + " in total" }
     ];
 
     return '' +
-    '<div class="page-head"><h1>Tu camino al 266+</h1>' +
-    '<p>Tres pasos, en este orden. El primero explica por qué los otros dos funcionan.</p></div>' +
+    '<div class="page-head"><h1>Your path to 266+</h1>' +
+    '<p>Three steps, in this order. The first explains why the other two work.</p></div>' +
 
-    '<section class="steps-flow" aria-label="Qué hacer">' + pasos.map(function(x){
+    '<section class="steps-flow" aria-label="What to do">' + pasos.map(function(x){
       return '<article class="card step-card">' +
         '<div class="step-card-head"><span class="step-n">' + x.n + '</span>' +
         '<div><h3>' + esc(x.titulo) + '</h3>' +
@@ -811,8 +811,8 @@
         esc(x.cta) + '</a></article>';
     }).join("") + '</section>' +
 
-    '<section class="grid-2" aria-label="Tu situación">' +
-      '<article class="card panel"><div class="panel-head"><h3>Tu avance</h3></div><div class="rows">' +
+    '<section class="grid-2" aria-label="Where you stand">' +
+      '<article class="card panel"><div class="panel-head"><h3>Your progress</h3></div><div class="rows">' +
       mide.map(function(m){
         var pct = m.de ? Math.min(100, Math.round(m.n / m.de * 100)) : 0;
         return '<div class="row"' + (m.n ? '' : ' style="opacity:.62"') + '>' +
@@ -823,7 +823,7 @@
       (arqRespondidos
         ? '<div class="rows" style="margin-top:var(--sp-4);padding-top:var(--sp-4);' +
           'border-top:1px solid var(--line)">' +
-          '<span class="label">Tasa de error por arquetipo</span>' +
+          '<span class="label">Error rate by archetype</span>' +
           D.archetypes.filter(function(a){ return A.porArquetipo[a.name]; }).map(function(a){
             var d = A.porArquetipo[a.name], v = archVar(a.name);
             return '<div class="row"><span class="row-name">' +
@@ -836,12 +836,12 @@
       (A.ensayo && A.ensayo.intentos
         ? '<p class="insight">Ensayo: ' + A.ensayo.intentos + ' conteo' +
           (A.ensayo.intentos === 1 ? '' : 's') + ', diferencia media de ' +
-          A.ensayo.brechaMedia + ' issues respecto a lo que plantea la pregunta.</p>'
+          A.ensayo.brechaMedia + ' issues relative to what the question raises.</p>'
         : '') +
       '</article>' +
 
-      '<article class="card panel"><div class="panel-head"><h3>Arquetipos de fricción</h3>' +
-      '<span class="label">Peso en el framework</span></div><div class="rows">' +
+      '<article class="card panel"><div class="panel-head"><h3>Friction archetypes</h3>' +
+      '<span class="label">Weight in the framework</span></div><div class="rows">' +
       arch.map(function(a){
         var v = archVar(a.name);
         // Sin cápsula: la barra de debajo ya lleva el color del arquetipo, así
@@ -881,12 +881,12 @@
     return s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/,"") + "…" : s;
   }
 
-  /* ---------------- Materias ---------------- */
+  /* ---------------- Subjects ---------------- */
   function viewSubjects(){
     var T = D.totals;
-    return '<div class="page-head"><h1>Materias</h1>' +
-      '<p>' + T.cases + ' casos de examen agrupados en ' + T.units + ' unidades analíticas, ' +
-      'más ' + T.meeIssues + ' issues de ensayo en ' + T.meeUnits + ' unidades. Todo cargado desde el libro definitivo.</p></div>' +
+    return '<div class="page-head"><h1>Subjects</h1>' +
+      '<p>' + T.cases + ' exam cases grouped into ' + T.units + ' analytical units, ' +
+      'plus ' + T.meeIssues + ' essay issues in ' + T.meeUnits + ' units. All loaded from the master workbook.</p></div>' +
 
       '<section class="grid-3">' + D.subjects.map(function(x){
         return '<a class="card subj" href="#/casos?subject=' + x.slug + '">' +
@@ -899,10 +899,10 @@
         '<h3>' + esc(D.mee.name) + '</h3>' +
         '<div class="nums"><span><b>' + D.mee.issues.length + '</b> issues</span>' +
         '<span><b>' + D.mee.units.length + '</b> unidades</span></div>' +
-        '<span class="chip chip--cognate">Capa de ensayo · MEE</span></a>' +
+        '<span class="chip chip--cognate">Essay layer · MEE</span></a>' +
       '</section>' +
 
-      '<div><span class="label" style="display:block;margin-bottom:var(--sp-3)">Big Picture por materia</span>' +
+      '<div><span class="label" style="display:block;margin-bottom:var(--sp-3)">Big Picture by subject</span>' +
       '<div class="subject-bar">' + D.subjects.map(function(x){
         return '<a href="#/materias?big=' + x.slug + '" aria-current="' + (bigOpen === x.slug) + '">' +
           esc(x.name) + '</a>';
@@ -918,8 +918,8 @@
     var src = bigOpen === "mee" ? D.mee : (bigOpen ? subj(bigOpen) : null);
     if(!src || !src.bigPicture){
       return '<article class="card block block--wide"><h3>Big Picture</h3>' +
-        '<p class="prose">Elige una materia arriba para leer dónde empieza tu formación, ' +
-        'qué es el sistema de EE. UU., qué diverge y qué es genuinamente igual.</p></article>';
+        '<p class="prose">Pick a subject above to read where your training starts, ' +
+        'what the U.S. system is, what diverges, and what is genuinely the same.</p></article>';
     }
     // Los cuatro movimientos vienen separados por dobles saltos desde el Excel.
     return '<article class="card block block--wide"><h3>Big Picture — ' + esc(src.name) + '</h3>' +
@@ -946,7 +946,7 @@
     });
 
     var facets = '<div class="facets"><span class="label">Familia doctrinal</span>' +
-      '<button class="facet" aria-pressed="' + (!fam) + '" data-fam="">Todas <b>' + T.cases.length + '</b></button>' +
+      '<button class="facet" aria-pressed="' + (!fam) + '" data-fam="">All <b>' + T.cases.length + '</b></button>' +
       T.families.map(function(f){
         return '<button class="facet" aria-pressed="' + (fam === f.name) + '" data-fam="' + esc(f.name) + '">' +
           esc(f.name) + ' <b>' + f.count + '</b></button>';
@@ -955,7 +955,7 @@
     var body = '<div class="list-head">' +
       '<span class="list-count">' + list.length + ' caso' + (list.length === 1 ? "" : "s") +
         (fam ? ' · ' + esc(fam) : '') + (q ? ' · «' + esc(q) + '»' : '') + '</span>' +
-      '<span class="label">Marca 2 a 4 para comparar</span></div>';
+      '<span class="label">Check 2 to 4 to compare</span></div>';
 
     // Con búsqueda activa, avisar de los aciertos en otras materias.
     if(q){
@@ -970,7 +970,7 @@
         body += '<div class="caveat" style="margin-bottom:var(--sp-4)">' +
           '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">' +
           '<circle cx="7" cy="7" r="4.8"/><path d="m10.6 10.6 3 3" stroke-linecap="round"/></svg>' +
-          '<span>«' + esc(q) + '» también aparece en ' +
+          '<span>«' + esc(q) + '» also appears in ' +
           otros.map(function(x){
             return '<a class="link" href="#/casos?subject=' + x.slug + '">' + esc(x.name) + ' (' + x.n + ')</a>';
           }).join(", ") + '.</span></div>';
@@ -979,11 +979,11 @@
 
     body += list.length
       ? '<div class="cases">' + list.map(caseCard).join("") + '</div>'
-      : '<div class="card empty"><p>Ningún caso coincide con ese filtro.</p>' +
-        '<a class="btn btn--outline" href="#/casos?' + qs() + '" style="display:inline-flex;width:auto">Quitar filtros</a></div>';
+      : '<div class="card empty"><p>No case matches that filter.</p>' +
+        '<a class="btn btn--outline" href="#/casos?' + qs() + '" style="display:inline-flex;width:auto">Clear filters</a></div>';
 
-    return '<div class="page-head"><h1>Casos — ' + esc(T.name) + '</h1>' +
-      '<p>Filtra por familia doctrinal, lee los casos seguidos y busca el único elemento que cambia entre dos que salen distinto.</p></div>' +
+    return '<div class="page-head"><h1>Cases — ' + esc(T.name) + '</h1>' +
+      '<p>Filter by doctrinal family, read the cases back to back and look for the single element that changes between two that come out differently.</p></div>' +
       subjectBar("casos") +
       '<div class="split">' + facets + '<div>' + body + '</div></div>' +
       '<div id="cmp-slot">' + compareBar() + '</div>';
@@ -995,9 +995,9 @@
     var u = c.unit ? unit(c.unit) : null;
     return '<article class="card case" data-selected="' + sel + '">' +
       '<input class="case-pick" type="checkbox" data-pick="' + c.n + '" ' + (sel ? "checked" : "") +
-        (full ? " disabled" : "") + ' aria-label="Seleccionar caso ' + c.n + ' para comparar">' +
+        (full ? " disabled" : "") + ' aria-label="Select case ' + c.n + ' to compare">' +
       '<div class="case-body">' +
-        '<div class="case-meta"><span class="label">Caso ' + c.n + '</span>' +
+        '<div class="case-meta"><span class="label">Case ' + c.n + '</span>' +
           '<span class="chip chip--gold">' + esc(c.family) + '</span>' +
           (u && u.archetype ? '<span class="chip ' + archClass(u.archetype) + '">' + esc(u.archetype) + '</span>' : '') +
         '</div>' +
@@ -1005,8 +1005,8 @@
         '<div class="case-foot">' +
           '<span class="trigger"><b>Trigger:</b> ' + esc(clip(c.trigger, 90)) + '</span>' +
           (c.unit
-            ? '<a class="link" href="#/unidad/' + c.unit + '?' + qs() + '">Ver análisis · Unidad ' + c.unit + ' →</a>'
-            : '<span class="chip">Sin unidad ligada</span>') +
+            ? '<a class="link" href="#/unidad/' + c.unit + '?' + qs() + '">See analysis · Unit ' + c.unit + ' →</a>'
+            : '<span class="chip">No linked unit</span>') +
         '</div>' +
       '</div></article>';
   }
@@ -1023,7 +1023,7 @@
       '</span></div>';
   }
 
-  /* ---------------- Comparador ---------------- */
+  /* ---------------- Compare ---------------- */
   function viewCompare(params){
     var T = S();
     // El tope de MAX_PICK vale también por URL directa: más de cuatro columnas
@@ -1033,9 +1033,9 @@
     raw.forEach(function(n){ if(ids.indexOf(n) < 0 && ids.length < MAX_PICK) ids.push(n); });
     var trimmed = raw.length > ids.length;
     if(ids.length < 2){
-      return '<div class="page-head"><h1>Comparador</h1></div>' +
-        '<div class="card empty"><p>Selecciona de 2 a 4 casos para verlos en paralelo.</p>' +
-        '<a class="btn btn--gold" href="#/casos?' + qs() + '" style="display:inline-flex;width:auto">Elegir casos</a></div>';
+      return '<div class="page-head"><h1>Compare</h1></div>' +
+        '<div class="card empty"><p>Select 2 to 4 cases to see them side by side.</p>' +
+        '<a class="btn btn--gold" href="#/casos?' + qs() + '" style="display:inline-flex;width:auto">Choose cases</a></div>';
     }
     var cols = ids.map(cse);
     var fields = [
@@ -1043,9 +1043,9 @@
     ];
 
     var head = '<thead><tr><th></th>' + cols.map(function(c){
-      return '<th><p class="cmp-title">Caso ' + c.n + '</p>' +
-        (c.unit ? '<a class="link" href="#/unidad/' + c.unit + '?' + qs() + '" style="font-size:var(--t-sm)">Unidad ' + c.unit + ' →</a>'
-                : '<span class="chip">Sin unidad</span>') + '</th>';
+      return '<th><p class="cmp-title">Case ' + c.n + '</p>' +
+        (c.unit ? '<a class="link" href="#/unidad/' + c.unit + '?' + qs() + '" style="font-size:var(--t-sm)">Unit ' + c.unit + ' →</a>'
+                : '<span class="chip">No unit</span>') + '</th>';
     }).join("") + '</tr></thead>';
 
     var rows = fields.map(function(f){
@@ -1057,20 +1057,20 @@
       }).join("") + '</tr>';
     }).join("");
 
-    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/casos?' + qs() + '">← Volver</button><span>/</span><span>' + esc(T.name) + ' · Comparación</span></div>' +
-      '<div class="page-head"><h1>' + ids.length + ' casos en paralelo</h1>' +
-      '<p>Las filas con <mark>barra dorada</mark> son las que cambian entre los casos. Ahí está lo que decide el resultado.</p></div>' +
+    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/casos?' + qs() + '">← Back</button><span>/</span><span>' + esc(T.name) + ' · Comparison</span></div>' +
+      '<div class="page-head"><h1>' + ids.length + ' cases side by side</h1>' +
+      '<p>The rows with a <mark>gold bar</mark> are the ones that change between the cases. That is what decides the outcome.</p></div>' +
       (trimmed ? '<div class="caveat"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" ' +
         'stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/>' +
         '<path d="M8 4.6v4.2M8 11.1v.2" stroke-linecap="round"/></svg>' +
-        '<span>Se comparan los primeros <b>' + MAX_PICK + '</b>: más columnas hacen ilegible la diferencia.</span></div>' : "") +
+        '<span>Comparing the first <b>' + MAX_PICK + '</b>: more columns make the difference unreadable.</span></div>' : "") +
       '<div class="cmp"><table>' + head + '<tbody>' + rows + '</tbody></table></div>' +
       '<div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">' +
-        '<a class="btn btn--outline" href="#/casos?' + qs() + '" style="width:auto">Volver a los casos</a>' +
+        '<a class="btn btn--outline" href="#/casos?' + qs() + '" style="width:auto">Back to cases</a>' +
       '</div>';
   }
 
-  /* ---------------- Unidades ---------------- */
+  /* ---------------- Units ---------------- */
   function viewUnits(params){
     var T = S();
     var arch = params.get("arch");
@@ -1080,7 +1080,7 @@
     var order = D.archetypes.map(function(a){ return a.name; })
                  .filter(function(a){ return counts[a]; });
 
-    // Sin chip "Todas": la materia de arriba ya muestra el total. El filtro
+    // Sin chip "All": la materia de arriba ya muestra el total. El filtro
     // activo se apaga al volver a pulsarlo, así que no hace falta un botón
     // aparte para limpiar.
     var chips = '<div class="arch-filters">' +
@@ -1088,22 +1088,22 @@
         var activo = arch === a;
         return '<a class="chip" aria-current="' + activo + '"' +
           ' style="--tono:var(' + archVar(a) + ')"' +
-          (activo ? ' title="Pulsa de nuevo para quitar el filtro"' : '') +
+          (activo ? ' title="Click again to clear the filter"' : '') +
           ' href="#/unidades?' + qs(activo ? "" : "arch=" + encodeURIComponent(a)) + '">' +
           esc(a) + ' ' + counts[a] + '</a>';
       }).join("") + '</div>';
 
-    return '<div class="page-head"><h1>Unidades — ' + esc(T.name) + '</h1>' +
-      '<p>Cada unidad nombra la condición formal que decide el resultado, y el error que produce la formación civilista.</p></div>' +
+    return '<div class="page-head"><h1>Units — ' + esc(T.name) + '</h1>' +
+      '<p>Each unit names the formal condition that decides the outcome, and the error that civil-law training produces.</p></div>' +
       subjectBar("unidades") +
       chips +
       '<section class="grid-2">' + list.map(function(u){
         return '<a class="card action" href="#/unidad/' + u.n + '?' + qs() + '" style="text-decoration:none;color:inherit">' +
-          '<div class="case-meta"><span class="label">Unidad ' + u.n + '</span>' +
+          '<div class="case-meta"><span class="label">Unit ' + u.n + '</span>' +
           (u.archetype ? '<span class="chip ' + archClass(u.archetype) + '">' + esc(u.archetype) + '</span>' : '') + '</div>' +
           '<h3 style="margin:0;font-size:var(--t-md);font-weight:600">' + esc(u.sub) + '</h3>' +
           '<p class="insight">' + esc(clip(u.summary, 180)) + '</p>' +
-          '<span class="label label--gold">' + casesOfUnit(u.n).length + ' casos →</span></a>';
+          '<span class="label label--gold">' + casesOfUnit(u.n).length + ' cases →</span></a>';
       }).join("") + '</section>';
   }
 
@@ -1111,12 +1111,12 @@
     var u = unit(n);
     if(u) U.progress.leerUnidad(S().slug, u.n, { arquetipo: u.archetype })
             .then(function(){ refrescarAvance(false); });
-    if(!u) return '<div class="card empty"><p>Esa unidad no existe.</p><a class="btn btn--outline" href="#/unidades?' + qs() + '" style="display:inline-flex;width:auto">Ver todas</a></div>';
+    if(!u) return '<div class="card empty"><p>That unit does not exist.</p><a class="btn btn--outline" href="#/unidades?' + qs() + '" style="display:inline-flex;width:auto">See all</a></div>';
     var rel = casesOfUnit(n);
 
-    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/unidades?' + qs() + '">← Volver</button><span>/</span><span>' + esc(S().name) + ' · Unidad ' + u.n + '</span></div>' +
+    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/unidades?' + qs() + '">← Back</button><span>/</span><span>' + esc(S().name) + ' · Unit ' + u.n + '</span></div>' +
       '<div class="page-head">' +
-        '<div class="case-meta"><span class="label">Unidad ' + u.n + '</span>' +
+        '<div class="case-meta"><span class="label">Unit ' + u.n + '</span>' +
         (u.archetype ? '<span class="chip ' + archClass(u.archetype) + '">' + esc(u.archetype) + '</span>' : '') + '</div>' +
         '<h1>' + esc(u.sub) + '</h1><p>' + esc(u.summary) + '</p>' +
       '</div>' +
@@ -1124,14 +1124,14 @@
         block("Trigger", u.trigger) +
         block("Regla", u.rule) +
         block("Sensibilidad estructural", u.sensitivity, true) +
-        block("Desalineación estructural", u.misalignment, true) +
+        block("Structural misalignment", u.misalignment, true) +
         (u.authority ? '<article class="card block block--wide"><h3>Autoridades legales</h3>' +
           '<p class="authority">' + esc(u.authority) + '</p></article>' : "") +
       '</section>' +
-      (rel.length ? '<article class="card panel"><div class="panel-head"><h3>Casos que alimentan esta unidad</h3>' +
+      (rel.length ? '<article class="card panel"><div class="panel-head"><h3>Cases that feed this unit</h3>' +
         '<span class="label">' + rel.length + '</span></div><div class="cases">' +
         rel.map(caseCard).join("") + '</div>' +
-        (rel.length >= 2 ? '<a class="btn btn--gold" href="#/comparar?' + qs("c=" + rel.slice(0,4).map(function(c){return c.n;}).join(",")) + '">Comparar estos casos</a>' : "") +
+        (rel.length >= 2 ? '<a class="btn btn--gold" href="#/comparar?' + qs("c=" + rel.slice(0,4).map(function(c){return c.n;}).join(",")) + '">Compare these cases</a>' : "") +
         '</article>' : "");
   }
   function block(title, body, wide){
@@ -1145,15 +1145,15 @@
     var c = cse(n);
     // Abrir el caso es el evento "visto": no hace falta un botón para ello.
     if(c) U.progress.verCaso(T.slug, c.n, metaCaso(c)).then(function(){ refrescarAvance(false); });
-    if(!c) return '<div class="card empty"><p>Ese caso no existe.</p>' +
-      '<a class="btn btn--outline" href="#/casos?' + qs() + '" style="display:inline-flex;width:auto">Ver los casos</a></div>';
+    if(!c) return '<div class="card empty"><p>That case does not exist.</p>' +
+      '<a class="btn btn--outline" href="#/casos?' + qs() + '" style="display:inline-flex;width:auto">See the cases</a></div>';
     var u = c.unit ? unit(c.unit) : null;
     var hermanos = T.cases.filter(function(x){ return x.family === c.family && x.n !== c.n; });
 
-    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/casos?' + qs() + '">← Volver</button>' +
-        '<span>/</span><span>' + esc(T.name) + ' · Caso ' + c.n + '</span></div>' +
+    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/casos?' + qs() + '">← Back</button>' +
+        '<span>/</span><span>' + esc(T.name) + ' · Case ' + c.n + '</span></div>' +
       '<div class="page-head">' +
-        '<div class="case-meta"><span class="label">Caso ' + c.n + '</span>' +
+        '<div class="case-meta"><span class="label">Case ' + c.n + '</span>' +
           '<a class="chip chip--gold" href="#/casos?' + qs("family=" + encodeURIComponent(c.family)) +
             '">' + esc(c.family) + '</a>' +
           (u && u.archetype ? '<span class="chip ' + archClass(u.archetype) + '">' + esc(u.archetype) + '</span>' : '') +
@@ -1161,17 +1161,17 @@
         '<h1>' + esc(c.sub || c.family) + '</h1>' +
       '</div>' +
       '<section class="unit-grid">' +
-        block("Los hechos", c.summary, true) +
+        block("The facts", c.summary, true) +
         (c.trigger ? block("Trigger", c.trigger) : "") +
         (c.rule ? block("Regla", c.rule) : "") +
       '</section>' +
       autoevaluacion(T.slug, c) +
       '<div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">' +
         (c.unit ? '<a class="btn btn--gold" href="#/unidad/' + c.unit + '?' + qs() +
-          '" style="width:auto">Ver el análisis · Unidad ' + c.unit + '</a>' : '') +
+          '" style="width:auto">See the analysis · Unit ' + c.unit + '</a>' : '') +
         (hermanos.length ? '<a class="btn btn--outline" href="#/comparar?' +
           qs("c=" + [c.n].concat(hermanos.slice(0,1).map(function(x){ return x.n; })).join(",")) +
-          '" style="width:auto">Comparar con otro de ' + esc(c.family) + '</a>' : '') +
+          '" style="width:auto">Compare with another from ' + esc(c.family) + '</a>' : '') +
       '</div>';
   }
 
@@ -1179,27 +1179,27 @@
      el usuario se califica: eso es lo que alimenta la tasa de error POR
      ARQUETIPO, que es el diagnóstico que el producto vende. */
   var VERDICTOS = [
-    ["acerte",  "Acerté",   "chip--ok"],
-    ["parcial", "A medias", "chip--mid"],
-    ["falle",   "Fallé",    "chip--bad"]
+    ["acerte",  "Got it right", "chip--ok"],
+    ["parcial", "Partly",       "chip--mid"],
+    ["falle",   "Missed it",    "chip--bad"]
   ];
   function autoevaluacion(materia, c){
     var st = U.progress.estadoCaso(materia, c.n);
     var actual = st && st.verdicto;
     return '<article class="card selfcheck" data-materia="' + esc(materia) + '" data-caso="' + c.n + '">' +
-      '<h3>¿Cómo te fue con este caso?</h3>' +
-      '<p class="insight">Tu propia calificación es la que construye el diagnóstico: ' +
-      'no mide cuánto sabes, sino en qué tipo de fricción tropiezas.</p>' +
+      '<h3>How did you do on this case?</h3>' +
+      '<p class="insight">Your own self-assessment is what builds the diagnosis: ' +
+      'it does not measure how much you know, but which type of friction trips you up.</p>' +
       '<div class="verdicts">' + VERDICTOS.map(function(v){
         return '<button type="button" class="chip ' + v[2] + '" data-verdicto="' + v[0] + '" ' +
           'aria-pressed="' + (actual === v[0]) + '">' + v[1] + '</button>';
       }).join("") + '</div>' +
       (actual ? '<p class="insight" style="color:var(--gold-text)">Registrado. ' +
-        'Aparece en tu avance por arquetipo.</p>' : '') +
+        'It shows up in your progress by archetype.</p>' : '') +
       '</article>';
   }
 
-  /* ---------------- El método: el READ ME, guiado ---------------- */
+  /* ---------------- The method: el READ ME, guiado ---------------- */
   // El READ ME del Excel pide comprometerse a una respuesta antes de leer
   // la siguiente línea. En una hoja eso depende del honor; aquí se cumple:
   // los pasos posteriores no existen en el DOM hasta que el lector responde.
@@ -1208,7 +1208,7 @@
   function viewMethod(layer){
     var esEnsayo = layer === "ensayo";
     var steps = esEnsayo ? D.readme.essay : D.readme.mcq;
-    if(!steps || !steps.length) return '<div class="card empty"><p>El método no está disponible.</p></div>';
+    if(!steps || !steps.length) return '<div class="card empty"><p>The method is not available.</p></div>';
 
     var key = esEnsayo ? "essay" : "mcq";
     var abierto = !!committed[key];
@@ -1218,12 +1218,12 @@
 
     var html = '<div class="page-head">' +
       '<div class="case-meta"><span class="label label--gold">' +
-        (esEnsayo ? "Capa de ensayo" : "Opción múltiple") + '</span></div>' +
-      '<h1>' + esc(intro && intro.rows[0] ? intro.rows[0].label : "El método") + '</h1>' +
+        (esEnsayo ? "Essay layer" : "Multiple choice") + '</span></div>' +
+      '<h1>' + esc(intro && intro.rows[0] ? intro.rows[0].label : "The method") + '</h1>' +
       (intro && intro.rows[1] ? '<p>' + esc(intro.rows[1].label || intro.rows[1].body) + '</p>' : '') +
       '</div>' +
       '<div class="subject-bar" style="margin-bottom:var(--sp-2)">' +
-        '<a href="#/metodo" aria-current="' + (!esEnsayo) + '">Opción múltiple</a>' +
+        '<a href="#/metodo" aria-current="' + (!esEnsayo) + '">Multiple choice</a>' +
         '<a href="#/metodo/ensayo" aria-current="' + esEnsayo + '">Ensayo · MEE</a>' +
       '</div>';
 
@@ -1237,18 +1237,18 @@
       }).join("") +
       (abierto
         ? '<div class="verdict verdict--match"><div class="verdict-head">' +
-            '<span class="label label--gold">Tu respuesta</span></div>' +
+            '<span class="label label--gold">Your answer</span></div>' +
             '<p>' + esc(committed[key]) + '</p></div>' +
           '<button class="btn btn--outline" data-recommit="' + key + '" style="width:auto">Cambiar mi respuesta</button>'
         : '<div class="commit">' +
-            '<label class="field"><span class="label">Escribe tu respuesta antes de continuar</span>' +
+            '<label class="field"><span class="label">Write your answer before continuing</span>' +
             '<textarea id="commit-text" rows="3" placeholder="' +
-              (esEnsayo ? "Qué pasa con el negocio, qué recibe él, y cuántos puntos harías…"
-                        : "¿Quién es el dueño de la tierra, y por qué?") + '"></textarea></label>' +
+              (esEnsayo ? "What happens to the business, what he receives, and how many issues you would raise…"
+                        : "Who owns the land, and why?") + '"></textarea></label>' +
             '<button class="btn btn--gold" data-commit="' + key + '" style="width:auto">' +
-              'Comprometer y continuar</button>' +
-            '<p class="insight">Los pasos siguientes no aparecen hasta que respondas. ' +
-            'El ejercicio no funciona si lees la respuesta primero.</p>' +
+              'Commit and continue</button>' +
+            '<p class="insight">The next steps do not appear until you answer. ' +
+            'The exercise does not work if you read the answer first.</p>' +
           '</div>') +
       '</article>';
 
@@ -1309,7 +1309,7 @@
       }).join("") + '</div>';
   }
 
-  /* ---------------- Capa de ensayos (MEE) ---------------- */
+  /* ---------------- Essay layers (MEE) ---------------- */
   function viewMee(params){
     var M = D.mee;
     var fam = params && params.get("family");
@@ -1322,37 +1322,37 @@
     var counts = M.scenarios.map(function(x){ return x.issueCount || 0; }).sort(function(a,b){ return a-b; });
     var median = counts.length ? counts[Math.floor(counts.length/2)] : 0;
 
-    return '<div class="page-head"><h1>Preguntas de ensayo</h1>' +
-      '<p>' + M.issues.length + ' issues de examen extraídos de ' + M.scenarios.length +
-      ' preguntas de ' + esc(M.name) + ', agrupados en ' + M.units.length + ' unidades analíticas. ' +
-      'Una fila por <strong>issue</strong>, no por pregunta.</p></div>' +
+    return '<div class="page-head"><h1>Essay questions</h1>' +
+      '<p>' + M.issues.length + ' exam issues drawn from ' + M.scenarios.length +
+      ' questions from ' + esc(M.name) + ', agrupados en ' + M.units.length + ' analytical units. ' +
+      'One row per <strong>issue</strong>, not per question.</p></div>' +
 
-      '<section class="grid-3" aria-label="Resumen del ensayo">' +
+      '<section class="grid-3" aria-label="Essay summary">' +
         stat("Preguntas","Escenarios", String(M.scenarios.length), "Business Associations", "", true) +
-        stat("Issues","Total", String(M.issues.length), "Mediana de " + median + " por pregunta", "", true) +
-        stat("Unidades","Analíticas", String(M.units.length), unitsMultiScenario() + " sirven a más de una", "", true) +
+        stat("Issues","Total", String(M.issues.length), "Median of " + median + " per question", "", true) +
+        stat("Units","Analytical", String(M.units.length), unitsMultiScenario() + " serve more than one", "", true) +
       '</section>' +
 
       '<a class="card step-link" href="#/metodo/ensayo" style="padding:var(--sp-5)">' +
-        '<span class="step-link-label">El método del ensayo, paso a paso →</span>' +
-        '<span class="step-link-body">Toma una pregunta. Antes de leer análisis, respóndela y ' +
-        '<strong style="color:var(--text-2)">cuenta tus puntos</strong>. Luego compara tu conteo con el real: ' +
-        'esa diferencia es tu diagnóstico, y será mayor de lo que esperas las primeras veces.</span></a>' +
+        '<span class="step-link-label">The essay method, step by step →</span>' +
+        '<span class="step-link-body">Take one question. Before reading any analysis, answer it and ' +
+        '<strong style="color:var(--text-2)">count your issues</strong>. Then compare your count with the real one: ' +
+        'that difference is your diagnosis, and it will be larger than you expect the first few times.</span></a>' +
 
       (M.families.length ?
         '<div><span class="label" style="display:block;margin-bottom:var(--sp-3)">Familia doctrinal</span>' +
         '<div class="subject-bar">' +
-          '<a href="#/mee" aria-current="' + (!fam) + '">Todas <b>' + M.scenarios.length + '</b></a>' +
+          '<a href="#/mee" aria-current="' + (!fam) + '">All <b>' + M.scenarios.length + '</b></a>' +
           M.families.map(function(f){
             return '<a href="#/mee?family=' + encodeURIComponent(f.name) + '" aria-current="' +
               (fam === f.name) + '">' + esc(f.name) + ' <b>' + f.count + '</b></a>';
           }).join("") +
         '</div></div>' : "") +
 
-      '<article class="card panel"><div class="panel-head"><h3>Mapa de dificultad</h3>' +
-      '<span class="label">Issues por pregunta</span></div>' +
-      '<p class="insight" style="margin:0">Comparar una pregunta de tres issues con una de doce ' +
-      'te dice cómo repartir el tiempo del examen. No mide avance.</p>' +
+      '<article class="card panel"><div class="panel-head"><h3>Difficulty map</h3>' +
+      '<span class="label">Issues per question</span></div>' +
+      '<p class="insight" style="margin:0">Comparing a three-issue question with a twelve-issue one ' +
+      'tells you how to budget your exam time. It does not measure progress.</p>' +
       '<div class="rows">' + M.scenarios.slice()
         .sort(function(a,b){ return (b.issueCount||0) - (a.issueCount||0); })
         .map(function(x){
@@ -1382,35 +1382,35 @@
   function viewScenario(id){
     id = decodeURIComponent(id || "");
     var sc = scenario(id);
-    if(!sc) return '<div class="card empty"><p>Ese escenario no existe.</p>' +
-      '<a class="btn btn--outline" href="#/mee" style="display:inline-flex;width:auto">Ver todos</a></div>';
+    if(!sc) return '<div class="card empty"><p>That scenario does not exist.</p>' +
+      '<a class="btn btn--outline" href="#/mee" style="display:inline-flex;width:auto">See all</a></div>';
     var list = issuesOf(id);
     var total = sc.issueCount || list.length;
 
-    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/mee">← Volver</button>' +
+    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/mee">← Back</button>' +
         '<span>/</span><span>' + esc(id) + '</span></div>' +
       '<div class="page-head"><h1>' + esc(id) + '</h1>' +
-      '<p>Antes de leer los issues: responde la pregunta y <strong>cuenta cuántos puntos</strong> harías. ' +
-      'Compromete el número, luego revélalo.</p></div>' +
+      '<p>Before reading the issues: answer the question and <strong>count how many issues</strong> you would raise. ' +
+      'Commit to the number, then reveal it.</p></div>' +
 
       '<article class="card guess" id="guess-card" data-total="' + total +
         '" data-escenario="' + esc(id) + '">' +
         '<div class="guess-form">' +
           '<label class="field" style="gap:6px">' +
-            '<span class="label">Tu conteo</span>' +
+            '<span class="label">Your count</span>' +
             '<span class="input-shell"><input type="number" id="guess-n" min="1" max="40" ' +
-              'inputmode="numeric" placeholder="?" aria-label="Cuántos puntos harías"></span>' +
+              'inputmode="numeric" placeholder="?" aria-label="How many issues you would raise"></span>' +
           '</label>' +
           '<button class="btn btn--gold" id="guess-go" style="height:44px;align-self:flex-end">Revelar</button>' +
         '</div>' +
         '<div id="guess-out"></div>' +
       '</article>' +
 
-      (sc.chain ? '<article class="card chain"><h3>Cadena de issues y dependencias</h3>' +
+      (sc.chain ? '<article class="card chain"><h3>Issue chain and dependencies</h3>' +
         '<p>' + esc(sc.chain) + '</p></article>' : "") +
 
       '<div class="panel-head"><h3 style="font-size:var(--t-md);font-weight:600;margin:0">' +
-        'Issues desarrollados</h3><span class="label">' + list.length + ' de ' + total + '</span></div>' +
+        'Issues covered</h3><span class="label">' + list.length + ' of ' + total + '</span></div>' +
 
       '<div class="issues">' + list.map(function(i, k){
         var u = i.unit ? meeUnit(i.unit) : null;
@@ -1423,8 +1423,8 @@
             '<div class="issue-foot">' +
               (i.family ? '<span class="chip chip--gold">' + esc(i.family) + '</span>' : '') +
               (u && u.archetype ? '<span class="chip ' + archClass(u.archetype) + '">' + esc(u.archetype) + '</span>' : '') +
-              (i.unit ? '<a class="link" href="#/mee/unidad/' + i.unit + '">Ver análisis · Unidad ' + i.unit + ' →</a>'
-                      : '<span class="chip">Sin unidad ligada</span>') +
+              (i.unit ? '<a class="link" href="#/mee/unidad/' + i.unit + '">See analysis · Unit ' + i.unit + ' →</a>'
+                      : '<span class="chip">No linked unit</span>') +
             '</div>' +
           '</div></article>';
       }).join("") + '</div>' +
@@ -1435,34 +1435,34 @@
     var u = meeUnit(n);
     if(u) U.progress.leerUnidad("mee", u.n, { arquetipo: u.archetype })
             .then(function(){ refrescarAvance(false); });
-    if(!u) return '<div class="card empty"><p>Esa unidad no existe.</p>' +
-      '<a class="btn btn--outline" href="#/mee" style="display:inline-flex;width:auto">Ver el ensayo</a></div>';
+    if(!u) return '<div class="card empty"><p>That unit does not exist.</p>' +
+      '<a class="btn btn--outline" href="#/mee" style="display:inline-flex;width:auto">See the essay</a></div>';
     var served = (u.scenarios || []);
 
-    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/mee">← Volver</button>' +
-        '<span>/</span><span>Unidad ' + u.n + '</span></div>' +
+    return '<div class="crumb"><button type="button" class="crumb-back" data-back data-fallback="#/mee">← Back</button>' +
+        '<span>/</span><span>Unit ' + u.n + '</span></div>' +
       '<div class="page-head">' +
-        '<div class="case-meta"><span class="label">MEE · Unidad ' + u.n + '</span>' +
+        '<div class="case-meta"><span class="label">MEE · Unit ' + u.n + '</span>' +
         (u.archetype ? '<span class="chip ' + archClass(u.archetype) + '">' + esc(u.archetype) + '</span>' : '') +
         served.map(function(id){
           return '<a class="chip chip--gold" href="#/mee/escenario/' + encodeURIComponent(id) +
             '">' + esc(id) + '</a>';
         }).join("") + '</div>' +
-        '<h1>' + esc(u.sub || ("Unidad " + u.n)) + '</h1>' +
+        '<h1>' + esc(u.sub || ("Unit " + u.n)) + '</h1>' +
         (u.summary ? '<p>' + esc(u.summary) + '</p>' : '') +
       '</div>' +
 
-      (u.sequence ? '<article class="card chain"><h3>Dónde va esto en tu respuesta</h3>' +
+      (u.sequence ? '<article class="card chain"><h3>Where this goes in your answer</h3>' +
         '<p>' + esc(u.sequence) + '</p></article>' : "") +
 
-      (u.required ? '<article class="card required"><h3>Lo que debes escribir explícitamente</h3>' +
+      (u.required ? '<article class="card required"><h3>What you must state explicitly</h3>' +
         paras(u.required, "req-para") + caveat("required") + '</article>' : "") +
 
       '<section class="unit-grid">' +
         (u.trigger ? block("Trigger", u.trigger) : "") +
         (u.rule ? block("Regla", u.rule) : "") +
         (u.sensitivity ? block("Sensibilidad estructural", u.sensitivity, true) : "") +
-        (u.misalignment ? block("Desalineación estructural", u.misalignment, true) : "") +
+        (u.misalignment ? block("Structural misalignment", u.misalignment, true) : "") +
         (u.authority ? '<article class="card block block--wide"><h3>Autoridades legales</h3>' +
           '<p class="authority">' + esc(u.authority) + '</p></article>' : "") +
       '</section>' +
@@ -1470,7 +1470,7 @@
       (served.length > 1 ? '<div class="caveat"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" ' +
         'stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/>' +
         '<path d="M8 4.6v4.2M8 11.1v.2" stroke-linecap="round"/></svg>' +
-        '<span>Esta unidad sirve a <b>' + served.length + ' preguntas</b>, porque la misma doctrina reaparece.</span></div>' : "");
+        '<span>Esta unidad sirve a <b>' + served.length + ' preguntas</b>, because the same doctrine reappears.</span></div>' : "");
   }
 
   /* ---------------- Progreso ---------------- */
@@ -1510,7 +1510,7 @@
           w.style.color = "var(--neg)";
           cm.parentElement.insertBefore(w, cm.nextSibling);
         }
-        w.textContent = "Escribe tu respuesta completa. Comprometerse a medias no revela nada.";
+        w.textContent = "Write your full answer. Committing halfway reveals nothing.";
         return;
       }
       committed[cm.dataset.commit] = val;
@@ -1539,7 +1539,7 @@
             nota.style.color = "var(--gold-text)";
             caja.appendChild(nota);
           }
-          nota.textContent = "Registrado. Aparece en tu avance por arquetipo.";
+          nota.textContent = "Recorded. It shows up in your progress by archetype.";
         });
       return;
     }
@@ -1552,25 +1552,25 @@
       var mine  = parseInt(input.value, 10);
       if(!mine || mine < 1){
         out.innerHTML = '<p class="insight" style="color:var(--neg)">' +
-          'Escribe cuántos puntos harías antes de revelar. El ejercicio no funciona al revés.</p>';
+          'Write how many issues you would raise before revealing. The exercise does not work the other way around.</p>';
         input.focus();
         return;
       }
       var gap = total - mine;
       var mod = gap > 0 ? "under" : (gap === 0 ? "match" : "over");
       var msg = gap > 0
-        ? "Contaste <b>" + mine + "</b>. La pregunta plantea <b>" + total + "</b>. No entendiste mal la ley: " +
-          "respondiste una pregunta distinta. Esa diferencia de <b>" + gap + "</b> es el diagnóstico."
+        ? "You counted <b>" + mine + "</b>. The question raises <b>" + total + "</b>. You did not misread the law: " +
+          "you answered a different question. That gap of <b>" + gap + "</b> is the diagnosis."
         : gap === 0
-          ? "Contaste <b>" + mine + "</b> y la pregunta plantea <b>" + total + "</b>. Tu descomposición coincide."
-          : "Contaste <b>" + mine + "</b> y la pregunta plantea <b>" + total + "</b>. " +
-            "Descompusiste de más: revisa si estás separando lo que el examen trata como un solo punto.";
+          ? "You counted <b>" + mine + "</b> and the question raises <b>" + total + "</b>. Your breakdown matches."
+          : "You counted <b>" + mine + "</b> and the question raises <b>" + total + "</b>. " +
+            "You split too finely: check whether you are separating what the exam treats as a single issue.";
       U.progress.registrarConteo(card.dataset.escenario || "", mine, total)
         .then(function(){ refrescarAvance(false); });
       out.innerHTML =
         '<div class="verdict verdict--' + mod + '">' +
           '<div class="verdict-head"><span class="verdict-num">' + total + '</span>' +
-          '<span class="label">issues en la pregunta</span></div>' +
+          '<span class="label">issues in the question</span></div>' +
           '<p>' + msg + '</p></div>';
       card.dataset.done = "true";
     }
@@ -1679,20 +1679,20 @@
     side.setAttribute("data-open","false");
     scrim.setAttribute("data-open","false");
     tog.setAttribute("aria-expanded","false");
-    tog.setAttribute("aria-label","Abrir menú");
+    tog.setAttribute("aria-label","Open menu");
   }
   tog.addEventListener("click", function(){
     var open = side.getAttribute("data-open") === "true";
     side.setAttribute("data-open", String(!open));
     scrim.setAttribute("data-open", String(!open));
     tog.setAttribute("aria-expanded", String(!open));
-    tog.setAttribute("aria-label", open ? "Abrir menú" : "Cerrar menú");
+    tog.setAttribute("aria-label", open ? "Open menu" : "Close menu");
   });
   scrim.addEventListener("click", closeSide);
 
   window.addEventListener("hashchange", render);
 
-  // Sesión y avance antes del primer pintado, para que Inicio no parpadee
+  // Sesión y avance antes del primer pintado, para que Home no parpadee
   // de cero a datos reales.
   U.auth.iniciar()
     .then(function(){ return U.progress.resumen(); })

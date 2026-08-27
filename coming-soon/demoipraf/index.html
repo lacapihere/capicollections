@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Acceso — IPRAF</title>
+<title>Access — IPRAF</title>
 <meta name="robots" content="noindex,nofollow">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -243,18 +243,18 @@
   <div class="filament filament--2"></div>
 </div>
 
-<div id="intro" role="status" aria-label="Bienvenida" hidden>
+<div id="intro" role="status" aria-label="Welcome" hidden>
   <img class="intro-agua intro-agua--izq" src="assets/ipraf-wordmark.png" alt="" aria-hidden="true">
   <img class="intro-agua intro-agua--der" src="assets/ipraf-wordmark.png" alt="" aria-hidden="true">
   <div class="intro-in">
     <p class="intro-frases">
-      <span>El momento de IPRAF llegó.</span>
-      <span>Ha nacido tu app.</span>
-      <span>Que suenen los tambores,</span>
-      <span>que este momento es único.</span>
+      <span>The moment for IPRAF has arrived.</span>
+      <span>Your app is born.</span>
+      <span>Let the drums roll,</span>
+      <span>this moment is one of a kind.</span>
     </p>
   </div>
-  <span class="intro-saltar">Toca para continuar</span>
+  <span class="intro-saltar">Tap to continue</span>
 </div>
 
 <main class="stage">
@@ -262,7 +262,7 @@
 
     <div class="auth-head">
       <img class="wordmark" src="assets/ipraf-wordmark.png" alt="IPRAF" width="900" height="491">
-      <h1>Demo Confidencial de la Plataforma.</h1>
+      <h1>Confidential Platform Demo.</h1>
     </div>
 
     <form id="code-form" novalidate>
@@ -275,7 +275,7 @@
       </div>
 
       <div class="field code-field">
-        <label for="code">Código de acceso</label>
+        <label for="code">Access code</label>
         <div class="input-shell">
           <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <rect x="3.5" y="7.8" width="11" height="7.2" rx="2"/><path d="M6 7.8V5.6a3 3 0 0 1 6 0v2.2"/>
@@ -286,7 +286,7 @@
       </div>
 
       <div class="submit-row">
-        <button type="submit" class="btn btn--gold btn--block" id="submit">Entrar</button>
+        <button type="submit" class="btn btn--gold btn--block" id="submit">Enter</button>
       </div>
     </form>
   </div>
@@ -379,7 +379,7 @@
     e.preventDefault();
 
     if (input.value.trim() !== CODIGO){
-      errTx.textContent = "Código incorrecto.";
+      errTx.textContent = "Incorrect code.";
       err.setAttribute("data-visible", "true");
       input.focus();
       input.select();
