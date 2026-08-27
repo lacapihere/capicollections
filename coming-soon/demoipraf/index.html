@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es" class="ipraf-gate-pending">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iniciar sesión — IPRAF</title>
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css?v=20260825232056">
+<script src="config.js"></script>
+<script src="ipraf-data.js"></script>
+<style>
+  body{
+    min-height:100vh;
+    display:grid;
+    /* "safe" evita que el borde superior quede fuera de alcance cuando la
+       tarjeta es más alta que la ventana (pantallas cortas / teclado abierto). */
+    place-items:safe center;
+    padding:var(--sp-5) var(--sp-4);
+  }
+
+  .auth{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:452px;
+    padding:clamp(1.75rem, 5vw, 2.75rem);
+    background:linear-gradient(168deg, rgba(28,28,29,.72), rgba(13,13,14,.86));
+    border:1px solid var(--line);
+    border-radius:var(--r-xl);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.05) inset,
+      0 40px 90px -40px rgba(0,0,0,1);
+    backdrop-filter:blur(12px);
+  }
+  /* Filo dorado superior: el detalle que hace "premium" sin gritarlo. */
+  .auth::before{
+    content:'';
+    position:absolute;left:12%;right:12%;top:-1px;height:1px;
+    background:var(--gold-hairline);
+  }
+
+  .auth-head{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:var(--sp-2);
+    margin-bottom:var(--sp-6);
+  }
+  .auth-head .wordmark{
+    width:clamp(126px, 34vw, 156px);
+    margin-bottom:var(--sp-4);
+  }
+  .auth-head h1{
+    margin:0;
+    font-size:var(--t-lg);
+    font-weight:600;
+    letter-spacing:-.01em;
+    color:var(--text);
+  }
+  .auth-head p{
+    margin:0;
+    font-size:var(--t-base);
+    color:var(--text-muted);
+  }
+
+  .sso{display:flex;flex-direction:column;gap:var(--sp-3)}
+
+  .auth form{display:flex;flex-direction:column;gap:var(--sp-4)}
+  .divider{margin:var(--sp-5) 0}
+
+  .field-head{
+    display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-3);
+  }
+  .field-head a{font-size:var(--t-sm)}
+
+  .submit-row{margin-top:var(--sp-2)}
+
+  .auth-foot{
+    margin:var(--sp-5) 0 0;
+    text-align:center;
+    font-size:var(--t-sm);
+    color:var(--text-muted);
+  }
+
+  /* Mensaje de error: dice qué pasó y qué hacer, sin disculpas. */
+  .form-error{
+    display:none;
+    align-items:flex-start;
+    gap:var(--sp-3);
+    padding:var(--sp-3) var(--sp-4);
+    background:rgba(196,85,63,.10);
+    border:1px solid rgba(196,85,63,.32);
+    border-radius:var(--r);
+    font-size:var(--t-sm);
+    color:#E8A594;
+    line-height:1.5;
+  }
+  .form-error[data-visible="true"]{display:flex}
+  .form-error svg{flex:0 0 auto;margin-top:2px}
+
+  .legal{
+    position:relative;z-index:1;
+    margin-top:var(--sp-5);
+    text-align:center;
+    font-size:var(--t-xs);
+    color:var(--text-faint);
+    max-width:452px;
+    line-height:1.7;
+  }
+  .legal a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid var(--line-strong)}
+  .legal a:hover{color:var(--text-2)}
+
+  .stage{
+    display:flex;flex-direction:column;align-items:center;
+    width:100%;
+  }
+
+  @media (max-width:420px){
+    .auth{border-radius:var(--r-lg)}
+  }
+</style>
+</head>
+<body>
+<!-- Puerta de acceso del demo. No es seguridad real: es un filtro simple
+     para que nadie llegue por casualidad al link. Cualquiera con el código
+     (o con las herramientas de desarrollador) puede pasarla. -->
+<style>
+  html.ipraf-gate-pending body > *:not(#ipraf-gate){display:none!important}
+  #ipraf-gate{
+    position:fixed;inset:0;z-index:99999;
+    background:#08090B;
+    display:flex;align-items:center;justify-content:center;
+    padding:1.25rem;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  #ipraf-gate .box{
+    width:100%;max-width:360px;
+    background:#111110;border:1px solid rgba(244,244,246,.09);
+    border-radius:14px;padding:2rem 1.75rem;
+    text-align:center;
+  }
+  #ipraf-gate img{width:110px;height:auto;margin:0 auto 1.5rem;display:block}
+  #ipraf-gate p{margin:0 0 1.25rem;color:rgba(244,244,246,.58);font-size:.9rem;line-height:1.5}
+  #ipraf-gate input{
+    width:100%;height:46px;box-sizing:border-box;
+    background:#15161A;border:1px solid rgba(244,244,246,.09);
+    border-radius:10px;padding:0 1rem;margin-bottom:.75rem;
+    color:#F4F4F5;font-size:.95rem;text-align:center;letter-spacing:.04em;
+  }
+  #ipraf-gate input:focus{outline:2px solid #C4944F;outline-offset:2px;border-color:#C4944F}
+  #ipraf-gate button{
+    width:100%;height:46px;border:0;border-radius:10px;
+    background:linear-gradient(160deg,#C99A55,#A1773B,#7D5B2A);
+    color:#140B04;font-weight:600;font-size:.95rem;cursor:pointer;
+  }
+  #ipraf-gate .err{
+    min-height:1.2rem;margin-top:.6rem;color:#D4674F;font-size:.82rem;
+  }
+</style>
+<div id="ipraf-gate" role="dialog" aria-modal="true" aria-label="Acceso al demo">
+  <div class="box">
+    <img src="assets/ipraf-wordmark.png" alt="IPRAF">
+    <p>Demo privado de validación. Escribe el código que te compartieron para entrar.</p>
+    <input type="password" id="ipraf-gate-input" placeholder="Código de acceso" autocomplete="off" inputmode="text">
+    <button type="button" id="ipraf-gate-go">Entrar</button>
+    <p class="err" id="ipraf-gate-err"></p>
+  </div>
+</div>
+<script>
+(function(){
+  "use strict";
+  var CODIGO = "bAFG4tGfCuUM";        // filtro simple, no es seguridad real
+  var LLAVE  = "ipraf_demo_gate_ok";
+
+  function desbloquear(){
+    document.documentElement.classList.remove("ipraf-gate-pending");
+    var g = document.getElementById("ipraf-gate");
+    if(g) g.remove();
+  }
+
+  try {
+    if(sessionStorage.getItem(LLAVE) === "1"){ desbloquear(); return; }
+  } catch(e) { /* sin sessionStorage: se pide el código en cada carga */ }
+
+  var input = document.getElementById("ipraf-gate-input");
+  var boton = document.getElementById("ipraf-gate-go");
+  var error = document.getElementById("ipraf-gate-err");
+
+  function intentar(){
+    if(input.value.trim() === CODIGO){
+      try { sessionStorage.setItem(LLAVE, "1"); } catch(e){}
+      desbloquear();
+    } else {
+      error.textContent = "Código incorrecto.";
+      input.focus();
+      input.select();
+    }
+  }
+  boton.addEventListener("click", intentar);
+  input.addEventListener("keydown", function(e){
+    if(e.key === "Enter") intentar();
+  });
+  setTimeout(function(){ input.focus(); }, 50);
+})();
+</script>
+
+<div class="atmosphere" aria-hidden="true">
+  <div class="filament"></div>
+  <div class="filament filament--2"></div>
+</div>
+
+<main class="stage">
+  <div class="auth">
+
+    <div class="auth-head">
+      <img class="wordmark" src="assets/ipraf-wordmark.png" alt="IPRAF" width="900" height="491">
+      <h1>Domina el MBE.</h1>
+      <p>Tu mejor puntaje comienza aquí.</p>
+    </div>
+
+    <div class="sso">
+      <button type="button" class="btn btn--outline" data-sso="google">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62Z"/>
+          <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.8.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18Z"/>
+          <path fill="#FBBC05" d="M3.97 10.72a5.4 5.4 0 0 1 0-3.44V4.95H.96a9 9 0 0 0 0 8.1l3.01-2.33Z"/>
+          <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.9 11.43 0 9 0A9 9 0 0 0 .96 4.95l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58Z"/>
+        </svg>
+        Continuar con Google
+      </button>
+      <button type="button" class="btn btn--outline" data-sso="apple">
+        <svg width="17" height="18" viewBox="0 0 17 20" fill="currentColor" aria-hidden="true">
+          <path d="M14.1 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.15-2.8.85-3.5.85-.7 0-1.85-.83-3.05-.8-1.55.02-3 .9-3.8 2.3-1.63 2.82-.42 7 1.16 9.3.78 1.12 1.7 2.38 2.9 2.34 1.17-.05 1.6-.75 3.02-.75 1.4 0 1.8.75 3.03.72 1.25-.02 2.04-1.14 2.8-2.27.88-1.3 1.25-2.56 1.27-2.63-.03-.01-2.43-.93-2.43-3.76ZM11.83 3.8c.64-.78 1.07-1.86.95-2.94-.92.04-2.04.61-2.7 1.38-.59.69-1.1 1.79-.96 2.85 1.02.08 2.07-.52 2.71-1.29Z"/>
+        </svg>
+        Continuar con Apple
+      </button>
+    </div>
+
+    <div class="divider">o continúa con tu correo</div>
+
+    <form id="login-form" novalidate>
+
+      <div class="form-error" id="form-error" role="alert" aria-live="polite">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="8" cy="8" r="6.5"/><path d="M8 5v3.5M8 10.8v.2" stroke-linecap="round"/>
+        </svg>
+        <span id="form-error-text"></span>
+      </div>
+
+      <div class="field">
+        <label for="email">Correo electrónico</label>
+        <div class="input-shell">
+          <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="2" y="4" width="14" height="10" rx="2"/><path d="m2.6 5 6.4 4.4L15.4 5"/>
+          </svg>
+          <input type="email" id="email" name="email" placeholder="ejemplo@correo.com"
+                 autocomplete="email" inputmode="email" spellcheck="false" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="password">Contraseña</label>
+          <a class="link" href="#recuperar">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="input-shell">
+          <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="3.5" y="7.8" width="11" height="7.2" rx="2"/><path d="M6 7.8V5.6a3 3 0 0 1 6 0v2.2"/>
+          </svg>
+          <input type="password" id="password" name="password" placeholder="••••••••••"
+                 autocomplete="current-password" required>
+          <button type="button" class="ghost-btn" id="toggle-pw"
+                  aria-label="Mostrar contraseña" aria-pressed="false">
+            <svg id="eye-open" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M1.5 9S4.4 4 9 4s7.5 5 7.5 5-2.9 5-7.5 5S1.5 9 1.5 9Z"/><circle cx="9" cy="9" r="2.1"/>
+            </svg>
+            <svg id="eye-closed" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none" aria-hidden="true">
+              <path d="M1.5 9S4.4 4 9 4c1.2 0 2.3.3 3.2.8M16.5 9s-1.4 2.4-3.8 3.8M3 15 15 3" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn btn--gold btn--block" id="submit">Iniciar sesión</button>
+      </div>
+    </form>
+
+    <p class="auth-foot">¿No tienes cuenta? <a class="link" href="#registro">Crear una cuenta</a></p>
+  </div>
+
+  <p class="legal">
+    Al continuar aceptas los <a href="#terminos">Términos</a> y el <a href="#privacidad">Aviso de privacidad</a>.<br>
+    IPRAF — Integrated Professional Relicensure Adaptation Framework
+  </p>
+</main>
+
+<script>
+(function(){
+  var form  = document.getElementById('login-form');
+  var email = document.getElementById('email');
+  var pw    = document.getElementById('password');
+  var err   = document.getElementById('form-error');
+  var errTx = document.getElementById('form-error-text');
+  var btn   = document.getElementById('submit');
+
+  /* Mostrar / ocultar contraseña */
+  var toggle = document.getElementById('toggle-pw');
+  var eyeOn  = document.getElementById('eye-open');
+  var eyeOff = document.getElementById('eye-closed');
+  toggle.addEventListener('click', function(){
+    var showing = pw.type === 'text';
+    pw.type = showing ? 'password' : 'text';
+    eyeOn.style.display  = showing ? '' : 'none';
+    eyeOff.style.display = showing ? 'none' : '';
+    toggle.setAttribute('aria-pressed', String(!showing));
+    toggle.setAttribute('aria-label', showing ? 'Mostrar contraseña' : 'Ocultar contraseña');
+    pw.focus();
+  });
+
+  function fail(msg, focusEl){
+    errTx.textContent = msg;
+    err.setAttribute('data-visible','true');
+    if (focusEl) focusEl.focus();
+  }
+  function clearFail(){ err.setAttribute('data-visible','false'); }
+
+  [email, pw].forEach(function(el){ el.addEventListener('input', clearFail); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    clearFail();
+
+    if (!email.value.trim()){
+      return fail('Escribe tu correo electrónico para continuar.', email);
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())){
+      return fail('Ese correo no tiene un formato válido. Revisa que esté completo, por ejemplo nombre@dominio.com.', email);
+    }
+    if (!pw.value){
+      return fail('Escribe tu contraseña para continuar.', pw);
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Entrando…';
+
+    window.IPRAF_USER.auth.entrar(email.value.trim(), pw.value)
+      .then(function(){ window.location.href = 'portal.html'; })
+      .catch(function(err){
+        btn.disabled = false;
+        btn.textContent = 'Iniciar sesión';
+        var m = (err && err.message) || '';
+        fail(/Invalid login/i.test(m)
+          ? 'Ese correo y esa contraseña no coinciden. Revisa ambos e inténtalo de nuevo.'
+          : 'No se pudo iniciar sesión: ' + (m || 'error de conexión') + '.', email);
+      });
+  });
+
+  document.querySelectorAll('[data-sso]').forEach(function(b){
+    b.addEventListener('click', function(){
+      window.IPRAF_USER.auth.entrarConProveedor(b.dataset.sso)
+        .then(function(r){
+          // En modo local no hay redirección del proveedor: se entra directo.
+          if(window.IPRAF_USER.modo === 'local') window.location.href = 'portal.html';
+        })
+        .catch(function(err){
+          fail('No se pudo continuar con ' + b.dataset.sso + ': ' +
+               ((err && err.message) || 'error de conexión') + '.', email);
+        });
+    });
+  });
+
+  /* Si ya hay sesión activa, no tiene sentido volver a pedirla. */
+  window.IPRAF_USER.auth.iniciar().then(function(s){
+    if(s) window.location.href = 'portal.html';
+  });
+})();
+</script>
+</body>
+</html>

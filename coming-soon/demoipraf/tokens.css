@@ -1,0 +1,416 @@
+/* ============================================================
+   IPRAF — Sistema visual
+   Tokens extraídos del mockup de marca "Premium Gold MBE Study Dashboard".
+   Fuente única de verdad: al pasar a Next.js, esto se vuelve el theme
+   (tailwind.config → theme.extend) sin recalcular un solo valor.
+   ============================================================ */
+
+:root{
+  /* ---- Fondos ------------------------------------------------
+     Medidos sobre los rellenos planos del mockup (bloques uniformes):
+     todos caen entre #05 y #0E, con R-B = -3 — negro levemente frío.
+     La tarjeta se separa del fondo por la hairline, no por ser más
+     clara: 3-4 niveles de diferencia, no 13. Ahí está el "premium". */
+  --ground:        #08090B;   /* lienzo de la app                */
+  --ground-deep:   #050608;   /* viñeta / bordes de pantalla     */
+  --surface:       #0C0D0F;   /* tarjeta, panel                  */
+  --surface-2:     #101114;   /* tarjeta elevada / hover         */
+  --surface-3:     #15161A;   /* input, chip, track de barra     */
+
+  /* ---- Rampa dorada -----------------------------------------
+     Derivada del logotipo, no del mockup: hue 35.5° y saturación
+     0.64, medidos sobre el trazo sólido del wordmark. La anterior
+     venía de una captura y quedaba 5° más fría, lo que hacía que
+     logo e interfaz se leyeran como dos dorados distintos.
+     La saturación cae al subir el valor, como en el metal real.  */
+  --gold-deep:     #805D2B;
+  --gold:          #A67A3C;   /* ancla: la base del logotipo     */
+  --gold-bright:   #C4944F;
+  --gold-glow:     #F0B969;
+  --gold-hi:       #FCD59D;
+  --gold-text:     #DBAA63;   /* 9.2:1 sobre la tarjeta          */
+  --on-gold:       #140B04;   /* texto sobre relleno dorado      */
+
+  /* Degradado metálico, todo en el hue del logotipo. La luz cae rápido desde
+     el borde superior, la sombra se concentra al pie y el 100% rebota un poco
+     hacia arriba: ese rebote es lo que hace que se lea como metal y no como
+     una rampa plana. Las paradas están puestas para que el tramo donde va el
+     texto (32–68% de la altura) se mantenga sobre 4.5:1. */
+  --gold-grad:     linear-gradient(168deg, #DEAD66 0%, #C7954E 14%, #B28440 46%,
+                                           #9E7336 68%, #785625 90%, #8A642D 100%);
+  --gold-hairline: linear-gradient(90deg, transparent, rgba(196,148,79,.42), transparent);
+
+  /* ---- Texto -------------------------------------------------*/
+  --text:          #F4F4F5;
+  --text-2:        #C3C3C6;
+  --text-muted:    #909095;
+  --text-faint:    #7C7C81;   /* 4.80:1 sobre --ground */
+
+  /* ---- Líneas ------------------------------------------------*/
+  --line:          rgba(244,244,246,.09);
+  --line-strong:   rgba(244,244,246,.16);
+  --line-gold:     rgba(196,148,79,.24);
+
+  /* ---- Semánticos (separados del acento de marca) -------------*/
+  /* Semáforo de autoevaluación. Deliberadamente aparte del acento de marca
+     y de los colores de arquetipo: aquí verde/ámbar/rojo significan lo que
+     todo el mundo espera. Contraste sobre --surface: 7.3 / 8.3 / 5.4. */
+  --pos:           #7FA97F;
+  --neg:           #D4674F;
+  --warn:          #D0A24A;
+
+  /* ---- Arquetipos de fricción --------------------------------
+     Los cinco del taxonómico, no solo los tres de Real Property,
+     para que las demás materias entren sin rediseñar nada.
+     Tonos elegidos por separación angular: 49° mínimo entre ellos
+     y 36° mínimo respecto al oro, que queda reservado a la marca.  */
+  --arch-void:      #C08AE0;  --arch-void-dim:      #5F3D75;   /* morado      */
+  --arch-cognate:   #5FB0A8;  --arch-cognate-dim:   #2E5F5A;   /* teal        */
+  --arch-converge:  #94B98D;  --arch-converge-dim:  #4A6345;   /* salvia      */
+  --arch-dual:      #8FA5DB;  --arch-dual-dim:      #46537A;   /* periwinkle  */
+  --arch-seq:       #DE7F87;  --arch-seq-dim:       #7E3A40;   /* carmín      */
+
+  /* ---- Tipografía --------------------------------------------
+     Una sola familia en toda la app. Las cifras se alinean con
+     font-variant-numeric: tabular-nums, no cambiando de tipografía. */
+  --f-ui:      'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* ---- Escala tipográfica ------------------------------------*/
+  --t-xs:   .6875rem;   /* 11 — etiquetas mono                   */
+  --t-sm:   .8125rem;   /* 13 — metadatos, ayuda                 */
+  --t-base: .9375rem;   /* 15 — interfaz                         */
+  --t-md:   1.0625rem;  /* 17 — prosa de contenido               */
+  --t-lg:   1.375rem;   /* 22 — título de sección                */
+  --t-xl:   1.75rem;    /* 28 — título de página                 */
+  --t-2xl:  2.25rem;    /* 36 — métrica grande                   */
+
+  /* ---- Ritmo y forma -----------------------------------------*/
+  --r-sm: 6px;
+  --r:    10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+
+  --sp-1: .25rem;  --sp-2: .5rem;   --sp-3: .75rem;  --sp-4: 1rem;
+  --sp-5: 1.5rem;  --sp-6: 2rem;    --sp-7: 3rem;    --sp-8: 4rem;
+
+  --shadow-card: 0 1px 0 rgba(255,255,255,.045) inset,
+                 0 18px 40px -20px rgba(0,0,0,.9);
+  --shadow-gold: 0 8px 28px -10px rgba(166,122,60,.45);
+
+  --ease: cubic-bezier(.16,1,.3,1);
+  --dur:  .22s;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--text);
+  font-family:var(--f-ui);
+  font-size:var(--t-base);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Los controles de formulario no heredan la tipografía del documento:
+   sin esto, cualquier <button> sin font-family propia cae a Arial. */
+button, input, select, textarea{
+  font-family:inherit;
+}
+
+/* Foco visible y consistente en toda la app. */
+:focus-visible{
+  outline:2px solid var(--gold-bright);
+  outline-offset:2px;
+  border-radius:var(--r-sm);
+}
+:focus:not(:focus-visible){outline:none}
+
+/* ============================================================
+   Átomos reutilizables
+   ============================================================ */
+
+/* -- Etiqueta mono en versalitas: numeración, categorías, meta -- */
+.label{
+  font-family:var(--f-ui);
+  font-size:var(--t-xs);
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text-faint);
+  font-variant-numeric:tabular-nums;
+}
+.label--gold{color:var(--gold-text)}
+
+/* -- Marca --------------------------------------------------- */
+.wordmark{
+  display:block;
+  width:auto;
+  /* El <img> lleva width/height para reservar espacio y evitar CLS; sin
+     height:auto el atributo HTML gana y deforma el logotipo. */
+  height:auto;
+  max-width:100%;
+  user-select:none;
+}
+
+/* -- Campo de formulario ------------------------------------- */
+.field{display:flex;flex-direction:column;gap:var(--sp-2)}
+.field > label{
+  font-size:var(--t-sm);
+  color:var(--text-2);
+  font-weight:500;
+}
+.input-shell{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:var(--sp-3);
+  background:var(--surface-3);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:0 var(--sp-4);
+  height:48px;
+  transition:border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.input-shell:focus-within{
+  border-color:var(--gold);
+  background:#2A2A2C;
+}
+.input-shell svg{flex:0 0 auto;color:var(--text-faint)}
+.input-shell:focus-within svg{color:var(--gold-text)}
+.input-shell input{
+  flex:1 1 auto;
+  min-width:0;
+  background:none;
+  border:0;
+  outline:none;
+  color:var(--text);
+  font-family:var(--f-ui);
+  font-size:var(--t-base);
+  padding:0;
+}
+.input-shell input::placeholder{color:var(--text-faint)}
+.input-shell input:-webkit-autofill{
+  -webkit-text-fill-color:var(--text);
+  -webkit-box-shadow:0 0 0 60px #2A2A2C inset;
+}
+
+.ghost-btn{
+  flex:0 0 auto;
+  background:none;border:0;padding:var(--sp-1);
+  color:var(--text-faint);
+  cursor:pointer;
+  display:grid;place-items:center;
+  border-radius:var(--r-sm);
+  transition:color var(--dur) var(--ease);
+}
+.ghost-btn:hover{color:var(--text-2)}
+
+/* -- Botones -------------------------------------------------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);
+  height:48px;padding:0 var(--sp-5);
+  border-radius:var(--r);
+  font-family:var(--f-ui);font-size:var(--t-base);font-weight:600;
+  border:1px solid transparent;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform var(--dur) var(--ease),
+             background var(--dur) var(--ease),
+             border-color var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease);
+}
+.btn:active{transform:translateY(1px)}
+
+.btn--gold{
+  background:var(--gold-grad);
+  color:var(--on-gold);
+  box-shadow:
+    0 1px 0 rgba(255,236,205,.34) inset,   /* filo de luz arriba */
+    0 -1px 0 rgba(60,40,14,.30) inset,     /* canto oscuro abajo */
+    var(--shadow-gold);
+  letter-spacing:.01em;
+  text-shadow:0 1px 0 rgba(255,235,200,.18);
+}
+/* El degradado no cambia al pasar el cursor: repintarlo hacía que el botón
+   pareciera cambiar de color. Solo se refuerza el resplandor de debajo. */
+.btn--gold:hover{
+  box-shadow:
+    0 1px 0 rgba(255,236,205,.34) inset,
+    0 -1px 0 rgba(60,40,14,.30) inset,
+    0 10px 30px -12px rgba(166,122,60,.46);
+}
+
+.btn--outline{
+  background:var(--surface);
+  border-color:var(--line-strong);
+  color:var(--text);
+  width:100%;
+}
+.btn--outline:hover{background:var(--surface-2);border-color:var(--line-gold)}
+
+.btn--block{width:100%}
+
+/* -- Enlace de texto ------------------------------------------ */
+.link{
+  color:var(--gold-text);
+  text-decoration:none;
+  font-weight:500;
+  border-bottom:1px solid transparent;
+  transition:border-color var(--dur) var(--ease);
+}
+.link:hover{border-bottom-color:var(--gold)}
+
+/* -- Divisor con texto ---------------------------------------- */
+.divider{
+  display:flex;align-items:center;gap:var(--sp-4);
+  color:var(--text-faint);font-size:var(--t-sm);
+}
+.divider::before,.divider::after{
+  content:'';flex:1 1 auto;height:1px;background:var(--line);
+}
+
+/* -- Superficies ---------------------------------------------- */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-card);
+}
+
+/* -- Atmósfera dorada ------------------------------------------
+   El mockup tiene filamentos de luz cálida sobre negro.
+   Se reconstruye con capas de gradiente, sin imágenes.          */
+.atmosphere{
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+.atmosphere::before{
+  content:'';position:absolute;inset:-20%;
+  background:
+    radial-gradient(46% 34% at 12% 22%, rgba(196,148,79,.16), transparent 68%),
+    radial-gradient(38% 46% at 88% 74%, rgba(166,122,60,.13), transparent 70%),
+    radial-gradient(60% 40% at 50% 108%, rgba(128,93,43,.10), transparent 72%);
+  filter:blur(2px);
+}
+.atmosphere::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 50% 45%, transparent 42%, var(--ground-deep) 100%);
+}
+/* filamento: una curva de luz, como en la pieza de marca */
+.filament{
+  position:absolute;
+  width:min(1100px,120vw);
+  height:min(1100px,120vw);
+  left:-32%;top:-26%;
+  border-radius:50%;
+  border:1px solid transparent;
+  background:
+    conic-gradient(from 210deg,
+      transparent 0deg,
+      rgba(240,185,105,.30) 26deg,
+      rgba(196,148,79,.10) 52deg,
+      transparent 84deg) border-box;
+  -webkit-mask:radial-gradient(closest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+          mask:radial-gradient(closest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+  opacity:.85;
+}
+.filament--2{
+  left:auto;right:-40%;top:auto;bottom:-46%;
+  width:min(900px,110vw);height:min(900px,110vw);
+  background:
+    conic-gradient(from 40deg,
+      transparent 0deg,
+      rgba(240,185,105,.22) 22deg,
+      transparent 66deg) border-box;
+}
+
+/* -- Barra de progreso ---------------------------------------- */
+.meter{
+  height:4px;border-radius:99px;
+  background:var(--surface-3);
+  overflow:hidden;
+}
+.meter > span{
+  display:block;height:100%;border-radius:99px;
+  background:linear-gradient(90deg, var(--gold-deep), var(--gold-glow));
+}
+
+/* -- Chips / píldoras ----------------------------------------- */
+.chip{
+  display:inline-flex;align-items:center;gap:var(--sp-2);
+  padding:var(--sp-1) var(--sp-3);
+  border:1px solid var(--line);
+  border-radius:99px;
+  font-family:var(--f-ui);
+  font-size:var(--t-xs);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  white-space:nowrap;
+}
+.chip--gold{border-color:var(--line-gold);color:var(--gold-text)}
+/* Un chip que además es enlace no debe llevar el subrayado del navegador. */
+a.chip{text-decoration:none}
+a.chip:hover{border-color:currentColor}
+
+/* Estado seleccionado: se rellena, en vez de ser el único con color. */
+.chip[aria-current="true"]{
+  background:color-mix(in srgb, currentColor 16%, transparent);
+  border-color:currentColor;
+  font-weight:600;
+}
+
+.chip--void{border-color:color-mix(in srgb, var(--arch-void) 34%, transparent);color:var(--arch-void)}
+.chip--cognate{border-color:color-mix(in srgb, var(--arch-cognate) 34%, transparent);color:var(--arch-cognate)}
+.chip--converge{border-color:color-mix(in srgb, var(--arch-converge) 34%, transparent);color:var(--arch-converge)}
+.chip--dual{border-color:color-mix(in srgb, var(--arch-dual) 34%, transparent);color:var(--arch-dual)}
+.chip--seq{border-color:color-mix(in srgb, var(--arch-seq) 34%, transparent);color:var(--arch-seq)}
+
+/* Semáforo de autoevaluación */
+.chip--ok{border-color:color-mix(in srgb, var(--pos) 38%, transparent);color:var(--pos)}
+.chip--mid{border-color:color-mix(in srgb, var(--warn) 38%, transparent);color:var(--warn)}
+.chip--bad{border-color:color-mix(in srgb, var(--neg) 38%, transparent);color:var(--neg)}
+
+/* -- Números tabulares ---------------------------------------- */
+.num{font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1}
+
+/* -- Prosa de contenido (casos, reglas, unidades) -------------- */
+.prose{
+  font-family:var(--f-ui);
+  font-size:var(--t-md);
+  line-height:1.66;
+  color:var(--text-2);
+  max-width:66ch;
+}
+.prose strong{color:var(--text);font-weight:600}
+
+/* -- Accesibilidad -------------------------------------------- */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.skip-link{
+  position:absolute;left:var(--sp-4);top:-100px;z-index:100;
+  background:var(--surface-2);color:var(--text);
+  padding:var(--sp-3) var(--sp-4);border-radius:var(--r);
+  border:1px solid var(--line-gold);text-decoration:none;
+}
+.skip-link:focus{top:var(--sp-4)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
