@@ -1,0 +1,3 @@
+hero-scene.*, hero-scene-mobile.*  — hero scene (client-provided)
+about-flag.*                       — About background (client-provided)
+area-employment.*, area-niw.*, area-family.* — practice area cards (client-provided)
